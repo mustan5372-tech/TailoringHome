@@ -6,11 +6,17 @@ export const SectionHeading = ({
   subtitle,
   align = 'center', // 'center' | 'left'
   className = '',
+  id,
 }) => {
   const isCenter = align === 'center';
 
   return (
-    <div className={`mb-10 ${isCenter ? 'text-center mx-auto max-w-2xl' : 'text-left'} ${className}`}>
+    <div
+      id={id}
+      className={`mb-10 ${id ? 'scroll-mt-24 md:scroll-mt-28' : ''} ${
+        isCenter ? 'text-center mx-auto max-w-2xl' : 'text-left'
+      } ${className}`}
+    >
       {eyebrow && (
         <div className={`flex items-center gap-2 mb-2.5 ${isCenter ? 'justify-center' : 'justify-start'}`}>
           <span className="h-px w-6 bg-gold"></span>
@@ -35,4 +41,3 @@ export const SectionHeading = ({
 };
 
 export default SectionHeading;
-

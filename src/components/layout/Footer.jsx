@@ -14,8 +14,8 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-chocolate-800">
           {/* Col 1: Brand Info */}
           <div className="space-y-4 lg:col-span-1">
-            <div className="bg-chocolate-800/60 p-3 rounded-sm inline-block border border-gold/20">
-              <BrandLogo />
+            <div className="bg-chocolate-950/60 p-3.5 rounded-sm inline-block border border-gold/30 shadow-xs">
+              <BrandLogo variant="inverse" />
             </div>
             <p className="text-sm text-ivory/70 leading-relaxed font-sans">
               A bespoke boutique destination harmonizing artisanal custom tailoring with the finest handpicked textile collections.

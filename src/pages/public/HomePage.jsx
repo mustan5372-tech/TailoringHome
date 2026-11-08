@@ -17,7 +17,10 @@ export const HomePage = () => {
   return (
     <div className="space-y-16 md:space-y-24 pb-16">
       {/* Hero Showcase Section */}
-      <section className="relative bg-gradient-to-b from-cream to-ivory border-b border-cream-border pt-16 pb-20 md:pt-24 md:pb-28">
+      <section
+        id="overview"
+        className="relative bg-gradient-to-b from-cream to-ivory border-b border-cream-border pt-16 pb-20 md:pt-24 md:pb-28 scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Eyebrow Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-maroon-50 border border-maroon-200/80 mb-6">
@@ -61,7 +64,10 @@ export const HomePage = () => {
       </section>
 
       {/* Dual Shop Showcase Portals */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="boutiques"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
         <SectionHeading
           eyebrow="Two Distinct Entities"
           title="Curated Under One Prestigious Roof"
@@ -162,7 +168,10 @@ export const HomePage = () => {
       </section>
 
       {/* Boutique Values & Standards */}
-      <section className="bg-cream py-16 border-y border-cream-border">
+      <section
+        id="standards"
+        className="bg-cream py-16 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card variant="default">
@@ -209,7 +218,10 @@ export const HomePage = () => {
       </section>
 
       {/* Consultation Call to Action */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="consultation"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="bg-gradient-to-r from-chocolate-900 via-maroon-900 to-chocolate-900 text-ivory rounded-sm p-8 md:p-12 border border-gold/30 shadow-xl relative overflow-hidden">
           <div className="relative z-10 max-w-2xl">
             <Badge variant="gold" size="xs" className="mb-3">
@@ -223,7 +235,7 @@ export const HomePage = () => {
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <Button
-                to={ROUTES.CONTACT}
+                to="/contact#enquiry-form"
                 variant="gold"
                 size="md"
                 icon={PhoneCall}

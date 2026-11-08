@@ -4,13 +4,15 @@ import { SectionHeading } from '../../components/common/SectionHeading';
 import { Badge } from '../../components/common/Badge';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
-import { ROUTES } from '../../constants/navigation';
 
 export const AboutPage = () => {
   return (
     <div className="space-y-16 md:space-y-24 pb-16">
       {/* Header Banner */}
-      <section className="bg-gradient-to-b from-cream to-ivory border-b border-cream-border py-14 md:py-20 text-center">
+      <section
+        id="about-hero"
+        className="bg-gradient-to-b from-cream to-ivory border-b border-cream-border py-14 md:py-20 text-center scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Badge variant="maroon" size="sm" className="mb-4">
             Our Heritage & Story
@@ -25,7 +27,10 @@ export const AboutPage = () => {
       </section>
 
       {/* The Story of Both Shops */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="our-story"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Shop 1: Tailoring Home Story */}
           <div className="bg-white p-8 sm:p-10 rounded-sm border border-cream-border shadow-2xs space-y-4">
@@ -64,7 +69,10 @@ export const AboutPage = () => {
       </section>
 
       {/* Core Principles */}
-      <section className="bg-cream py-16 border-y border-cream-border">
+      <section
+        id="principles"
+        className="bg-cream py-16 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Our Commitment"
@@ -107,14 +115,17 @@ export const AboutPage = () => {
       </section>
 
       {/* Invitation CTA */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section
+        id="visit-cta"
+        className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-mt-24 md:scroll-mt-28"
+      >
         <h3 className="font-serif text-3xl font-bold text-chocolate-900 mb-4">
           Experience the Difference in Person
         </h3>
         <p className="text-sm text-chocolate-600 max-w-xl mx-auto mb-8 font-sans">
           Visit our twin boutiques to touch our cloths, inspect our tailoring finishes, and consult with our master artisans.
         </p>
-        <Button to={ROUTES.CONTACT} variant="primary" size="lg">
+        <Button to="/contact#locations" variant="primary" size="lg">
           Plan Your Visit
         </Button>
       </section>

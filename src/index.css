@@ -47,6 +47,18 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Generous scroll padding offset so the sticky navbar (80px) never overlaps headings or CTA labels */
+    scroll-padding-top: 5.75rem; /* 92px on mobile */
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 6.25rem; /* 100px on tablet & desktop */
+    }
+  }
+
   body {
     background-color: var(--color-ivory);
     color: var(--color-chocolate);

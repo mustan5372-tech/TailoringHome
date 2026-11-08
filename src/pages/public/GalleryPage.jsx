@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Scissors, Layers } from 'lucide-react';
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
-import { ROUTES } from '../../constants/navigation';
 
 export const GalleryPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -83,7 +82,10 @@ export const GalleryPage = () => {
   return (
     <div className="space-y-16 pb-16">
       {/* Page Header */}
-      <section className="bg-gradient-to-b from-cream to-ivory border-b border-cream-border py-14 md:py-20 text-center">
+      <section
+        id="gallery-hero"
+        className="bg-gradient-to-b from-cream to-ivory border-b border-cream-border py-14 md:py-20 text-center scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Badge variant="gold" size="sm" className="mb-4">
             Visual Archive
@@ -97,8 +99,11 @@ export const GalleryPage = () => {
         </div>
       </section>
 
-      {/* Gallery Filter Navigation */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Gallery Filter Navigation & Grid */}
+      <section
+        id="gallery-showcase"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
           {filters.map((f) => (
             <button
@@ -165,7 +170,7 @@ export const GalleryPage = () => {
                 <div className="pt-3 border-t border-cream-border flex items-center justify-between text-xs text-chocolate-500">
                   <span className="font-serif italic">Boutique Reference</span>
                   <Button
-                    to={ROUTES.CONTACT}
+                    to="/contact#enquiry-form"
                     variant="ghost"
                     size="sm"
                     className="text-maroon-800 hover:text-maroon-900 p-0"

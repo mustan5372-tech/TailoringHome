@@ -70,7 +70,10 @@ export const TailoringHomePage = () => {
   return (
     <div className="space-y-16 md:space-y-24 pb-16">
       {/* Header Banner */}
-      <section className="bg-gradient-to-b from-maroon-50/60 to-ivory border-b border-cream-border py-14 md:py-20">
+      <section
+        id="tailoring-hero"
+        className="bg-gradient-to-b from-maroon-50/60 to-ivory border-b border-cream-border py-14 md:py-20 scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Badge variant="maroon" size="sm" className="mb-4">
             Atelier Portfolio
@@ -83,7 +86,7 @@ export const TailoringHomePage = () => {
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Button
-              to={ROUTES.CONTACT}
+              to="/contact#enquiry-form"
               variant="primary"
               size="md"
               icon={Calendar}
@@ -102,7 +105,10 @@ export const TailoringHomePage = () => {
       </section>
 
       {/* Services Catalogue Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="services"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
         <SectionHeading
           eyebrow="Specialized Offerings"
           title="Stitching & Tailoring Catalogue"
@@ -142,7 +148,10 @@ export const TailoringHomePage = () => {
       </section>
 
       {/* The 4-Step Bespoke Tailoring Experience */}
-      <section className="bg-cream py-16 border-y border-cream-border">
+      <section
+        id="process"
+        className="bg-cream py-16 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Craftsmanship Journey"
@@ -174,7 +183,10 @@ export const TailoringHomePage = () => {
       </section>
 
       {/* Tailoring Enquiries Box */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="tailoring-enquiry"
+        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="bg-maroon-900 text-ivory rounded-sm p-8 sm:p-10 border border-gold/30 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <h3 className="font-serif text-2xl font-bold">
@@ -185,7 +197,7 @@ export const TailoringHomePage = () => {
             </p>
           </div>
           <Button
-            to={ROUTES.CONTACT}
+            to="/contact#enquiry-form"
             variant="gold"
             size="md"
             className="shrink-0"

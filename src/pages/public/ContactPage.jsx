@@ -33,7 +33,10 @@ export const ContactPage = () => {
   return (
     <div className="space-y-16 md:space-y-24 pb-16">
       {/* Header Banner */}
-      <section className="bg-gradient-to-b from-cream to-ivory border-b border-cream-border py-14 md:py-20 text-center">
+      <section
+        id="contact-hero"
+        className="bg-gradient-to-b from-cream to-ivory border-b border-cream-border py-14 md:py-20 text-center scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Badge variant="maroon" size="sm" className="mb-4">
             Visit & Connect
@@ -48,7 +51,10 @@ export const ContactPage = () => {
       </section>
 
       {/* Dual Shop Contact Cards */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="locations"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Shop 1: Tailoring Home Contact Card */}
           <div className="bg-white p-8 rounded-sm border-2 border-maroon-100 shadow-2xs space-y-5">
@@ -161,7 +167,10 @@ export const ContactPage = () => {
       </section>
 
       {/* Consultation Enquiry Form */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="enquiry-form"
+        className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="bg-white p-8 sm:p-10 rounded-sm border border-cream-border shadow-md">
           <SectionHeading
             eyebrow="Direct Message"

@@ -66,7 +66,10 @@ export const FabricHomePage = () => {
   return (
     <div className="space-y-16 md:space-y-24 pb-16">
       {/* Header Banner */}
-      <section className="bg-gradient-to-b from-chocolate-50 to-ivory border-b border-cream-border py-14 md:py-20">
+      <section
+        id="fabric-hero"
+        className="bg-gradient-to-b from-chocolate-50 to-ivory border-b border-cream-border py-14 md:py-20 scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Badge variant="chocolate" size="sm" className="mb-4">
             Textile Repository
@@ -79,7 +82,7 @@ export const FabricHomePage = () => {
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Button
-              to={ROUTES.CONTACT}
+              to="/contact#enquiry-form"
               variant="secondary"
               size="md"
               icon={PhoneCall}
@@ -98,7 +101,10 @@ export const FabricHomePage = () => {
       </section>
 
       {/* Fabric Varieties Catalogue */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="varieties"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
         <SectionHeading
           eyebrow="Curated Textile Gallery"
           title="Different Varieties of Fabrics & Textiles"
@@ -139,7 +145,7 @@ export const FabricHomePage = () => {
               <div className="pt-3 border-t border-cream-border flex items-center justify-between">
                 <span className="text-xs text-chocolate-500 font-medium">Available by the meter</span>
                 <Button
-                  to={ROUTES.CONTACT}
+                  to="/contact#enquiry-form"
                   variant="ghost"
                   size="sm"
                   className="text-maroon-800 hover:text-maroon-900 p-0"
@@ -153,7 +159,10 @@ export const FabricHomePage = () => {
       </section>
 
       {/* Sourcing & Textile Authenticity Pledge */}
-      <section className="bg-cream py-16 border-y border-cream-border">
+      <section
+        id="authenticity"
+        className="bg-cream py-16 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Integrity of the Loom"
@@ -202,7 +211,10 @@ export const FabricHomePage = () => {
       </section>
 
       {/* Fabric Yardage Enquiry Banner */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="fabric-enquiry"
+        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
         <div className="bg-chocolate-900 text-ivory rounded-sm p-8 sm:p-10 border border-gold/30 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <h3 className="font-serif text-2xl font-bold">
@@ -213,7 +225,7 @@ export const FabricHomePage = () => {
             </p>
           </div>
           <Button
-            to={ROUTES.CONTACT}
+            to="/contact#enquiry-form"
             variant="gold"
             size="md"
             className="shrink-0"
