@@ -102,3 +102,4 @@ export const deleteFile = async (pathOrUrl) => {
     throw error;
   }
 };
+

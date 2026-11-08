@@ -37,3 +37,4 @@ if (isConfigured) {
 
 export { app, db, storage, auth, isConfigured };
 export default { app, db, storage, auth, isConfigured };
+

@@ -44,3 +44,4 @@ export const BRAND_INFO = {
   },
   workingHours: 'Mon - Sat: 10:00 AM – 8:30 PM | Sunday: 11:00 AM – 6:00 PM',
 };
+

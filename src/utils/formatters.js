@@ -26,3 +26,4 @@ export const formatDate = (dateInput) => {
     year: 'numeric',
   }).format(date);
 };
+
