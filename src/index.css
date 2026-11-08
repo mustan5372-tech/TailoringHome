@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #FDFBF7;
+  --color-ivory-50: #FFFFFF;
+  --color-ivory-100: #FDFBF7;
+  --color-ivory-200: #F7F3EB;
+  --color-ivory-300: #EFE8DA;
+  --color-ivory-400: #E2D7C3;
+
+  --color-cream: #F8F5EE;
+  --color-cream-soft: #F3EFE6;
+  --color-cream-muted: #EAE3D2;
+  --color-cream-border: #E3D9C6;
+
+  --color-chocolate: #2E1C14;
+  --color-chocolate-50: #F6F3F1;
+  --color-chocolate-100: #E7DFDC;
+  --color-chocolate-200: #D0C0BA;
+  --color-chocolate-300: #AC9389;
+  --color-chocolate-400: #886A5E;
+  --color-chocolate-500: #5C3E32;
+  --color-chocolate-600: #462B21;
+  --color-chocolate-700: #382118;
+  --color-chocolate-800: #2E1C14;
+  --color-chocolate-900: #1D110C;
+
+  --color-maroon: #5E1F27;
+  --color-maroon-50: #FBF4F5;
+  --color-maroon-100: #F5E2E4;
+  --color-maroon-200: #EBC6CA;
+  --color-maroon-300: #DA9FA6;
+  --color-maroon-400: #C16C77;
+  --color-maroon-500: #A1434F;
+  --color-maroon-600: #822E39;
+  --color-maroon-700: #6D242E;
+  --color-maroon-800: #5E1F27;
+  --color-maroon-900: #42141B;
+
+  --color-gold: #C5A059;
+  --color-gold-light: #DFC78F;
+  --color-gold-dark: #9E7D38;
+
+  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-chocolate);
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+}
