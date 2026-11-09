@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Scissors, Layers } from 'lucide-react';
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
+import { Card } from '../../components/common/Card';
+import { ImageContainer } from '../../components/common/ImageContainer';
 
 export const GalleryPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -109,7 +110,7 @@ export const GalleryPage = () => {
             <button
               key={f.id}
               onClick={() => setActiveFilter(f.id)}
-              className={`px-4 py-2 text-xs font-semibold rounded-sm transition-all tracking-wider uppercase ${
+              className={`px-4 py-2 text-xs font-semibold rounded-sm transition-all tracking-wider uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maroon-700/50 ${
                 activeFilter === f.id
                   ? 'bg-maroon-800 text-ivory shadow-xs'
                   : 'bg-white text-chocolate-700 border border-cream-border hover:bg-cream-soft'
@@ -120,46 +121,22 @@ export const GalleryPage = () => {
           ))}
         </div>
 
-        {/* Gallery Grid */}
+        {/* Gallery Grid using Reusable Card & ImageContainer */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredItems.map((item) => (
-            <div
+            <Card
               key={item.id}
-              className="group bg-white rounded-sm border border-cream-border overflow-hidden hover:shadow-lg transition-all duration-300"
+              variant="default"
+              padding="none"
+              className="overflow-hidden flex flex-col justify-between"
             >
-              {/* Boutique Aesthetic Visual Frame */}
-              <div
-                className={`h-56 bg-gradient-to-br ${item.accentColor} p-6 flex flex-col justify-between relative overflow-hidden`}
-              >
-                <div className="flex items-center justify-between z-10">
-                  <Badge
-                    variant={item.category === 'tailoring' ? 'maroon' : 'chocolate'}
-                    size="xs"
-                    className="bg-white/90 text-chocolate-900"
-                  >
-                    {item.shop}
-                  </Badge>
-                  <span className="text-[10px] uppercase tracking-widest text-gold-light font-medium">
-                    Catalogue #{item.id}
-                  </span>
-                </div>
-
-                <div className="z-10 text-ivory">
-                  <div className="h-10 w-10 rounded-full bg-white/10 backdrop-blur-xs flex items-center justify-center mb-2">
-                    {item.category === 'tailoring' ? (
-                      <Scissors className="h-5 w-5 text-gold-light" />
-                    ) : (
-                      <Layers className="h-5 w-5 text-gold-light" />
-                    )}
-                  </div>
-                  <h4 className="font-serif font-bold text-lg text-white">
-                    {item.title}
-                  </h4>
-                </div>
-
-                {/* Subtle Geometric Overlay */}
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none" />
-              </div>
+              <ImageContainer
+                aspectRatio="landscape"
+                category={item.category}
+                gradient={item.accentColor}
+                badge={item.shop}
+                title={item.title}
+              />
 
               {/* Card Body */}
               <div className="p-6">
@@ -173,13 +150,13 @@ export const GalleryPage = () => {
                     to="/contact#enquiry-form"
                     variant="ghost"
                     size="sm"
-                    className="text-maroon-800 hover:text-maroon-900 p-0"
+                    className="text-maroon-800 hover:text-maroon-900 p-0 font-medium"
                   >
                     Inquire Item &rarr;
                   </Button>
                 </div>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </section>

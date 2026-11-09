@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
+/**
+ * Tailoring Home & Fabric Home - Central Design System
+ * Defines brand colour tokens, typography, shadows, borders, and transitions.
+ */
 @theme {
+  /* Warm Ivory Palette */
   --color-ivory: #FDFBF7;
   --color-ivory-50: #FFFFFF;
   --color-ivory-100: #FDFBF7;
@@ -8,11 +13,14 @@
   --color-ivory-300: #EFE8DA;
   --color-ivory-400: #E2D7C3;
 
+  /* Cream Palette */
   --color-cream: #F8F5EE;
   --color-cream-soft: #F3EFE6;
   --color-cream-muted: #EAE3D2;
   --color-cream-border: #E3D9C6;
+  --color-cream-dark: #D8CEBC;
 
+  /* Chocolate Brown Palette */
   --color-chocolate: #2E1C14;
   --color-chocolate-50: #F6F3F1;
   --color-chocolate-100: #E7DFDC;
@@ -24,7 +32,9 @@
   --color-chocolate-700: #382118;
   --color-chocolate-800: #2E1C14;
   --color-chocolate-900: #1D110C;
+  --color-chocolate-950: #120A07;
 
+  /* Muted Maroon Palette */
   --color-maroon: #5E1F27;
   --color-maroon-50: #FBF4F5;
   --color-maroon-100: #F5E2E4;
@@ -36,20 +46,34 @@
   --color-maroon-700: #6D242E;
   --color-maroon-800: #5E1F27;
   --color-maroon-900: #42141B;
+  --color-maroon-950: #2A0A0F;
 
+  /* Subtle Champagne Gold Palette */
   --color-gold: #C5A059;
   --color-gold-light: #DFC78F;
   --color-gold-dark: #9E7D38;
+  --color-gold-muted: #A38344;
+  --color-gold-faint: #FBF7EE;
 
+  /* Typography */
   --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
   --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Boutique Layered Shadows */
+  --shadow-boutique-xs: 0 1px 2px 0 rgba(46, 28, 20, 0.05);
+  --shadow-boutique-sm: 0 2px 4px 0 rgba(46, 28, 20, 0.06), 0 1px 2px -1px rgba(46, 28, 20, 0.04);
+  --shadow-boutique-md: 0 4px 8px -1px rgba(46, 28, 20, 0.08), 0 2px 4px -2px rgba(46, 28, 20, 0.06);
+  --shadow-boutique-lg: 0 12px 20px -3px rgba(46, 28, 20, 0.1), 0 4px 6px -4px rgba(46, 28, 20, 0.05);
+  --shadow-gold-glow: 0 0 18px rgba(197, 160, 89, 0.28);
+  --shadow-maroon-glow: 0 6px 20px -3px rgba(94, 31, 39, 0.3);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Generous scroll padding offset so the sticky navbar (80px) never overlaps headings or CTA labels */
+    /* Safe scroll padding offset for sticky navbar (80px height) */
     scroll-padding-top: 5.75rem; /* 92px on mobile */
   }
 
@@ -61,12 +85,21 @@
 
   body {
     background-color: var(--color-ivory);
-    color: var(--color-chocolate);
+    color: var(--color-chocolate-900);
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
+    color: var(--color-chocolate-900);
+  }
+
+  /* Consistent text selection matching boutique maroon & gold */
+  ::selection {
+    background-color: var(--color-maroon-100);
+    color: var(--color-maroon-900);
   }
 }
