@@ -79,7 +79,7 @@ export const ImageContainer = ({
           }`}
         >
           {/* Subtle Geometric Weave Overlay */}
-          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#C5A059_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(var(--color-gold)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
           <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none" />
 
           {/* Top Badge Slot */}
@@ -128,3 +128,4 @@ export const ImageContainer = ({
 };
 
 export default ImageContainer;
+
