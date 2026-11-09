@@ -32,11 +32,39 @@ export const HomePage = () => {
     hero,
     businessIntros,
     tailoringHighlights,
+    tailoringFilterTabs = [],
     fabricHighlights,
+    fabricFilterTabs = [],
     galleryPreview,
     whyChooseUs,
     contact,
   } = homeContent;
+
+  // Active filter state for category tabs
+  const [activeTailoringFilter, setActiveTailoringFilter] = React.useState('all');
+  const [activeFabricFilter, setActiveFabricFilter] = React.useState('all');
+
+  // Filtered lists
+  const filteredTailoring = React.useMemo(() => {
+    if (activeTailoringFilter === 'all') return tailoringHighlights;
+    return tailoringHighlights.filter((item) => item.group === activeTailoringFilter);
+  }, [activeTailoringFilter, tailoringHighlights]);
+
+  const filteredFabric = React.useMemo(() => {
+    if (activeFabricFilter === 'all') return fabricHighlights;
+    return fabricHighlights.filter((item) => item.group === activeFabricFilter);
+  }, [activeFabricFilter, fabricHighlights]);
+
+  // Tab counts
+  const getTailoringCount = (tabId) => {
+    if (tabId === 'all') return tailoringHighlights.length;
+    return tailoringHighlights.filter((item) => item.group === tabId).length;
+  };
+
+  const getFabricCount = (tabId) => {
+    if (tabId === 'all') return fabricHighlights.length;
+    return fabricHighlights.filter((item) => item.group === tabId).length;
+  };
 
   // Icon mapping for Why Choose Us section
   const iconMap = {
@@ -282,16 +310,56 @@ export const HomePage = () => {
           <SectionHeading
             eyebrow="Sartorial Offerings"
             title="Tailoring Home Specialities"
-            subtitle="Every piece begins with raw cloth and personal measurements, cut meticulously for individual balance and poise."
+            subtitle="Bespoke craftsmanship for Dawoodi Bohra traditional attire, official school uniforms, gentlemen's suits and fine alterations."
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            {tailoringHighlights.map((item) => (
+          {/* Category Filter Tabs */}
+          {tailoringFilterTabs.length > 0 && (
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-8 mb-10">
+              {tailoringFilterTabs.map((tab) => {
+                const isActive = activeTailoringFilter === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTailoringFilter(tab.id)}
+                    type="button"
+                    className={`inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-sm text-xs sm:text-sm font-sans transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? 'bg-maroon-800 text-ivory font-semibold shadow-xs ring-2 ring-maroon-800/30'
+                        : tab.isFeatured
+                        ? 'bg-amber-50/80 text-gold-dark hover:bg-amber-100/80 border border-gold/40 font-medium'
+                        : 'bg-white/80 hover:bg-cream text-chocolate-700 hover:text-chocolate-900 border border-cream-border font-medium'
+                    }`}
+                  >
+                    {tab.isFeatured && <Sparkles className="h-3.5 w-3.5 text-gold-dark" />}
+                    <span>{tab.label}</span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-sans ${
+                        isActive
+                          ? 'bg-maroon-900/60 text-ivory'
+                          : 'bg-cream-border/70 text-chocolate-600'
+                      }`}
+                    >
+                      {getTailoringCount(tab.id)}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Tailoring Category Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredTailoring.map((item) => (
               <Card
                 key={item.id}
                 variant="default"
                 padding="none"
-                className="overflow-hidden flex flex-col justify-between"
+                className={`overflow-hidden flex flex-col justify-between transition-all duration-300 ${
+                  item.isCommunitySpecial
+                    ? 'border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20'
+                    : 'border border-cream-border hover:border-chocolate-300 hover:shadow-xs'
+                }`}
               >
                 <div>
                   <ImageContainer
@@ -305,12 +373,33 @@ export const HomePage = () => {
                   />
 
                   <div className="p-5">
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <Badge
+                        variant={item.badgeVariant || (item.isCommunitySpecial ? 'gold' : 'maroon')}
+                        size="xs"
+                        icon={item.isCommunitySpecial ? Sparkles : undefined}
+                      >
+                        {item.badge}
+                      </Badge>
+                      {item.isRepresentativeImage && (
+                        <span className="text-[10px] text-chocolate-400 font-sans tracking-wide">
+                          Sample Preview
+                        </span>
+                      )}
+                    </div>
+
                     <h4 className="font-serif font-bold text-lg text-chocolate-900 mb-2">
                       {item.title}
                     </h4>
-                    <p className="text-xs text-chocolate-600 leading-relaxed font-sans mb-4 line-clamp-3">
+                    <p className="text-xs text-chocolate-600 leading-relaxed font-sans mb-3 line-clamp-3">
                       {item.description}
                     </p>
+
+                    {item.notice && (
+                      <p className="text-[11px] text-chocolate-600 bg-cream/90 p-2.5 rounded-sm border border-cream-border mb-3 font-sans leading-relaxed italic">
+                        {item.notice}
+                      </p>
+                    )}
 
                     <div className="flex flex-wrap gap-1.5 pt-3 border-t border-cream-border">
                       {item.tags.map((tag, tagIdx) => (
@@ -361,16 +450,56 @@ export const HomePage = () => {
         <SectionHeading
           eyebrow="Textile Repository"
           title="Curated Fabric Varieties"
-          subtitle="Direct partnerships with weaving clusters bring authentic silks, pure linens, fine wools and long-staple cottons to our shelves."
+          subtitle="Specialized Rida materials, Kurta-Saya Swiss lawns and cambrics, approved MSB & ABN uniform textiles alongside pure silks, Irish linens and luxury wools."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-          {fabricHighlights.map((fabric) => (
+        {/* Category Filter Tabs */}
+        {fabricFilterTabs.length > 0 && (
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-8 mb-10">
+            {fabricFilterTabs.map((tab) => {
+              const isActive = activeFabricFilter === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveFabricFilter(tab.id)}
+                  type="button"
+                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-sm text-xs sm:text-sm font-sans transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? 'bg-chocolate-800 text-ivory font-semibold shadow-xs ring-2 ring-chocolate-800/30'
+                      : tab.isFeatured
+                      ? 'bg-amber-50/80 text-gold-dark hover:bg-amber-100/80 border border-gold/40 font-medium'
+                      : 'bg-white/80 hover:bg-cream text-chocolate-700 hover:text-chocolate-900 border border-cream-border font-medium'
+                  }`}
+                >
+                  {tab.isFeatured && <Sparkles className="h-3.5 w-3.5 text-gold-dark" />}
+                  <span>{tab.label}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full font-sans ${
+                      isActive
+                        ? 'bg-chocolate-950 text-ivory'
+                        : 'bg-cream-border/70 text-chocolate-600'
+                    }`}
+                  >
+                    {getFabricCount(tab.id)}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Fabric Category Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredFabric.map((fabric) => (
             <Card
               key={fabric.id}
               variant="default"
               padding="none"
-              className="overflow-hidden flex flex-col justify-between"
+              className={`overflow-hidden flex flex-col justify-between transition-all duration-300 ${
+                fabric.isCommunitySpecial
+                  ? 'border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20'
+                  : 'border border-cream-border hover:border-chocolate-300 hover:shadow-xs'
+              }`}
             >
               <div>
                 <ImageContainer
@@ -384,19 +513,45 @@ export const HomePage = () => {
                 />
 
                 <div className="p-5">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <Badge
+                      variant={fabric.badgeVariant || (fabric.isCommunitySpecial ? 'gold' : 'chocolate')}
+                      size="xs"
+                      icon={fabric.isCommunitySpecial ? Sparkles : undefined}
+                    >
+                      {fabric.badge}
+                    </Badge>
+                    {fabric.isRepresentativeImage && (
+                      <span className="text-[10px] text-chocolate-400 font-sans tracking-wide">
+                        Sample Preview
+                      </span>
+                    )}
+                  </div>
+
                   <div className="text-[11px] text-chocolate-500 font-sans mb-1 font-medium">
                     Weave: {fabric.weaveType}
                   </div>
                   <h4 className="font-serif font-bold text-lg text-chocolate-900 mb-2">
                     {fabric.name}
                   </h4>
-                  <p className="text-xs text-chocolate-600 leading-relaxed font-sans mb-4 line-clamp-3">
+                  <p className="text-xs text-chocolate-600 leading-relaxed font-sans mb-3 line-clamp-3">
                     {fabric.description}
                   </p>
 
-                  <div className="bg-cream/70 p-2.5 rounded-sm border border-cream-border text-[11px] text-chocolate-700">
+                  <div className="bg-cream/70 p-2.5 rounded-sm border border-cream-border text-[11px] text-chocolate-700 mb-3">
                     <span className="font-semibold text-chocolate-900">Recommended For: </span>
                     <span>{fabric.idealFor}</span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-cream-border">
+                    {fabric.tags.map((tag, tagIdx) => (
+                      <span
+                        key={tagIdx}
+                        className="text-[10px] font-medium px-2 py-0.5 rounded bg-cream text-chocolate-700 border border-cream-border"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
