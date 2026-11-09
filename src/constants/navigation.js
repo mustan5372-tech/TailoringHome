@@ -1,5 +1,7 @@
 /**
  * Navigation and Brand Constants
+ * Note: Contact details and addresses are marked as temporary placeholders
+ * until verified business information is supplied.
  */
 
 export const ROUTES = {
@@ -34,14 +36,18 @@ export const BRAND_INFO = {
     name: 'Tailoring Home',
     specialty: 'Custom bespoke stitching, suits, traditional wear & alterations',
     phone: '+91 98765 43210',
-    location: 'Boutique Wing, Main Street',
+    phoneDisplay: '+91 98765 43210 [Placeholder]',
+    whatsapp: '+919876543210',
+    location: '[Placeholder: Boutique Wing, Main Fashion Street]',
   },
   fabricShop: {
     name: 'Fabric Home',
     specialty: 'Pure silks, fine linens, cottons, brocades & designer textiles',
     phone: '+91 98765 43211',
-    location: 'Textile Pavilion, Main Street',
+    phoneDisplay: '+91 98765 43211 [Placeholder]',
+    whatsapp: '+919876543211',
+    location: '[Placeholder: Textile Pavilion, Main Fashion Street]',
   },
-  workingHours: 'Mon - Sat: 10:00 AM – 8:30 PM | Sunday: 11:00 AM – 6:00 PM',
+  workingHours: 'Mon - Sat: 10:00 AM – 8:30 PM [Placeholder]',
+  fullHours: 'Mon - Sat: 10:00 AM – 8:30 PM | Sunday: 11:00 AM – 6:00 PM [Placeholder]',
 };
-

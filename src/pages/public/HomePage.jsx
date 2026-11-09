@@ -1,69 +1,129 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Scissors,
   Layers,
   ArrowRight,
-  Compass,
-  Award,
-  PhoneCall,
+  ShieldCheck,
+  Ruler,
+  Eye,
+  Clock,
+  Phone,
+  MessageCircle,
+  MapPin,
+  Sparkles,
+  CheckCircle2,
+  ExternalLink,
 } from 'lucide-react';
-import { SectionHeading } from '../../components/common/SectionHeading';
-import { Button } from '../../components/common/Button';
-import { Badge } from '../../components/common/Badge';
-import { Card } from '../../components/common/Card';
+
+import {
+  Button,
+  Card,
+  SectionHeading,
+  Badge,
+  ImageContainer,
+} from '../../components/common';
+
+import { homeContent } from '../../data/homeContent';
 import { ROUTES } from '../../constants/navigation';
 
 export const HomePage = () => {
+  const {
+    hero,
+    businessIntros,
+    tailoringHighlights,
+    fabricHighlights,
+    galleryPreview,
+    whyChooseUs,
+    contact,
+  } = homeContent;
+
+  // Icon mapping for Why Choose Us section
+  const iconMap = {
+    Scissors: Scissors,
+    ShieldCheck: ShieldCheck,
+    Layers: Layers,
+    Ruler: Ruler,
+    Eye: Eye,
+    Clock: Clock,
+  };
+
   return (
-    <div className="space-y-16 md:space-y-24 pb-16">
-      {/* Hero Showcase Section */}
+    <div className="space-y-20 md:space-y-28 pb-20">
+      {/* ====================================================================== */}
+      {/* 1. HERO SECTION                                                        */}
+      {/* ====================================================================== */}
       <section
         id="overview"
-        className="relative bg-gradient-to-b from-cream to-ivory border-b border-cream-border pt-16 pb-20 md:pt-24 md:pb-28 scroll-mt-24 md:scroll-mt-28"
+        className="relative bg-chocolate-950 text-ivory overflow-hidden border-b border-gold/30 scroll-mt-24 md:scroll-mt-28"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Background Image with Dark Chocolate / Maroon Gradient Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={hero.backgroundImage}
+            alt="Tailoring atelier and luxury fabrics backdrop"
+            className="w-full h-full object-cover object-center opacity-30 scale-105 transition-transform duration-1000 ease-out"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-chocolate-950/90 via-chocolate-900/85 to-chocolate-950/95" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(94,31,39,0.25)_0,transparent_70%)]" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-36 text-center">
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-maroon-50 border border-maroon-200/80 mb-6">
-            <span className="text-xs font-semibold tracking-widest text-maroon-800 uppercase">
-              Unified Boutique Catalogue
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-maroon-900/80 border border-gold/40 text-gold-light mb-8 shadow-xs">
+            <Sparkles className="h-3.5 w-3.5 text-gold" />
+            <span className="text-xs font-semibold tracking-widest uppercase font-sans">
+              {hero.badge}
             </span>
           </div>
 
-          {/* Hero Heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-chocolate-900 tracking-tight leading-tight max-w-4xl mx-auto">
-            Where Sartorial Craftsmanship Meets Exquisite Textiles
+          {/* Premium Headline */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-tight max-w-4xl mx-auto text-ivory">
+            {hero.headline}
           </h1>
 
-          <p className="mt-6 text-base sm:text-lg text-chocolate-600 max-w-2xl mx-auto leading-relaxed font-sans">
-            Welcome to the online showcase of <strong>Tailoring Home</strong> and <strong>Fabric Home</strong>.
-            Explore our artisanal stitching services and curated collections of premium fabrics.
+          {/* Introduction */}
+          <p className="mt-6 text-base sm:text-lg text-ivory/85 max-w-2xl mx-auto leading-relaxed font-sans">
+            {hero.subheadline}
           </p>
 
-          {/* Quick Dual Actions */}
+          {/* Dual Navigation Buttons */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Button
-              to={ROUTES.TAILORING}
+              to={hero.primaryCta.to}
               variant="primary"
               size="lg"
               icon={Scissors}
-              className="shadow-md"
+              className="shadow-md hover:shadow-lg"
             >
-              Explore Tailoring Services
+              {hero.primaryCta.label}
             </Button>
             <Button
-              to={ROUTES.FABRIC}
-              variant="secondary"
+              to={hero.secondaryCta.to}
+              variant="gold"
               size="lg"
               icon={Layers}
-              className="shadow-md"
+              className="shadow-md hover:shadow-lg text-chocolate-950 font-semibold"
             >
-              Discover Fabric Varieties
+              {hero.secondaryCta.label}
             </Button>
+          </div>
+
+          {/* Highlights Ribbon */}
+          <div className="mt-14 pt-8 border-t border-ivory/15 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto text-xs sm:text-sm text-ivory/80 font-sans">
+            {hero.highlights.map((item, index) => (
+              <div key={index} className="flex items-center justify-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold"></span>
+                <span>{item}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Dual Shop Showcase Portals */}
+      {/* ====================================================================== */}
+      {/* 2. BUSINESS INTRODUCTION (Tailoring Home & Fabric Home)                */}
+      {/* ====================================================================== */}
       <section
         id="boutiques"
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
@@ -71,185 +131,544 @@ export const HomePage = () => {
         <SectionHeading
           eyebrow="Two Distinct Entities"
           title="Curated Under One Prestigious Roof"
-          subtitle="Whether you seek master bespoke craftsmanship or the world's most delicate woven cloths, discover our specialized ateliers below."
+          subtitle="Explore the separate disciplines of our master bespoke tailoring studio and our premier repository of certified fine textiles."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mt-10">
-          {/* Shop 1: Tailoring Home */}
-          <div className="group relative rounded-sm bg-gradient-to-br from-cream to-white border-2 border-maroon-100 hover:border-maroon-300 p-8 sm:p-10 transition-all duration-300 hover:shadow-lg">
-            <div className="flex items-center justify-between mb-6">
-              <div className="h-14 w-14 rounded-sm bg-maroon-800 text-gold flex items-center justify-center shadow-xs">
-                <Scissors className="h-7 w-7" />
-              </div>
-              <Badge variant="maroon" size="sm">
-                Bespoke Atelier
-              </Badge>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-12">
+          {/* Card 1: Tailoring Home */}
+          <Card
+            variant="default"
+            padding="none"
+            className="group overflow-hidden border-2 border-maroon-100 hover:border-maroon-300 transition-all duration-300 flex flex-col justify-between"
+          >
+            <div>
+              {/* Image Showcase */}
+              <ImageContainer
+                src={businessIntros.tailoring.image}
+                alt="Tailoring Home master tailoring studio"
+                aspectRatio="landscape"
+                category="tailoring"
+                badge={businessIntros.tailoring.badge}
+                title={businessIntros.tailoring.name}
+                subtitle={businessIntros.tailoring.tagline}
+              />
 
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-chocolate-900 mb-3">
-              Tailoring Home
-            </h3>
+              <div className="p-7 sm:p-9 space-y-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="h-12 w-12 rounded-sm bg-maroon-800 text-gold flex items-center justify-center shadow-xs">
+                      <Scissors className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-2xl sm:text-3xl font-bold text-chocolate-900">
+                        {businessIntros.tailoring.name}
+                      </h3>
+                      <p className="text-xs uppercase tracking-wider text-maroon-700 font-semibold font-sans">
+                        {businessIntros.tailoring.tagline}
+                      </p>
+                    </div>
+                  </div>
+                  <Badge variant="maroon" size="sm">
+                    {businessIntros.tailoring.badge}
+                  </Badge>
+                </div>
 
-            <p className="text-chocolate-600 text-sm sm:text-base leading-relaxed mb-6 font-sans">
-              Precision master cutting, bespoke suit tailoring, ceremonial ethnic wear, handcrafted shirts, and tailored alterations engineered for individual perfection.
-            </p>
+                <p className="text-sm text-chocolate-600 leading-relaxed font-sans">
+                  {businessIntros.tailoring.description}
+                </p>
 
-            <div className="space-y-2.5 mb-8 text-xs sm:text-sm text-chocolate-700">
-              <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-maroon-700"></span>
-                <span>Custom Measurement & Personal Silhouette Styling</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-maroon-700"></span>
-                <span>Suits, Tuxedos, Sherwanis, Blazers & Kurtas</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-maroon-700"></span>
-                <span>Express Finishing & Precision Alteration Service</span>
-              </div>
-            </div>
-
-            <Button
-              to={ROUTES.TAILORING}
-              variant="maroonOutline"
-              className="w-full justify-between"
-              icon={ArrowRight}
-              iconPosition="right"
-            >
-              Browse Tailoring Catalogue
-            </Button>
-          </div>
-
-          {/* Shop 2: Fabric Home */}
-          <div className="group relative rounded-sm bg-gradient-to-br from-cream to-white border-2 border-chocolate-200 hover:border-chocolate-400 p-8 sm:p-10 transition-all duration-300 hover:shadow-lg">
-            <div className="flex items-center justify-between mb-6">
-              <div className="h-14 w-14 rounded-sm bg-chocolate-800 text-gold flex items-center justify-center shadow-xs">
-                <Layers className="h-7 w-7" />
-              </div>
-              <Badge variant="chocolate" size="sm">
-                Textile Archive
-              </Badge>
-            </div>
-
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-chocolate-900 mb-3">
-              Fabric Home
-            </h3>
-
-            <p className="text-chocolate-600 text-sm sm:text-base leading-relaxed mb-6 font-sans">
-              An expansive repository of handpicked textiles: pure Banarasi silks, crisp Irish and European linens, Egyptian Giza cottons, raw silks, and regal jacquards.
-            </p>
-
-            <div className="space-y-2.5 mb-8 text-xs sm:text-sm text-chocolate-700">
-              <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-chocolate-700"></span>
-                <span>Pure Mulberry, Tussar & Banarasi Silks</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-chocolate-700"></span>
-                <span>Breathable Natural Linens & Fine Wool Blends</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-chocolate-700"></span>
-                <span>Embroidered Brocades & Festive Fabric Yards</span>
+                <div className="space-y-2.5 pt-2 border-t border-cream-border text-xs sm:text-sm text-chocolate-700">
+                  {businessIntros.tailoring.features.map((feature, i) => (
+                    <div key={i} className="flex items-start gap-2.5">
+                      <CheckCircle2 className="h-4 w-4 text-maroon-700 shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <Button
-              to={ROUTES.FABRIC}
-              variant="outline"
-              className="w-full justify-between"
-              icon={ArrowRight}
-              iconPosition="right"
-            >
-              Explore Textile Varieties
-            </Button>
-          </div>
+            <div className="p-7 sm:p-9 pt-0">
+              <Button
+                to={businessIntros.tailoring.ctaTo}
+                variant="maroonOutline"
+                fullWidth
+                icon={ArrowRight}
+                iconPosition="right"
+                className="justify-between"
+              >
+                {businessIntros.tailoring.ctaText}
+              </Button>
+            </div>
+          </Card>
+
+          {/* Card 2: Fabric Home */}
+          <Card
+            variant="default"
+            padding="none"
+            className="group overflow-hidden border-2 border-chocolate-200 hover:border-chocolate-400 transition-all duration-300 flex flex-col justify-between"
+          >
+            <div>
+              {/* Image Showcase */}
+              <ImageContainer
+                src={businessIntros.fabric.image}
+                alt="Fabric Home luxury textiles collection"
+                aspectRatio="landscape"
+                category="fabric"
+                badge={businessIntros.fabric.badge}
+                title={businessIntros.fabric.name}
+                subtitle={businessIntros.fabric.tagline}
+              />
+
+              <div className="p-7 sm:p-9 space-y-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="h-12 w-12 rounded-sm bg-chocolate-800 text-gold flex items-center justify-center shadow-xs">
+                      <Layers className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-2xl sm:text-3xl font-bold text-chocolate-900">
+                        {businessIntros.fabric.name}
+                      </h3>
+                      <p className="text-xs uppercase tracking-wider text-chocolate-600 font-semibold font-sans">
+                        {businessIntros.fabric.tagline}
+                      </p>
+                    </div>
+                  </div>
+                  <Badge variant="chocolate" size="sm">
+                    {businessIntros.fabric.badge}
+                  </Badge>
+                </div>
+
+                <p className="text-sm text-chocolate-600 leading-relaxed font-sans">
+                  {businessIntros.fabric.description}
+                </p>
+
+                <div className="space-y-2.5 pt-2 border-t border-cream-border text-xs sm:text-sm text-chocolate-700">
+                  {businessIntros.fabric.features.map((feature, i) => (
+                    <div key={i} className="flex items-start gap-2.5">
+                      <CheckCircle2 className="h-4 w-4 text-chocolate-700 shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="p-7 sm:p-9 pt-0">
+              <Button
+                to={businessIntros.fabric.ctaTo}
+                variant="outline"
+                fullWidth
+                icon={ArrowRight}
+                iconPosition="right"
+                className="justify-between"
+              >
+                {businessIntros.fabric.ctaText}
+              </Button>
+            </div>
+          </Card>
         </div>
       </section>
 
-      {/* Boutique Values & Standards */}
+      {/* ====================================================================== */}
+      {/* 3. TAILORING HIGHLIGHTS (Stitching & Tailoring Service Categories)      */}
+      {/* ====================================================================== */}
       <section
-        id="standards"
-        className="bg-cream py-16 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
+        id="tailoring-highlights"
+        className="bg-cream py-18 md:py-24 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card variant="default">
-              <Award className="h-8 w-8 text-maroon-700 mb-3" />
-              <h4 className="font-serif font-bold text-lg text-chocolate-900 mb-1">
-                Artisanal Masters
-              </h4>
-              <p className="text-xs text-chocolate-600 leading-relaxed">
-                Over 25 years of generational tailoring wisdom and pattern mastery.
-              </p>
-            </Card>
+          <SectionHeading
+            eyebrow="Sartorial Offerings"
+            title="Tailoring Home Specialities"
+            subtitle="Every piece begins with raw cloth and personal measurements, cut meticulously for individual balance and poise."
+          />
 
-            <Card variant="default">
-              <Layers className="h-8 w-8 text-chocolate-700 mb-3" />
-              <h4 className="font-serif font-bold text-lg text-chocolate-900 mb-1">
-                Certified Purity
-              </h4>
-              <p className="text-xs text-chocolate-600 leading-relaxed">
-                Authentic fabric origins with strict natural fiber and thread count verification.
-              </p>
-            </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+            {tailoringHighlights.map((item) => (
+              <Card
+                key={item.id}
+                variant="default"
+                padding="none"
+                className="overflow-hidden flex flex-col justify-between"
+              >
+                <div>
+                  <ImageContainer
+                    src={item.image}
+                    alt={item.title}
+                    aspectRatio="landscape"
+                    category="tailoring"
+                    gradient={item.gradient}
+                    badge={item.category}
+                    title={item.title}
+                  />
 
-            <Card variant="default">
-              <Compass className="h-8 w-8 text-gold-dark mb-3" />
-              <h4 className="font-serif font-bold text-lg text-chocolate-900 mb-1">
-                Bespoke Fitting
-              </h4>
-              <p className="text-xs text-chocolate-600 leading-relaxed">
-                Individual trial sessions guaranteeing silhouette harmony and posture precision.
-              </p>
-            </Card>
+                  <div className="p-5">
+                    <h4 className="font-serif font-bold text-lg text-chocolate-900 mb-2">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs text-chocolate-600 leading-relaxed font-sans mb-4 line-clamp-3">
+                      {item.description}
+                    </p>
 
-            <Card variant="default">
-              <Award className="h-8 w-8 text-maroon-800 mb-3" />
-              <h4 className="font-serif font-bold text-lg text-chocolate-900 mb-1">
-                Punctual Delivery
-              </h4>
-              <p className="text-xs text-chocolate-600 leading-relaxed">
-                Reliable turnaround times for celebratory dates and corporate occasions.
-              </p>
-            </Card>
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-cream-border">
+                      {item.tags.map((tag, tagIdx) => (
+                        <span
+                          key={tagIdx}
+                          className="text-[10px] font-medium px-2 py-0.5 rounded bg-cream text-chocolate-700 border border-cream-border"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 pt-0">
+                  <Link
+                    to={ROUTES.TAILORING}
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-maroon-800 hover:text-maroon-900 transition-colors pt-2"
+                  >
+                    <span>View Service Details</span>
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Button
+              to={ROUTES.TAILORING}
+              variant="primary"
+              size="md"
+              icon={Scissors}
+            >
+              Explore Complete Tailoring Catalogue
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Consultation Call to Action */}
+      {/* ====================================================================== */}
+      {/* 4. FABRIC HIGHLIGHTS (Curated Fabric Varieties Preview)                */}
+      {/* ====================================================================== */}
+      <section
+        id="fabric-highlights"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
+        <SectionHeading
+          eyebrow="Textile Repository"
+          title="Curated Fabric Varieties"
+          subtitle="Direct partnerships with weaving clusters bring authentic silks, pure linens, fine wools and long-staple cottons to our shelves."
+        />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          {fabricHighlights.map((fabric) => (
+            <Card
+              key={fabric.id}
+              variant="default"
+              padding="none"
+              className="overflow-hidden flex flex-col justify-between"
+            >
+              <div>
+                <ImageContainer
+                  src={fabric.image}
+                  alt={fabric.name}
+                  aspectRatio="landscape"
+                  category="fabric"
+                  gradient={fabric.gradient}
+                  badge={fabric.origin}
+                  title={fabric.name}
+                />
+
+                <div className="p-5">
+                  <div className="text-[11px] text-chocolate-500 font-sans mb-1 font-medium">
+                    Weave: {fabric.weaveType}
+                  </div>
+                  <h4 className="font-serif font-bold text-lg text-chocolate-900 mb-2">
+                    {fabric.name}
+                  </h4>
+                  <p className="text-xs text-chocolate-600 leading-relaxed font-sans mb-4 line-clamp-3">
+                    {fabric.description}
+                  </p>
+
+                  <div className="bg-cream/70 p-2.5 rounded-sm border border-cream-border text-[11px] text-chocolate-700">
+                    <span className="font-semibold text-chocolate-900">Recommended For: </span>
+                    <span>{fabric.idealFor}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-5 pt-0">
+                <Link
+                  to={ROUTES.FABRIC}
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-chocolate-800 hover:text-chocolate-900 transition-colors pt-2"
+                >
+                  <span>Explore Textile Specs</span>
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <Button
+            to={ROUTES.FABRIC}
+            variant="secondary"
+            size="md"
+            icon={Layers}
+          >
+            Explore Complete Fabric Archive
+          </Button>
+        </div>
+      </section>
+
+      {/* ====================================================================== */}
+      {/* 5. GALLERY PREVIEW (Selection of Sample Photographs)                   */}
+      {/* ====================================================================== */}
+      <section
+        id="gallery-preview"
+        className="bg-cream py-18 md:py-24 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Visual Retrospective"
+            title="Craftsmanship & Textile Gallery"
+            subtitle="A curated glimpse of completed bespoke creations from Tailoring Home alongside distinct fabric weaves from Fabric Home."
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+            {galleryPreview.map((item) => (
+              <Card
+                key={item.id}
+                variant="default"
+                padding="none"
+                className="overflow-hidden flex flex-col justify-between"
+              >
+                <ImageContainer
+                  src={item.image}
+                  alt={item.title}
+                  aspectRatio="portrait"
+                  category={item.category}
+                  gradient={item.gradient}
+                  badge={item.shop}
+                  title={item.title}
+                />
+
+                <div className="p-5">
+                  <span className="text-[10px] uppercase tracking-wider text-gold-dark font-semibold block mb-1">
+                    {item.tag}
+                  </span>
+                  <h4 className="font-serif font-bold text-base text-chocolate-900 mb-1">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs text-chocolate-600 leading-relaxed font-sans line-clamp-2">
+                    {item.description}
+                  </p>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Button
+              to={ROUTES.GALLERY}
+              variant="outline"
+              size="md"
+              icon={ExternalLink}
+              iconPosition="right"
+            >
+              View Full Creation Gallery
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* ====================================================================== */}
+      {/* 6. WHY CHOOSE US (Genuine Business Qualities)                          */}
+      {/* ====================================================================== */}
+      <section
+        id="standards"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
+      >
+        <SectionHeading
+          eyebrow="Craftsmanship Values"
+          title="Why Choose Tailoring Home & Fabric Home"
+          subtitle="Our principles are anchored in generational pattern mastery, verified natural fiber sourcing, and pressure-free customer consultations."
+        />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          {whyChooseUs.map((pillar) => {
+            const Icon = iconMap[pillar.icon] || Scissors;
+
+            return (
+              <Card
+                key={pillar.id}
+                variant="default"
+                className="flex flex-col justify-between"
+              >
+                <div>
+                  <div className="h-12 w-12 rounded-sm bg-maroon-50 text-maroon-800 flex items-center justify-center mb-5 border border-maroon-200/60 shadow-2xs">
+                    <Icon className="h-6 w-6" />
+                  </div>
+
+                  <h4 className="font-serif font-bold text-xl text-chocolate-900 mb-2.5">
+                    {pillar.title}
+                  </h4>
+
+                  <p className="text-xs sm:text-sm text-chocolate-600 leading-relaxed font-sans">
+                    {pillar.description}
+                  </p>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ====================================================================== */}
+      {/* 7. CONTACT & LOCATION PLACEHOLDERS SECTION                             */}
+      {/* ====================================================================== */}
       <section
         id="consultation"
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <div className="bg-gradient-to-r from-chocolate-900 via-maroon-900 to-chocolate-900 text-ivory rounded-sm p-8 md:p-12 border border-gold/30 shadow-xl relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl">
-            <Badge variant="gold" size="xs" className="mb-3">
-              Personalized Consultation
+        <div className="bg-gradient-to-br from-chocolate-950 via-chocolate-900 to-maroon-950 text-ivory rounded-sm p-8 sm:p-12 lg:p-14 border border-gold/40 shadow-xl relative overflow-hidden">
+          {/* Subtle Background Ornament */}
+          <div className="absolute -right-12 -bottom-12 opacity-5 pointer-events-none">
+            <Scissors className="h-96 w-96 text-gold" />
+          </div>
+
+          <div className="relative z-10 max-w-3xl mb-10">
+            <Badge variant="gold" size="xs" className="mb-3 text-chocolate-950 font-semibold">
+              {contact.badge}
             </Badge>
-            <h3 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-ivory">
-              Plan Your Bespoke Wardrobe
+
+            <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-ivory">
+              {contact.title}
             </h3>
-            <p className="text-ivory/80 text-sm md:text-base leading-relaxed mb-8 font-sans">
-              Visit our boutique showroom to feel the fabrics in person or consult with our master tailors for your upcoming event.
+
+            <p className="text-ivory/85 text-sm sm:text-base leading-relaxed font-sans">
+              {contact.subtitle}
             </p>
-            <div className="flex flex-wrap items-center gap-4">
-              <Button
-                to="/contact#enquiry-form"
-                variant="gold"
-                size="md"
-                icon={PhoneCall}
-              >
-                Contact Our Boutiques
-              </Button>
-              <Button
-                to={ROUTES.GALLERY}
-                variant="outline"
-                size="md"
-                className="text-ivory border-ivory/40 hover:bg-white/10"
-              >
-                View Creation Gallery
-              </Button>
+
+            {/* Clearly Identifiable Temporary Notice */}
+            <div className="mt-4 p-3 rounded-sm bg-white/10 border border-gold/30 text-[11px] text-gold-light/90 font-mono">
+              {contact.notice}
+            </div>
+          </div>
+
+          {/* Dual Shop Contact Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+            {/* Tailoring Home Contact Card */}
+            <div className="bg-white/10 backdrop-blur-xs p-6 rounded-sm border border-maroon-400/30 space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                <div className="flex items-center gap-2.5">
+                  <Scissors className="h-5 w-5 text-gold" />
+                  <span className="font-serif font-bold text-lg text-ivory">
+                    {contact.tailoringContact.shop}
+                  </span>
+                </div>
+                <Badge variant="maroon" size="xs">
+                  Stitching
+                </Badge>
+              </div>
+
+              <p className="text-xs text-ivory/70 font-sans">
+                {contact.tailoringContact.specialty}
+              </p>
+
+              <div className="space-y-2 text-xs text-ivory/85 font-sans pt-1">
+                <p className="flex items-center gap-2">
+                  <Phone className="h-3.5 w-3.5 text-gold shrink-0" />
+                  <span>{contact.tailoringContact.phoneDisplay}</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <MapPin className="h-3.5 w-3.5 text-gold shrink-0" />
+                  <span>{contact.tailoringContact.location}</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <Clock className="h-3.5 w-3.5 text-gold shrink-0" />
+                  <span>{contact.tailoringContact.hours}</span>
+                </p>
+              </div>
+
+              <div className="pt-3 flex flex-wrap items-center gap-3">
+                <a
+                  href={`https://wa.me/${contact.tailoringContact.whatsapp.replace(/[^0-9]/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white transition-colors shadow-xs"
+                >
+                  <MessageCircle className="h-3.5 w-3.5" />
+                  <span>WhatsApp Inquire</span>
+                </a>
+                <Button
+                  to="/contact#enquiry-form"
+                  variant="gold"
+                  size="sm"
+                  className="text-chocolate-950"
+                >
+                  Book Session
+                </Button>
+              </div>
+            </div>
+
+            {/* Fabric Home Contact Card */}
+            <div className="bg-white/10 backdrop-blur-xs p-6 rounded-sm border border-chocolate-400/30 space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                <div className="flex items-center gap-2.5">
+                  <Layers className="h-5 w-5 text-gold" />
+                  <span className="font-serif font-bold text-lg text-ivory">
+                    {contact.fabricContact.shop}
+                  </span>
+                </div>
+                <Badge variant="chocolate" size="xs">
+                  Textiles
+                </Badge>
+              </div>
+
+              <p className="text-xs text-ivory/70 font-sans">
+                {contact.fabricContact.specialty}
+              </p>
+
+              <div className="space-y-2 text-xs text-ivory/85 font-sans pt-1">
+                <p className="flex items-center gap-2">
+                  <Phone className="h-3.5 w-3.5 text-gold shrink-0" />
+                  <span>{contact.fabricContact.phoneDisplay}</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <MapPin className="h-3.5 w-3.5 text-gold shrink-0" />
+                  <span>{contact.fabricContact.location}</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <Clock className="h-3.5 w-3.5 text-gold shrink-0" />
+                  <span>{contact.fabricContact.hours}</span>
+                </p>
+              </div>
+
+              <div className="pt-3 flex flex-wrap items-center gap-3">
+                <a
+                  href={`https://wa.me/${contact.fabricContact.whatsapp.replace(/[^0-9]/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white transition-colors shadow-xs"
+                >
+                  <MessageCircle className="h-3.5 w-3.5" />
+                  <span>WhatsApp Swatches</span>
+                </a>
+                <Button
+                  to="/contact#enquiry-form"
+                  variant="outline"
+                  size="sm"
+                  className="text-ivory border-ivory/40 hover:bg-white/15"
+                >
+                  Inquire Yardage
+                </Button>
+              </div>
             </div>
           </div>
         </div>
