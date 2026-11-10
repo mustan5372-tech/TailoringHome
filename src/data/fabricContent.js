@@ -583,3 +583,4 @@ export const fabricContent = {
 };
 
 export default fabricContent;
+

@@ -14,10 +14,21 @@ dist-ssr
 
 # Environment variables
 .env
+.env.*
 .env.development.local
 .env.test.local
 .env.production.local
 !.env.example
+
+# Vercel
+.vercel
+
+# Private keys and credentials
+*.pem
+*.key
+*.cert
+serviceAccountKey*.json
+
 
 # Editor directories and files
 .vscode/*
