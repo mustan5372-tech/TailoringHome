@@ -91,3 +91,4 @@ export const AdminTailoringPage = () => {
 };
 
 export default AdminTailoringPage;
+

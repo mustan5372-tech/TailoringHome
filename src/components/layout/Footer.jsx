@@ -1,6 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Scissors, Layers, Phone, Clock, MapPin, ArrowUpRight, Heart } from 'lucide-react';
+import {
+  Scissors,
+  Layers,
+  Phone,
+  Clock,
+  MapPin,
+  ArrowUpRight,
+  Heart,
+  ExternalLink,
+} from 'lucide-react';
 import { BrandLogo } from '../common/BrandLogo';
 import { ROUTES, BRAND_INFO } from '../../constants/navigation';
 
@@ -127,6 +136,53 @@ export const Footer = () => {
             <Heart className="h-3 w-3 text-maroon-400 fill-maroon-400" />
             <span>for bespoke craftsmanship</span>
           </p>
+        </div>
+
+        {/* About the Developer Section */}
+        <div className="mt-8 pt-6 border-t border-chocolate-800/80">
+          <div className="bg-chocolate-950/60 rounded-sm border border-gold/25 p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-3.5 text-center sm:text-left">
+              {/* Developer Photograph */}
+              <div className="relative shrink-0">
+                <img
+                  src="/images/developer/mustansir.jpg"
+                  alt="Mustansir Sanawadwala"
+                  className="h-12 w-12 sm:h-14 sm:w-14 rounded-full object-cover border-2 border-gold/40 shadow-xs"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = '/20261031_102346(1).jpg';
+                  }}
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Developer Details */}
+              <div className="space-y-0.5">
+                <span className="text-[10px] uppercase font-semibold tracking-wider text-gold-light/80 block">
+                  About the Developer
+                </span>
+                <h4 className="font-serif font-bold text-sm sm:text-base text-ivory">
+                  Mustansir Sanawadwala
+                </h4>
+                <p className="text-xs text-ivory/70 font-sans">
+                  Designed and developed by Mustansir Sanawadwala.
+                </p>
+              </div>
+            </div>
+
+            {/* Portfolio Link */}
+            <div className="shrink-0">
+              <a
+                href="https://mustansir.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-sm text-xs font-semibold text-gold bg-chocolate-900/90 hover:bg-maroon-900/80 hover:text-gold-light border border-gold/30 hover:border-gold/60 transition-all duration-200 shadow-xs"
+              >
+                <span>Visit Portfolio</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
