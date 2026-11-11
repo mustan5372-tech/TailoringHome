@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   Users,
-  ArrowLeft,
-  Info,
   UserPlus,
   Key,
   CheckCircle2,
@@ -13,7 +10,7 @@ import {
 import { Card } from '../../components/common/Card';
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
-import { ROUTES } from '../../constants/navigation';
+import { AdminSectionHeader } from '../../components/admin/AdminSectionHeader';
 import { adminContent } from '../../data/adminContent';
 
 export const AdminUsersPage = () => {
@@ -45,44 +42,23 @@ export const AdminUsersPage = () => {
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto font-sans">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-sm border border-cream-border">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <Link
-              to={ROUTES.ADMIN.DASHBOARD}
-              className="text-xs text-chocolate-500 hover:text-maroon-800 flex items-center gap-1 font-semibold"
-            >
-              <ArrowLeft className="h-3 w-3" /> Dashboard
-            </Link>
-            <span className="text-stone-300">/</span>
-            <Badge variant="maroon" size="xs">
-              Access Control
-            </Badge>
-          </div>
-          <h1 className="font-serif font-bold text-2xl text-chocolate-900">
-            Administrator Management [Demo UI]
-          </h1>
-          <p className="text-xs text-chocolate-600 mt-0.5">
-            Configure boutique managerial roles, atelier staff permissions, and security policies.
-          </p>
-        </div>
-
-        <Button variant="primary" size="sm" icon={UserPlus} disabled className="opacity-80">
-          Invite Administrator [Demo]
-        </Button>
-      </div>
-
-      {/* Demo Notice */}
-      <div className="bg-cream/60 border border-gold/30 rounded-sm p-3.5 text-xs text-chocolate-700 flex items-start gap-2.5">
-        <Info className="h-4 w-4 text-gold-dark shrink-0 mt-0.5" />
-        <span>
-          <strong>Authentication Staged (Demo Only):</strong> Firebase Authentication and role-based access control (RBAC) are not yet connected. The accounts below represent staged mock administrators for interface testing.
-        </span>
-      </div>
+      {/* Standardized Header */}
+      <AdminSectionHeader
+        title="Administrator Management [Demo UI]"
+        subtitle="Configure boutique managerial roles, atelier staff permissions, and security policies."
+        badgeText="Access Control"
+        badgeVariant="maroon"
+        badgeIcon={Users}
+        demoNoticeText="Firebase Authentication and role-based access control (RBAC) are not yet connected. The accounts below represent staged mock administrators for interface testing."
+        actions={
+          <Button variant="primary" size="sm" icon={UserPlus} disabled className="opacity-80">
+            Invite Administrator [Demo]
+          </Button>
+        }
+      />
 
       {/* Admin Users Table / Cards */}
-      <div className="bg-white rounded-sm border border-cream-border overflow-hidden">
+      <div className="bg-white rounded-sm border border-cream-border overflow-hidden shadow-2xs">
         <div className="p-5 border-b border-cream-border flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Users className="h-5 w-5 text-maroon-800" />
@@ -148,7 +124,7 @@ export const AdminUsersPage = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {roleDefinitions.map((role, idx) => (
-            <Card key={idx} variant="default" className="border border-cream-border space-y-2">
+            <Card key={idx} variant="default" className="border border-cream-border space-y-2 shadow-2xs">
               <div className="flex items-center justify-between">
                 <Badge variant={role.badgeVariant} size="xs">
                   {role.scope}

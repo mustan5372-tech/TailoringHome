@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Sparkles,
-  ArrowLeft,
-  Info,
   Upload,
   Crop,
   Image as ImageIcon,
@@ -13,7 +10,7 @@ import {
 } from 'lucide-react';
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
-import { ROUTES } from '../../constants/navigation';
+import { AdminSectionHeader } from '../../components/admin/AdminSectionHeader';
 
 export const AdminImageStudioPage = () => {
   const [selectedRatio, setSelectedRatio] = useState('4:3');
@@ -34,46 +31,25 @@ export const AdminImageStudioPage = () => {
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto font-sans">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-sm border border-cream-border">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <Link
-              to={ROUTES.ADMIN.DASHBOARD}
-              className="text-xs text-chocolate-500 hover:text-maroon-800 flex items-center gap-1 font-semibold"
-            >
-              <ArrowLeft className="h-3 w-3" /> Dashboard
-            </Link>
-            <span className="text-stone-300">/</span>
-            <Badge variant="gold" size="xs" icon={Sparkles}>
-              Image Studio
-            </Badge>
-          </div>
-          <h1 className="font-serif font-bold text-2xl text-chocolate-900">
-            Image Studio & Asset Pipeline
-          </h1>
-          <p className="text-xs text-chocolate-600 mt-0.5">
-            Optimize, format, and stage high-resolution boutique photography before publishing.
-          </p>
-        </div>
-
-        <Button variant="primary" size="sm" icon={Upload} disabled className="opacity-80">
-          Upload to Studio [Demo]
-        </Button>
-      </div>
-
-      {/* Demo Notice */}
-      <div className="bg-cream/60 border border-gold/30 rounded-sm p-3.5 text-xs text-chocolate-700 flex items-start gap-2.5">
-        <Info className="h-4 w-4 text-gold-dark shrink-0 mt-0.5" />
-        <span>
-          <strong>Staged Studio Environment:</strong> The Image Studio prepares visual assets according to boutique brand guidelines. Live Cloud Storage integration and client-side WebP compression will be activated in subsequent backend phases.
-        </span>
-      </div>
+      {/* Standardized Header */}
+      <AdminSectionHeader
+        title="Image Studio & Asset Pipeline"
+        subtitle="Optimize, format, and stage high-resolution boutique photography before publishing."
+        badgeText="Image Studio"
+        badgeVariant="gold"
+        badgeIcon={Sparkles}
+        demoNoticeText="The Image Studio prepares visual assets according to boutique brand guidelines. Live Cloud Storage integration and client-side WebP compression will be activated in subsequent backend phases."
+        actions={
+          <Button variant="primary" size="sm" icon={Upload} disabled className="opacity-80">
+            Upload to Studio [Demo]
+          </Button>
+        }
+      />
 
       {/* Grid: Specifications & Simulator */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Aspect Ratio Calibrator */}
-        <div className="lg:col-span-7 bg-white p-6 rounded-sm border border-cream-border space-y-5">
+        <div className="lg:col-span-7 bg-white p-6 rounded-sm border border-cream-border space-y-5 shadow-2xs">
           <div className="flex items-center justify-between border-b border-cream-border pb-3">
             <div className="flex items-center gap-2">
               <Crop className="h-5 w-5 text-maroon-800" />
@@ -165,7 +141,7 @@ export const AdminImageStudioPage = () => {
         {/* Right Column: Asset Guidelines & Storage Structure */}
         <div className="lg:col-span-5 space-y-6">
           {/* Storage Directory Structure */}
-          <div className="bg-white p-6 rounded-sm border border-cream-border space-y-4">
+          <div className="bg-white p-6 rounded-sm border border-cream-border space-y-4 shadow-2xs">
             <div className="flex items-center gap-2 border-b border-cream-border pb-3">
               <FolderTree className="h-5 w-5 text-chocolate-800" />
               <h3 className="font-serif font-bold text-base text-chocolate-900">
@@ -192,7 +168,7 @@ export const AdminImageStudioPage = () => {
           </div>
 
           {/* Standards & Hygiene Checklist */}
-          <div className="bg-white p-6 rounded-sm border border-cream-border space-y-3">
+          <div className="bg-white p-6 rounded-sm border border-cream-border space-y-3 shadow-2xs">
             <div className="flex items-center gap-2 text-chocolate-900 font-serif font-bold text-base border-b border-cream-border pb-2">
               <Sliders className="h-4 w-4 text-gold-dark" />
               <span>Asset Quality Standards</span>

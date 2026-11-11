@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, Info, Plus } from 'lucide-react';
+import { CheckCircle2, Plus } from 'lucide-react';
 import { Card } from '../../components/common/Card';
 import { Badge } from '../../components/common/Badge';
 import { Button } from '../../components/common/Button';
-import { ROUTES } from '../../constants/navigation';
+import { AdminSectionHeader } from '../../components/admin/AdminSectionHeader';
 import { fabricContent } from '../../data/fabricContent';
 
 export const AdminFabricPage = () => {
@@ -23,41 +22,19 @@ export const AdminFabricPage = () => {
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto font-sans">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-sm border border-cream-border">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <Link
-              to={ROUTES.ADMIN.DASHBOARD}
-              className="text-xs text-chocolate-500 hover:text-maroon-800 flex items-center gap-1 font-semibold"
-            >
-              <ArrowLeft className="h-3 w-3" /> Dashboard
-            </Link>
-            <span className="text-stone-300">/</span>
-            <Badge variant="chocolate" size="xs">
-              Fabric Archive Module
-            </Badge>
-          </div>
-          <h1 className="font-serif font-bold text-2xl text-chocolate-900">
-            Fabric Home Textile Archive Management
-          </h1>
-          <p className="text-xs text-chocolate-600 mt-0.5">
-            Manage fabric varieties, yarn counts, Rida material swatches, and school uniform cloths.
-          </p>
-        </div>
-
-        <Button variant="secondary" size="sm" icon={Plus} disabled className="opacity-80">
-          Add New Textile [Demo]
-        </Button>
-      </div>
-
-      {/* Demo Notice */}
-      <div className="bg-cream/60 border border-gold/30 rounded-sm p-3.5 text-xs text-chocolate-700 flex items-start gap-2.5">
-        <Info className="h-4 w-4 text-gold-dark shrink-0 mt-0.5" />
-        <span>
-          <strong>Demo Management View:</strong> Below are the 11 curated fabric varieties staged in the decoupled data store. Future Firestore integration will allow live inventory swatch editing.
-        </span>
-      </div>
+      {/* Standardized Header */}
+      <AdminSectionHeader
+        title="Fabric Home Textile Archive Management"
+        subtitle="Manage fabric varieties, yarn counts, Rida material swatches, and school uniform cloths."
+        badgeText="Fabric Archive"
+        badgeVariant="chocolate"
+        demoNoticeText="Below are the 11 curated fabric varieties staged in the decoupled data store. Future Firestore integration will allow live inventory swatch editing."
+        actions={
+          <Button variant="secondary" size="sm" icon={Plus} disabled className="opacity-80">
+            Add New Textile [Demo]
+          </Button>
+        }
+      />
 
       {/* Textile Groups Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -93,4 +70,3 @@ export const AdminFabricPage = () => {
 };
 
 export default AdminFabricPage;
-
