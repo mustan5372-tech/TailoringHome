@@ -16,6 +16,9 @@ export const ROUTES = {
     TAILORING: '/admin/tailoring',
     FABRIC: '/admin/fabric',
     GALLERY: '/admin/gallery',
+    IMAGE_STUDIO: '/admin/image-studio',
+    ADMIN_MANAGEMENT: '/admin/admins',
+    SETTINGS: '/admin/settings',
     CLEANUP: '/admin/cleanup',
   },
 };
