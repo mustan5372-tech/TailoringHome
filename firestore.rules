@@ -1,0 +1,84 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: Check if user is authenticated via Firebase Auth
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // =========================================================================
+    // 1. PUBLIC CATALOGUES (Read by everyone, Write by authenticated admins)
+    // =========================================================================
+
+    // Tailoring Services Catalogue (Production & Dev)
+    match /tailoring_services/{document=**} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+    match /dev_tailoring_services/{document=**} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Fabrics Catalogue (Production & Dev)
+    match /fabrics_catalogue/{document=**} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+    match /dev_fabrics_catalogue/{document=**} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Gallery Showcase (Production & Dev)
+    match /gallery_showcase/{document=**} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+    match /dev_gallery_showcase/{document=**} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Site Settings & Brand Configuration (Production & Dev)
+    match /site_settings/{document=**} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+    match /dev_site_settings/{document=**} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // =========================================================================
+    // 2. CUSTOMER ENQUIRIES (Public submission, Admin-only view)
+    // =========================================================================
+    match /customer_enquiries/{document=**} {
+      allow create: if true;
+      allow read, update, delete: if isAuthenticated();
+    }
+    match /dev_customer_enquiries/{document=**} {
+      allow create: if true;
+      allow read, update, delete: if isAuthenticated();
+    }
+
+    // =========================================================================
+    // 3. ADMIN MANAGEMENT & USERS
+    // =========================================================================
+    match /admins/{document=**} {
+      allow read, write: if isAuthenticated();
+    }
+    match /users/{document=**} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // =========================================================================
+    // 4. DEFAULT CATCH-ALL (Deny any other unlisted access)
+    // =========================================================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
