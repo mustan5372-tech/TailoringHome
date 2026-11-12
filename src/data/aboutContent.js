@@ -180,9 +180,11 @@ export const aboutContent = {
     fabricAddress: BRAND_INFO.fabricShop.location,
     hours: BRAND_INFO.fullHours,
     phone: BRAND_INFO.tailoringShop.phoneDisplay,
-    whatsappUrl: `https://wa.me/${BRAND_INFO.tailoringShop.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-      'Hello, I would like to schedule an in-person consultation at your showroom.'
-    )}`,
+    whatsappUrl: BRAND_INFO.tailoringShop.whatsapp
+      ? `https://wa.me/${BRAND_INFO.tailoringShop.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+          'Hello, I would like to schedule an in-person consultation at your showroom.'
+        )}`
+      : null,
   },
 };
 

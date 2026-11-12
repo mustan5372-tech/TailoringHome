@@ -22,16 +22,23 @@ export const Header = () => {
           <div className="flex items-center gap-1.5">
             <Clock className="h-3 w-3 text-gold/80" />
             <span className="hidden lg:inline">{BRAND_INFO.workingHours}</span>
-            <span className="lg:hidden">10 AM – 8:30 PM</span>
+            <span className="lg:hidden">Visiting hours to be announced</span>
           </div>
           <span className="text-chocolate-600">|</span>
-          <a
-            href={`tel:${BRAND_INFO.tailoringShop.phone.replace(/\s+/g, '')}`}
-            className="flex items-center gap-1.5 hover:text-gold transition-colors"
-          >
-            <Phone className="h-3 w-3 text-gold/80" />
-            <span>{BRAND_INFO.tailoringShop.phone}</span>
-          </a>
+          {BRAND_INFO.tailoringShop.phone ? (
+            <a
+              href={`tel:${BRAND_INFO.tailoringShop.phone.replace(/\s+/g, '')}`}
+              className="flex items-center gap-1.5 hover:text-gold transition-colors"
+            >
+              <Phone className="h-3 w-3 text-gold/80" />
+              <span>{BRAND_INFO.tailoringShop.phone}</span>
+            </a>
+          ) : (
+            <div className="flex items-center gap-1.5 text-gold-light/90">
+              <Phone className="h-3 w-3 text-gold/80" />
+              <span>{BRAND_INFO.tailoringShop.phoneDisplay}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
