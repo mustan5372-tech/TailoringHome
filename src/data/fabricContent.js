@@ -14,8 +14,7 @@ export const fabricContent = {
     headline: 'Curated Luxury Textiles, Traditional Weaves & Fine Drapery',
     subheadline:
       'The comprehensive textile repository of Fabric Home. Sourcing authentic Rida prints, pristine Kurta-Saya Swiss lawns, approved MSB & ABN school uniform textiles, pure Banarasi silks, European linens, and Italian worsted suiting wools.',
-    backgroundImage:
-      'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=2000&q=80',
+    backgroundImage: null,
     fallbackGradient: 'from-chocolate-950 via-chocolate-900 to-maroon-950',
     highlights: [
       '100% Certified Natural Fibers',
@@ -61,11 +60,10 @@ export const fabricContent = {
         ],
         idealFor: 'Everyday Ridas, Miqaat Wear, Coordinated Jodis',
         tags: ['Floral Prints', 'Soft Cotton', 'Jodi Fabrics', 'Colorfast', 'Rida Speciality'],
-        image:
-          'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-maroon-900 to-amber-950',
         inquirySubject: 'Rida Fabrics & Jodi Prints',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'rida-designer-panels',
@@ -85,11 +83,10 @@ export const fabricContent = {
         ],
         idealFor: 'Pardi Flaps, Ghagra Border Accents, Festive Ridas',
         tags: ['Border Laces', 'Crochet Trims', 'French Chiffon', 'Organza Panels'],
-        image:
-          'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-amber-950 to-maroon-950',
         inquirySubject: 'Rida Panels, Chiffons & Lace Trims',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'kurta-saya-fabrics',
@@ -109,11 +106,10 @@ export const fabricContent = {
         ],
         idealFor: "Bohra Men's Kurta & Saya, Daily Prayers, Festive Miqaats",
         tags: ['Pristine White', 'Swiss Lawn', 'Egyptian Cambric', 'Self-Jacquard', 'Prayer Wear'],
-        image:
-          'https://images.unsplash.com/photo-1528458876859-9944061a5b48?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-stone-900 to-chocolate-950',
         inquirySubject: 'Kurta-Saya Fabrics',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'izaar-fabrics',
@@ -133,11 +129,10 @@ export const fabricContent = {
         ],
         idealFor: 'Traditional Izaars, Pajama Bottoms, Lightweight Daily Prayer Wear',
         tags: ['Pure White Cotton', 'Durable Cambric', 'Woven Border', 'Soft Poplin'],
-        image:
-          'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-amber-950 to-chocolate-900',
         inquirySubject: 'Izaar Fabrics',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
     ],
   },
@@ -172,11 +167,10 @@ export const fabricContent = {
         ],
         idealFor: "MSB Boys' & Girls' School Uniforms, Shirts, Trousers & Pinafores",
         tags: ['MSB Approved Shade', 'High-Tensile Weave', 'Anti-Pill', 'Colorfast', 'Grades 1-12'],
-        image:
-          'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-900 to-maroon-950',
         inquirySubject: 'MSB Uniform Fabrics',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'abn-uniform-fabrics',
@@ -198,11 +192,10 @@ export const fabricContent = {
         ],
         idealFor: 'ABN Campus Uniforms, Student Shirting & Trousers',
         tags: ['ABN Standard Shade', 'Heavy-Duty Twill', 'Tear-Resistant', 'Easy-Care', 'Campus Wear'],
-        image:
-          'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-maroon-950 to-chocolate-900',
         inquirySubject: 'ABN Uniform Fabrics',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
     ],
   },
@@ -244,11 +237,10 @@ export const fabricContent = {
         ],
         idealFor: 'Executive Boardroom Shirts, Daily Luxury Kurtas, Casual Tops',
         tags: ['Giza 100s-140s', '2-Ply Yarn', 'Silky Smooth', 'Breathable', 'Pure Cotton'],
-        image:
-          'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-800 to-stone-900',
         inquirySubject: 'Egyptian Giza & Supima Cottons',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'cotton-cambric-mulmul',
@@ -269,11 +261,10 @@ export const fabricContent = {
         ],
         idealFor: 'Summer Kurtas, Inner Linings, Daily Tunics, Nightwear',
         tags: ['Mulmul', 'Fine Cambric', 'Featherlight', 'Summer Cooling'],
-        image:
-          'https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-amber-950 to-chocolate-900',
         inquirySubject: 'Cotton Cambrics & Soft Mulmul',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
 
       // Silk
@@ -296,11 +287,10 @@ export const fabricContent = {
         ],
         idealFor: 'Wedding Sherwanis, Regal Kurtas, Festive Dupattas & Lehengas',
         tags: ['Pure Silk', 'Banarasi Zari', 'Handloom', 'Heirloom Quality', 'Royal Fabric'],
-        image:
-          'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-maroon-900 to-amber-900',
         inquirySubject: 'Banarasi & Katan Silks',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'silk-mulberry-tussar',
@@ -321,11 +311,10 @@ export const fabricContent = {
         ],
         idealFor: 'Nehru Jackets, Bandhgalas, Festive Kurtas, Modest Tunics',
         tags: ['Tussar Silk', 'Raw Silk', 'Organic Slub', 'Bandhgala Fabric'],
-        image:
-          'https://images.unsplash.com/photo-1583391733975-dd2895689100?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-amber-950 to-maroon-900',
         inquirySubject: 'Mulberry, Tussar & Matka Silks',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
 
       // Linen
@@ -348,11 +337,10 @@ export const fabricContent = {
         ],
         idealFor: 'Summer Suits, Unlined Blazers, Casual Leisure Shirts, Trousers',
         tags: ['Pure Flax', 'Irish Linen', 'High Breathability', 'Summer Suiting', 'Eco-Friendly'],
-        image:
-          'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-amber-900 to-chocolate-900',
         inquirySubject: 'European & Irish Pure Linens',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'linen-blends',
@@ -373,11 +361,10 @@ export const fabricContent = {
         ],
         idealFor: 'Safari Suits, Waistcoats, Semi-Formal Shirts, Summer Trousers',
         tags: ['Linen Blend', 'Silk-Linen', 'Low Crease', 'Safari Suiting'],
-        image:
-          'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-900 to-amber-950',
         inquirySubject: 'Linen Blends',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
 
       // Suit Materials
@@ -400,11 +387,10 @@ export const fabricContent = {
         ],
         idealFor: 'Two-Piece Suits, Three-Piece Suits, Executive Tuxedos, Trousers',
         tags: ['Super 120s-160s', 'Worsted Wool', 'Executive Suit', 'Crease Recovery', 'Italian Cloth'],
-        image:
-          'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-slate-900 to-chocolate-950',
         inquirySubject: 'Super 120s-160s Merino Suiting Wools',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'suit-materials-hopsack',
@@ -425,11 +411,10 @@ export const fabricContent = {
         ],
         idealFor: 'Year-Round Blazers, Club Jackets, Travel Sport Coats',
         tags: ['Hopsack', 'Blazer Cloth', 'Open Weave', 'Travel Friendly'],
-        image:
-          'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-950 to-maroon-950',
         inquirySubject: 'Tropical Hopsack & Blazer Cloths',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
 
       // Designer & Embroidered
@@ -452,11 +437,10 @@ export const fabricContent = {
         ],
         idealFor: 'Sherwanis, Wedding Bandhgalas, Festive Jackets, Designer Borders',
         tags: ['Brocade', 'Ornamental Jacquard', 'Zari Motifs', 'Festive Statement', 'Wedding Cloth'],
-        image:
-          'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-maroon-900 to-amber-950',
         inquirySubject: 'Heritage Brocades & Ornamental Jacquards',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'designer-embroidered-chikankari',
@@ -477,11 +461,10 @@ export const fabricContent = {
         ],
         idealFor: 'Festive Kurtas, Designer Rida Panels, Embroidered Dupattas',
         tags: ['Chikankari', 'Hand Embroidery', 'Shadow Work', 'Delicate Craft'],
-        image:
-          'https://images.unsplash.com/photo-1579541814924-49fef17c5be5?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-amber-950 to-chocolate-950',
         inquirySubject: 'Hand-Embroidered Chikankari & Appliqué',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
 
       // Other Varieties
@@ -504,11 +487,10 @@ export const fabricContent = {
         ],
         idealFor: 'Winter Bandhgalas, Smoking Jackets, Velvet Collars & Lapels',
         tags: ['Micro-Velvet', 'Corduroy', 'Jewel Tones', 'Winter Suiting'],
-        image:
-          'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-950 to-maroon-950',
         inquirySubject: 'Micro-Velvet, Corduroy & Suede Weaves',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'other-linings-interfacings',
@@ -529,11 +511,10 @@ export const fabricContent = {
         ],
         idealFor: 'Jacket Linings, Waistcoat Backs, Pocket Bags & Facings',
         tags: ['Cupro Bemberg', 'Anti-Static', 'Jacket Lining', 'Breathable Viscose'],
-        image:
-          'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-stone-900 to-chocolate-950',
         inquirySubject: 'Bemberg Silk & Viscose Linings',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
     ],
   },
@@ -568,9 +549,11 @@ export const fabricContent = {
     phone: BRAND_INFO.fabricShop.phone,
     phoneDisplay: BRAND_INFO.fabricShop.phoneDisplay,
     whatsapp: BRAND_INFO.fabricShop.whatsapp,
-    whatsappUrl: `https://wa.me/${BRAND_INFO.fabricShop.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-      'Hello Fabric Home, I would like to inquire about fabric varieties and swatches.'
-    )}`,
+    whatsappUrl: BRAND_INFO.fabricShop.whatsapp
+      ? `https://wa.me/${BRAND_INFO.fabricShop.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+          'Hello Fabric Home, I would like to inquire about fabric varieties and swatches.'
+        )}`
+      : null,
     location: BRAND_INFO.fabricShop.location,
     hours: BRAND_INFO.workingHours,
     companionShop: {

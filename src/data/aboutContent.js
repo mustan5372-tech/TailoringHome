@@ -18,8 +18,7 @@ export const aboutContent = {
     headline: 'Where Master Tailoring Meets Curated Fine Textiles',
     subheadline:
       'Tailoring Home and Fabric Home operate as two complementary boutique businesses under one unified destination. Together, we serve the Dawoodi Bohra community and discerning clients with bespoke craftsmanship and authentic natural fabrics.',
-    backgroundImage:
-      'https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=2000&q=80',
+    backgroundImage: null,
     fallbackGradient: 'from-chocolate-950 via-chocolate-900 to-maroon-950',
     highlights: [
       'Two Dedicated Ateliers Under One Roof',
@@ -115,10 +114,9 @@ export const aboutContent = {
         desc: 'Super 120s–160s Merino wools, hopsack blazer cloths, and four-season temperature-regulating textiles.',
       },
     ],
-    image:
-      'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1000&q=80',
+    image: null,
     imageAlt: 'Fabric Home textile archive showcase',
-    isRepresentativeImage: true,
+    isRepresentativeImage: false,
     ctaText: 'Explore Fabric Archive',
     ctaTo: ROUTES.FABRIC,
   },

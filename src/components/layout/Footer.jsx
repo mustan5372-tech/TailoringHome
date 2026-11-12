@@ -69,11 +69,11 @@ export const Footer = () => {
             </p>
             <div className="pt-2 text-xs space-y-1.5 text-ivory/80">
               <p className="flex items-center gap-1.5">
-                <Phone className="h-3.5 w-3.5 text-gold" />
-                <span>{BRAND_INFO.tailoringShop.phone}</span>
+                <Phone className="h-3.5 w-3.5 text-gold shrink-0" />
+                <span>{BRAND_INFO.tailoringShop.phoneDisplay}</span>
               </p>
               <p className="flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5 text-gold" />
+                <MapPin className="h-3.5 w-3.5 text-gold shrink-0" />
                 <span>{BRAND_INFO.tailoringShop.location}</span>
               </p>
             </div>
@@ -97,11 +97,11 @@ export const Footer = () => {
             </p>
             <div className="pt-2 text-xs space-y-1.5 text-ivory/80">
               <p className="flex items-center gap-1.5">
-                <Phone className="h-3.5 w-3.5 text-gold" />
-                <span>{BRAND_INFO.fabricShop.phone}</span>
+                <Phone className="h-3.5 w-3.5 text-gold shrink-0" />
+                <span>{BRAND_INFO.fabricShop.phoneDisplay}</span>
               </p>
               <p className="flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5 text-gold" />
+                <MapPin className="h-3.5 w-3.5 text-gold shrink-0" />
                 <span>{BRAND_INFO.fabricShop.location}</span>
               </p>
             </div>

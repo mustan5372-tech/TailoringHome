@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Eye,
   X,
@@ -11,6 +12,7 @@ import {
   Layers,
   Scissors,
   Filter,
+  ArrowRight,
 } from 'lucide-react';
 
 import {
@@ -21,7 +23,7 @@ import {
 } from '../../components/common';
 
 import { galleryContent } from '../../data/galleryContent';
-import { ROUTES } from '../../constants/navigation';
+import { ROUTES, BRAND_INFO } from '../../constants/navigation';
 
 export const GalleryPage = () => {
   const { header, filterTabs, items, consultationBanner } = galleryContent;
@@ -102,7 +104,9 @@ export const GalleryPage = () => {
 
   // Helper for generating targeted WhatsApp inquiry links
   const getWhatsAppInquiryUrl = (subject) => {
-    const rawNumber = '919876543210';
+    const phone = BRAND_INFO.tailoringShop.whatsapp;
+    if (!phone) return null;
+    const rawNumber = phone.replace(/[^0-9]/g, '');
     const message = `Hello, I am viewing the online gallery and would like to inquire about: ${subject}.`;
     return `https://wa.me/${rawNumber}?text=${encodeURIComponent(message)}`;
   };
@@ -116,15 +120,11 @@ export const GalleryPage = () => {
         id="gallery-hero"
         className="relative bg-chocolate-950 text-ivory overflow-hidden border-b border-gold/30 scroll-mt-24 md:scroll-mt-28"
       >
-        {/* Background Image with Dark Chocolate / Maroon Gradient Overlay */}
+        {/* Background Gradient & Geometric Texture */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=2000&q=80"
-            alt="Atelier creations and fabrics backdrop"
-            className="w-full h-full object-cover object-center opacity-25 scale-105 transition-transform duration-1000 ease-out"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-chocolate-950/92 via-chocolate-900/88 to-chocolate-950/95" />
+          <div className="absolute inset-0 bg-gradient-to-b from-chocolate-950/95 via-chocolate-900/90 to-chocolate-950/98" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(94,31,39,0.25)_0,transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(var(--color-gold)_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center">
@@ -258,13 +258,13 @@ export const GalleryPage = () => {
                       {item.badge}
                     </Badge>
 
-                    {item.isRepresentativeImage ? (
-                      <span className="text-[10px] text-chocolate-400 font-sans tracking-wide">
-                        Sample Preview
-                      </span>
-                    ) : (
+                    {item.image ? (
                       <span className="text-[10px] text-maroon-700 font-sans font-semibold tracking-wide">
                         Boutique Photo
+                      </span>
+                    ) : (
+                      <span className="text-[10px] text-chocolate-400 font-sans tracking-wide">
+                        Archive Placeholder
                       </span>
                     )}
                   </div>
@@ -312,15 +312,25 @@ export const GalleryPage = () => {
                   <span>Inspect Photo</span>
                 </button>
 
-                <a
-                  href={getWhatsAppInquiryUrl(item.inquirySubject)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-maroon-800 hover:text-maroon-900 transition-colors py-1"
-                >
-                  <span>Inquire</span>
-                  <ExternalLink className="h-3 w-3" />
-                </a>
+                {getWhatsAppInquiryUrl(item.inquirySubject) ? (
+                  <a
+                    href={getWhatsAppInquiryUrl(item.inquirySubject)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-maroon-800 hover:text-maroon-900 transition-colors py-1"
+                  >
+                    <span>Inquire</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                ) : (
+                  <Link
+                    to={ROUTES.CONTACT}
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-maroon-800 hover:text-maroon-900 transition-colors py-1"
+                  >
+                    <span>Inquire</span>
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
+                )}
               </div>
             </Card>
           ))}
@@ -355,21 +365,39 @@ export const GalleryPage = () => {
 
             {/* Left Column: High-Resolution Image Presentation */}
             <div className="lg:w-3/5 bg-chocolate-950 relative flex items-center justify-center min-h-[300px] lg:min-h-[500px]">
-              <img
-                src={selectedItem.image}
-                alt={selectedItem.title}
-                className="w-full h-full object-cover max-h-[550px]"
-              />
+              {selectedItem.image ? (
+                <img
+                  src={selectedItem.image}
+                  alt={selectedItem.title}
+                  className="w-full h-full object-cover max-h-[550px]"
+                />
+              ) : (
+                <div className="w-full h-full min-h-[300px] lg:min-h-[500px] flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-chocolate-900 via-chocolate-950 to-maroon-950">
+                  <div className="h-16 w-16 rounded-full bg-white/10 flex items-center justify-center mb-4 border border-gold/30">
+                    {selectedItem.category === 'tailoring' ? (
+                      <Scissors className="h-8 w-8 text-gold-light" />
+                    ) : (
+                      <Layers className="h-8 w-8 text-gold-light" />
+                    )}
+                  </div>
+                  <h3 className="font-serif text-lg font-semibold text-ivory mb-2">
+                    {selectedItem.title}
+                  </h3>
+                  <p className="text-xs text-cream/70 max-w-xs font-sans">
+                    Authentic workshop photography under preparation for our permanent archive.
+                  </p>
+                </div>
+              )}
 
-              {/* Watermark Tag for Sample Previews */}
+              {/* Watermark Tag */}
               <div className="absolute bottom-3 left-3 z-10">
-                {selectedItem.isRepresentativeImage ? (
-                  <Badge variant="dark" size="xs">
-                    Sample Preview Placeholder
-                  </Badge>
-                ) : (
+                {selectedItem.image ? (
                   <Badge variant="gold" size="xs">
                     Actual Boutique Creation
+                  </Badge>
+                ) : (
+                  <Badge variant="dark" size="xs">
+                    Archive Placeholder
                   </Badge>
                 )}
               </div>
@@ -459,16 +487,17 @@ export const GalleryPage = () => {
               {/* Bottom Actions */}
               <div className="pt-4 border-t border-cream-border space-y-2.5">
                 <Button
-                  href={getWhatsAppInquiryUrl(selectedItem.inquirySubject)}
+                  to={getWhatsAppInquiryUrl(selectedItem.inquirySubject) ? undefined : ROUTES.CONTACT}
+                  href={getWhatsAppInquiryUrl(selectedItem.inquirySubject) || undefined}
                   variant="gold"
                   size="md"
                   fullWidth
                   icon={MessageCircle}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={getWhatsAppInquiryUrl(selectedItem.inquirySubject) ? '_blank' : undefined}
+                  rel={getWhatsAppInquiryUrl(selectedItem.inquirySubject) ? 'noopener noreferrer' : undefined}
                   className="justify-center"
                 >
-                  Inquire on WhatsApp
+                  {getWhatsAppInquiryUrl(selectedItem.inquirySubject) ? 'Inquire on WhatsApp' : 'Contact Us'}
                 </Button>
 
                 {/* Link to respective dedicated catalogue page */}
@@ -511,14 +540,15 @@ export const GalleryPage = () => {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             <Button
-              href={consultationBanner.whatsappUrl}
+              to={consultationBanner.whatsappUrl ? undefined : ROUTES.CONTACT}
+              href={consultationBanner.whatsappUrl || undefined}
               variant="gold"
               size="md"
               icon={MessageCircle}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={consultationBanner.whatsappUrl ? '_blank' : undefined}
+              rel={consultationBanner.whatsappUrl ? 'noopener noreferrer' : undefined}
             >
-              WhatsApp Us
+              {consultationBanner.whatsappUrl ? 'WhatsApp Us' : 'Contact Us'}
             </Button>
             <Button
               to={ROUTES.CONTACT}

@@ -92,10 +92,9 @@ export const galleryContent = {
         'Pucker-free curved lace attachments',
       ],
       tags: ['Rida Crafting', 'Pardi & Ghagra', 'Lace Appliqué', 'Bespoke Stitch'],
-      image:
-        'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       gradient: 'from-maroon-900 to-amber-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
       inquirySubject: 'Two-Piece Bohra Rida Crafting',
     },
     {
@@ -116,9 +115,9 @@ export const galleryContent = {
         'Monogrammed left cuff embroidery',
       ],
       tags: ['Egyptian Cotton', 'French Seams', 'Bespoke Shirt', 'Split Yoke'],
-      image: '/images/tailoring/collar_shirt.jpg',
+      image: null,
       gradient: 'from-chocolate-900 to-stone-900',
-      isRepresentativeImage: false, // User provided real boutique image
+      isRepresentativeImage: false,
       inquirySubject: 'Custom Sartorial Egyptian Cotton Shirt',
     },
     {
@@ -139,9 +138,9 @@ export const galleryContent = {
         'Contrast interior piping and ticket pocket',
       ],
       tags: ['Tailored Blazer', 'Worsted Wool', 'Hand-Canvassed', 'Executive Wear'],
-      image: '/images/tailoring/wardrobe.jpg',
+      image: null,
       gradient: 'from-chocolate-950 to-maroon-950',
-      isRepresentativeImage: false, // User provided real boutique image
+      isRepresentativeImage: false,
       inquirySubject: 'Structured Blazers & Suiting Atelier',
     },
     {
@@ -162,9 +161,9 @@ export const galleryContent = {
         'Breathable pure natural cotton fabrics',
       ],
       tags: ['Children Ethnic', 'Junior Kurta', 'Growth Margin', 'Comfort Lining'],
-      image: '/images/tailoring/apparel_1.jpg',
+      image: null,
       gradient: 'from-amber-950 to-chocolate-900',
-      isRepresentativeImage: false, // User provided real boutique image
+      isRepresentativeImage: false,
       inquirySubject: "Children's Traditional Attire",
     },
     {
@@ -185,9 +184,9 @@ export const galleryContent = {
         'Hand-stitched blind hem finishes',
       ],
       tags: ['Pleated Trousers', 'Side Adjusters', 'Wool Trousers', 'Clean Break'],
-      image: '/images/tailoring/folded_shirts.jpg',
+      image: null,
       gradient: 'from-chocolate-900 to-chocolate-950',
-      isRepresentativeImage: false, // User provided real boutique image
+      isRepresentativeImage: false,
       inquirySubject: 'Tailored Pleated Trousers',
     },
     {
@@ -208,10 +207,9 @@ export const galleryContent = {
         'Full breathable silk interior lining',
       ],
       tags: ['Bandhgala', 'Velvet Tuxedo', 'Dinner Jacket', 'Celebratory'],
-      image:
-        'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       gradient: 'from-chocolate-950 to-maroon-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
       inquirySubject: 'Midnight Velvet Bandhgala & Tuxedo',
     },
 
@@ -234,10 +232,9 @@ export const galleryContent = {
         'Certified 100% natural mulberry silk warp and weft',
       ],
       tags: ['Pure Silk', 'Banarasi Zari', 'Handloom', 'Heirloom Quality'],
-      image:
-        'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       gradient: 'from-maroon-900 to-amber-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
       inquirySubject: 'Heritage Banarasi Katan Silk Fabric',
     },
     {
@@ -258,10 +255,9 @@ export const galleryContent = {
         'Width calibrated for minimal pardi and ghagra wastage',
       ],
       tags: ['Floral Prints', 'Rida Jodi', 'Soft Cotton', 'Bohra Speciality'],
-      image:
-        'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       gradient: 'from-maroon-900 to-amber-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
       inquirySubject: 'Curated Floral Rida Jodi Prints',
     },
     {
@@ -282,10 +278,9 @@ export const galleryContent = {
         'Natural undyed oatmeal and earth-toned palettes',
       ],
       tags: ['Irish Linen', 'Pure Flax', 'Organic Weave', 'Summer Suiting'],
-      image:
-        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       gradient: 'from-amber-900 to-chocolate-900',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
       inquirySubject: 'European & Irish Pure Flax Linen',
     },
     {
@@ -306,10 +301,9 @@ export const galleryContent = {
         'Pre-shrunk fabric ensuring post-tailoring size accuracy',
       ],
       tags: ['Swiss Lawn', 'Pristine White', 'Kurta-Saya Cloth', 'High-Count'],
-      image:
-        'https://images.unsplash.com/photo-1528458876859-9944061a5b48?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       gradient: 'from-stone-900 to-chocolate-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
       inquirySubject: 'Swiss Lawn & Egyptian Kurta Cambric',
     },
     {
@@ -330,10 +324,9 @@ export const galleryContent = {
         'Available in executive whites, sky blues, and chalk stripes',
       ],
       tags: ['Giza Cotton', '140s Count', 'Silky Touch', 'Executive Shirt'],
-      image:
-        'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       gradient: 'from-chocolate-800 to-stone-900',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
       inquirySubject: 'Egyptian Giza 140s 2-Ply Cotton',
     },
     {
@@ -354,10 +347,9 @@ export const galleryContent = {
         'Available in midnight navy, charcoal, and Glen checks',
       ],
       tags: ['Super 140s', 'Worsted Wool', 'Biella Weave', 'Executive Suit'],
-      image:
-        'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       gradient: 'from-slate-900 to-chocolate-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
       inquirySubject: 'Super 140s Italian Worsted Suiting Wool',
     },
     {
@@ -378,10 +370,9 @@ export const galleryContent = {
         'Breathable cotton-rich blend for all-day classroom comfort',
       ],
       tags: ['MSB Textile', 'Regulation Shade', 'High Tensile', 'Anti-Pill'],
-      image:
-        'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       gradient: 'from-chocolate-900 to-maroon-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
       inquirySubject: 'Approved MSB School Uniform Textile',
     },
     {
@@ -402,10 +393,9 @@ export const galleryContent = {
         'Rich festive colorways (emerald, royal blue, antique gold)',
       ],
       tags: ['Brocade', 'Ornamental Weave', 'Zari Motifs', 'Wedding Cloth'],
-      image:
-        'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       gradient: 'from-maroon-900 to-amber-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
       inquirySubject: 'Heritage Brocade & Ornamental Jacquard Fabric',
     },
   ],
@@ -414,9 +404,11 @@ export const galleryContent = {
   consultationBanner: {
     title: 'Interested in Any Creation or Fabric Swatch?',
     desc: 'Speak directly with our Master Cutter or Textile Specialist. Visit our twin showrooms or send an inquiry via WhatsApp with the item reference.',
-    whatsappUrl: `https://wa.me/${BRAND_INFO.tailoringShop.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-      'Hello, I would like to inquire about an item featured in your online gallery.'
-    )}`,
+    whatsappUrl: BRAND_INFO.tailoringShop.whatsapp
+      ? `https://wa.me/${BRAND_INFO.tailoringShop.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+          'Hello, I would like to inquire about an item featured in your online gallery.'
+        )}`
+      : null,
   },
 };
 

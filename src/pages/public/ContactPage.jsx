@@ -1,283 +1,171 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Phone,
-  MapPin,
-  Clock,
   Scissors,
   Layers,
-  Send,
-  CheckCircle,
+  Sparkles,
+  ArrowRight,
+  Clock,
+  Phone,
+  MapPin,
+  ShieldCheck,
+  ImageIcon,
 } from 'lucide-react';
-import { SectionHeading } from '../../components/common/SectionHeading';
+import { Link } from 'react-router-dom';
 import { Badge } from '../../components/common/Badge';
-import { Button } from '../../components/common/Button';
-import { BRAND_INFO } from '../../constants/navigation';
+import { ROUTES, BRAND_INFO } from '../../constants/navigation';
 
 export const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    interest: 'tailoring', // 'tailoring' | 'fabric' | 'both'
-    message: '',
-  });
-
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Front-end capture ready for future Firebase submission
-    setSubmitted(true);
-  };
-
   return (
-    <div className="space-y-16 md:space-y-24 pb-16">
-      {/* Header Banner */}
+    <div className="space-y-16 pb-20 font-sans">
+      {/* Hero Banner */}
       <section
         id="contact-hero"
-        className="bg-gradient-to-b from-cream to-ivory border-b border-cream-border py-14 md:py-20 text-center scroll-mt-24 md:scroll-mt-28"
+        className="bg-gradient-to-b from-chocolate-950 via-chocolate-900 to-maroon-950 text-ivory py-16 sm:py-24 border-b border-gold/30 text-center relative overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Badge variant="maroon" size="sm" className="mb-4">
-            Visit & Connect
+        <div className="absolute inset-0 bg-[radial-gradient(var(--color-gold)_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <Badge variant="gold" size="sm" icon={Sparkles} className="mb-2">
+            Boutique Inquiries
           </Badge>
-          <h1 className="text-4xl sm:text-5xl font-serif font-bold text-chocolate-900 tracking-tight">
-            Contact & Location Details
+
+          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-ivory tracking-tight leading-tight">
+            Contact & Visiting Details
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-chocolate-600 max-w-2xl mx-auto leading-relaxed font-sans">
-            Schedule a private bespoke measurement session or visit our textile archive to inspect fabric varieties.
+
+          <p className="text-sm sm:text-base text-cream/80 max-w-2xl mx-auto leading-relaxed">
+            Tailoring Home & Fabric Home • Connect with our tailoring atelier and textile showroom.
           </p>
         </div>
       </section>
 
-      {/* Dual Shop Contact Cards */}
-      <section
-        id="locations"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Shop 1: Tailoring Home Contact Card */}
-          <div className="bg-white p-8 rounded-sm border-2 border-maroon-100 shadow-2xs space-y-5">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-sm bg-maroon-800 text-gold flex items-center justify-center">
-                  <Scissors className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-serif text-xl font-bold text-chocolate-900">
-                    Tailoring Home
-                  </h3>
-                  <p className="text-xs text-maroon-700 font-semibold uppercase tracking-wider">
-                    Stitching & Tailoring Services
-                  </p>
-                </div>
-              </div>
-              <Badge variant="maroon" size="xs">
-                Appointments
-              </Badge>
-            </div>
-
-            <p className="text-xs text-chocolate-600 leading-relaxed font-sans">
-              Contact our master tailors for suit fittings, bridal/groom tailoring, bespoke consultations, and alterations.
-            </p>
-
-            <div className="space-y-3 pt-3 border-t border-cream-border text-xs sm:text-sm text-chocolate-800">
-              <div className="flex items-start gap-3">
-                <Phone className="h-4 w-4 text-maroon-700 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-semibold block text-chocolate-900">Phone & WhatsApp:</span>
-                  <a href={`tel:${BRAND_INFO.tailoringShop.phone.replace(/\s+/g, '')}`} className="hover:text-maroon-700">
-                    {BRAND_INFO.tailoringShop.phone}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 text-maroon-700 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-semibold block text-chocolate-900">Address:</span>
-                  <span>{BRAND_INFO.tailoringShop.location}</span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Clock className="h-4 w-4 text-maroon-700 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-semibold block text-chocolate-900">Visiting Hours:</span>
-                  <span>{BRAND_INFO.workingHours}</span>
-                </div>
-              </div>
-            </div>
+      {/* Main Status & Postponed Notice Container */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-sm border-2 border-gold/40 p-6 sm:p-10 shadow-xs space-y-6 text-center">
+          <div className="h-14 w-14 rounded-full bg-cream text-maroon-800 border border-gold/40 flex items-center justify-center mx-auto shadow-xs">
+            <Clock className="h-7 w-7 text-maroon-800" />
           </div>
 
-          {/* Shop 2: Fabric Home Contact Card */}
-          <div className="bg-white p-8 rounded-sm border-2 border-chocolate-200 shadow-2xs space-y-5">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-sm bg-chocolate-800 text-gold flex items-center justify-center">
-                  <Layers className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-serif text-xl font-bold text-chocolate-900">
-                    Fabric Home
-                  </h3>
-                  <p className="text-xs text-chocolate-700 font-semibold uppercase tracking-wider">
-                    Textile & Fabric Varieties
-                  </p>
-                </div>
-              </div>
-              <Badge variant="chocolate" size="xs">
-                Walk-ins Welcome
-              </Badge>
-            </div>
-
-            <p className="text-xs text-chocolate-600 leading-relaxed font-sans">
-              Visit our fabric showroom to inspect silk, linen, cotton, and wool swatches, or inquire about custom yardage.
+          <div className="space-y-2 max-w-2xl mx-auto">
+            <span className="text-xs uppercase font-semibold tracking-wider text-gold-dark font-sans block">
+              Section Status Notice
+            </span>
+            <h2 className="font-serif font-bold text-2xl sm:text-3xl text-chocolate-900">
+              Official Contact Channels Under Preparation
+            </h2>
+            <p className="text-xs sm:text-sm text-chocolate-600 leading-relaxed font-sans pt-2">
+              To prevent miscommunication, fake phone numbers, placeholder street addresses, or simulated appointment forms have been removed. Official telephone lines, dedicated WhatsApp support channels, and verified showroom locations will be published here once finalized.
             </p>
-
-            <div className="space-y-3 pt-3 border-t border-cream-border text-xs sm:text-sm text-chocolate-800">
-              <div className="flex items-start gap-3">
-                <Phone className="h-4 w-4 text-chocolate-700 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-semibold block text-chocolate-900">Phone & WhatsApp:</span>
-                  <a href={`tel:${BRAND_INFO.fabricShop.phone.replace(/\s+/g, '')}`} className="hover:text-chocolate-900">
-                    {BRAND_INFO.fabricShop.phone}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 text-chocolate-700 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-semibold block text-chocolate-900">Address:</span>
-                  <span>{BRAND_INFO.fabricShop.location}</span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Clock className="h-4 w-4 text-chocolate-700 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-semibold block text-chocolate-900">Visiting Hours:</span>
-                  <span>{BRAND_INFO.workingHours}</span>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Consultation Enquiry Form */}
-      <section
-        id="enquiry-form"
-        className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
-      >
-        <div className="bg-white p-8 sm:p-10 rounded-sm border border-cream-border shadow-md">
-          <SectionHeading
-            eyebrow="Direct Message"
-            title="Book a Consultation or Inquire"
-            subtitle="Let us know your requirements. Our master tailor or textile curator will get back to you promptly."
-            align="left"
-          />
-
-          {submitted ? (
-            <div className="bg-emerald-50 border border-emerald-200 rounded-sm p-6 text-center space-y-3">
-              <CheckCircle className="h-10 w-10 text-emerald-600 mx-auto" />
-              <h4 className="font-serif font-bold text-lg text-emerald-900">
-                Enquiry Recorded Successfully
-              </h4>
-              <p className="text-xs sm:text-sm text-emerald-800 font-sans">
-                Thank you for reaching out to Tailoring Home & Fabric Home. Our team will contact you within business hours.
+          {/* Dual Shop Current Status Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 text-left">
+            {/* Tailoring Home Card */}
+            <div className="p-5 rounded-sm border border-maroon-200 bg-stone-50 space-y-3">
+              <div className="flex items-center gap-2.5 text-maroon-800 font-serif font-bold text-base">
+                <Scissors className="h-5 w-5 text-gold-dark" />
+                <span>Tailoring Home</span>
+              </div>
+              <p className="text-xs text-chocolate-600">
+                Bespoke stitching, Dawoodi Bohra attire, school uniforms & alterations.
               </p>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setSubmitted(false)}
-              >
-                Send Another Message
-              </Button>
+              <div className="space-y-2 pt-2 border-t border-cream-border text-xs text-chocolate-700">
+                <div className="flex items-center gap-2">
+                  <Phone className="h-3.5 w-3.5 text-maroon-800 shrink-0" />
+                  <span>Phone / WhatsApp: {BRAND_INFO.tailoringShop.phoneDisplay}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-3.5 w-3.5 text-maroon-800 shrink-0" />
+                  <span>Atelier Location: {BRAND_INFO.tailoringShop.location}</span>
+                </div>
+              </div>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-chocolate-700 mb-1.5">
-                    Your Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="e.g. Vikram Sharma"
-                    className="w-full px-3.5 py-2.5 rounded-sm border border-chocolate-200 text-sm focus:outline-hidden focus:border-maroon-700 bg-ivory/50"
-                  />
-                </div>
 
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-chocolate-700 mb-1.5">
-                    Contact Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+91 98765 00000"
-                    className="w-full px-3.5 py-2.5 rounded-sm border border-chocolate-200 text-sm focus:outline-hidden focus:border-maroon-700 bg-ivory/50"
-                  />
+            {/* Fabric Home Card */}
+            <div className="p-5 rounded-sm border border-chocolate-200 bg-stone-50 space-y-3">
+              <div className="flex items-center gap-2.5 text-chocolate-800 font-serif font-bold text-base">
+                <Layers className="h-5 w-5 text-gold-dark" />
+                <span>Fabric Home</span>
+              </div>
+              <p className="text-xs text-chocolate-600">
+                Curated natural silks, linens, cottons, Rida prints & uniform fabrics.
+              </p>
+              <div className="space-y-2 pt-2 border-t border-cream-border text-xs text-chocolate-700">
+                <div className="flex items-center gap-2">
+                  <Phone className="h-3.5 w-3.5 text-chocolate-800 shrink-0" />
+                  <span>Phone / WhatsApp: {BRAND_INFO.fabricShop.phoneDisplay}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-3.5 w-3.5 text-chocolate-800 shrink-0" />
+                  <span>Showroom Location: {BRAND_INFO.fabricShop.location}</span>
                 </div>
               </div>
+            </div>
+          </div>
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-chocolate-700 mb-1.5">
-                  I am interested in:
-                </label>
-                <div className="grid grid-cols-3 gap-2 text-xs">
-                  {[
-                    { id: 'tailoring', label: 'Tailoring Home' },
-                    { id: 'fabric', label: 'Fabric Home' },
-                    { id: 'both', label: 'Both Boutiques' },
-                  ].map((opt) => (
-                    <button
-                      key={opt.id}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, interest: opt.id })}
-                      className={`py-2 px-3 rounded-sm border font-medium text-center transition-all ${
-                        formData.interest === opt.id
-                          ? 'bg-maroon-800 text-ivory border-maroon-800'
-                          : 'bg-white text-chocolate-700 border-chocolate-200 hover:bg-cream-soft'
-                      }`}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
+          <div className="p-4 bg-cream/50 rounded-sm border border-cream-border text-xs text-chocolate-700 max-w-xl mx-auto text-left flex items-start gap-3 mt-4">
+            <ShieldCheck className="h-5 w-5 text-emerald-700 shrink-0 mt-0.5" />
+            <p>
+              <strong>Catalogue Browsing Open:</strong> While contact channels are being established, you can browse all tailoring service specifications and curated fabric varieties directly on this website.
+            </p>
+          </div>
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-chocolate-700 mb-1.5">
-                  Tell Us About Your Requirement
-                </label>
-                <textarea
-                  rows={4}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="e.g. Inquiring about a three-piece suit for a December wedding and pure Banarasi silk swatches."
-                  className="w-full px-3.5 py-2.5 rounded-sm border border-chocolate-200 text-sm focus:outline-hidden focus:border-maroon-700 bg-ivory/50"
-                ></textarea>
-              </div>
+          {/* Quick Catalogue Access Options */}
+          <div className="pt-6 border-t border-cream-border">
+            <h3 className="font-serif font-bold text-base text-chocolate-900 mb-4">
+              Explore Active Boutique Collections
+            </h3>
 
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                className="w-full"
-                icon={Send}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+              <Link
+                to={ROUTES.TAILORING}
+                className="p-4 rounded-sm border border-cream-border bg-stone-50 hover:bg-cream hover:border-maroon-700 transition-all group"
               >
-                Submit Consultation Request
-              </Button>
-            </form>
-          )}
+                <div className="flex items-center justify-between mb-2">
+                  <Scissors className="h-5 w-5 text-maroon-800" />
+                  <ArrowRight className="h-4 w-4 text-chocolate-400 group-hover:text-maroon-800 group-hover:translate-x-0.5 transition-all" />
+                </div>
+                <h4 className="font-serif font-bold text-sm text-chocolate-900">
+                  Tailoring Home
+                </h4>
+                <p className="text-[11px] text-chocolate-600 mt-1 leading-snug">
+                  Kurta-Saya, Ridas, MSB/ABN uniforms & bespoke suiting.
+                </p>
+              </Link>
+
+              <Link
+                to={ROUTES.FABRIC}
+                className="p-4 rounded-sm border border-cream-border bg-stone-50 hover:bg-cream hover:border-chocolate-700 transition-all group"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <Layers className="h-5 w-5 text-chocolate-800" />
+                  <ArrowRight className="h-4 w-4 text-chocolate-400 group-hover:text-chocolate-800 group-hover:translate-x-0.5 transition-all" />
+                </div>
+                <h4 className="font-serif font-bold text-sm text-chocolate-900">
+                  Fabric Home
+                </h4>
+                <p className="text-[11px] text-chocolate-600 mt-1 leading-snug">
+                  Swiss lawns, Rida prints, silks, linens & suiting wools.
+                </p>
+              </Link>
+
+              <Link
+                to={ROUTES.GALLERY}
+                className="p-4 rounded-sm border border-cream-border bg-stone-50 hover:bg-cream hover:border-gold transition-all group"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <ImageIcon className="h-5 w-5 text-gold-dark" />
+                  <ArrowRight className="h-4 w-4 text-chocolate-400 group-hover:text-gold-dark group-hover:translate-x-0.5 transition-all" />
+                </div>
+                <h4 className="font-serif font-bold text-sm text-chocolate-900">
+                  Creation Gallery
+                </h4>
+                <p className="text-[11px] text-chocolate-600 mt-1 leading-snug">
+                  Showcase imagery & retrospective craftsmanship photos.
+                </p>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

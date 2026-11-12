@@ -10,9 +10,11 @@
  */
 
 import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getAnalytics, isSupported } from 'firebase/analytics';
 import { env } from './env.config';
 
 let app = null;
+let analytics = null;
 
 // Read Firebase Web configuration from Vite environment variables
 export const firebaseConfig = {
@@ -57,6 +59,19 @@ export const initializeFirebase = (customConfig = null) => {
     console.info(
       `[Firebase] Initialized successfully for project [${config.projectId}].`
     );
+
+    // Initialize Analytics if supported in current browser environment
+    if (typeof window !== 'undefined' && config.measurementId) {
+      isSupported().then((supported) => {
+        if (supported) {
+          analytics = getAnalytics(initializedApp);
+          console.info(`[Firebase] Analytics initialized with measurement ID: ${config.measurementId}`);
+        }
+      }).catch((err) => {
+        console.warn('[Firebase] Analytics not supported in this environment:', err);
+      });
+    }
+
     return initializedApp;
   } catch (error) {
     console.error('[Firebase] Initialization error:', error);
@@ -75,5 +90,5 @@ export const db = null;
 export const storage = null;
 export const auth = null;
 
-export { app };
-export default { app, firebaseConfig, isConfigured, initializeFirebase };
+export { app, analytics };
+export default { app, analytics, firebaseConfig, isConfigured, initializeFirebase };

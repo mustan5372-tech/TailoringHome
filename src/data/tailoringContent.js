@@ -14,8 +14,7 @@ export const tailoringContent = {
     headline: 'Bespoke Sartorial Mastery for Every Silhouette',
     subheadline:
       'Dedicated to the Dawoodi Bohra community and clients who value hand-cut precision. From traditional Kurta-Saya-Izaar and custom Ridas to official MSB & ABN school uniforms, executive suits, and fine alterations.',
-    backgroundImage:
-      'https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=2000&q=80',
+    backgroundImage: null,
     fallbackGradient: 'from-chocolate-950 via-maroon-950 to-chocolate-900',
     highlights: [
       'Over 28 Anatomical Body Measurements',
@@ -80,11 +79,10 @@ export const tailoringContent = {
           'Breathable natural cotton construction',
         ],
         tags: ['Daily Prayer Wear', 'Egyptian Cambric', 'Custom Armhole', 'Crisp Band'],
-        image:
-          'https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-900 to-amber-950',
         inquirySubject: 'Bespoke Bohra Kurta',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'bohra-saya',
@@ -101,11 +99,10 @@ export const tailoringContent = {
           'Wrinkle-resistant lightweight cotton interfacing',
         ],
         tags: ['Outer Saya', 'Lightweight Lawn', 'Regal Drape', 'Festive Miqaat'],
-        image:
-          'https://images.unsplash.com/photo-1528458876859-9944061a5b48?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-stone-900 to-chocolate-950',
         inquirySubject: 'Traditional Saya',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'bohra-izaar',
@@ -122,11 +119,10 @@ export const tailoringContent = {
           'Generous calf cut ensuring ease of movement',
         ],
         tags: ['Cotton Izaar', 'Woven Border', 'Prayer Comfort', 'Reinforced Gusset'],
-        image:
-          'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-amber-950 to-chocolate-900',
         inquirySubject: 'Traditional Izaar',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
     ],
   },
@@ -157,11 +153,10 @@ export const tailoringContent = {
           'Soft interior facings for skin comfort',
         ],
         tags: ['Two-Piece Rida', 'Pardi & Ghagra', 'Panel Matching', 'Bespoke Stitch'],
-        image:
-          'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-maroon-900 to-amber-950',
         inquirySubject: 'Complete Two-Piece Rida',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'rida-pardi-crafting',
@@ -178,11 +173,10 @@ export const tailoringContent = {
           'Hand-anchored decorative border appliqués',
         ],
         tags: ['Pardi Stitching', 'Face Framing', 'Lace Border', 'Comfort Facing'],
-        image:
-          'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-maroon-950 to-chocolate-900',
         inquirySubject: 'Pardi Crafting',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'rida-ghagra-tailoring',
@@ -199,11 +193,10 @@ export const tailoringContent = {
           'Generous walking flare calibrated to personal height',
         ],
         tags: ['Ghagra Tailoring', 'Concealed Pockets', 'Canvas Hem', 'Graceful Flare'],
-        image:
-          'https://images.unsplash.com/photo-1583391733975-dd2895689100?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-900 to-maroon-950',
         inquirySubject: 'Ghagra Tailoring',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'rida-lace-panel-embellishment',
@@ -220,11 +213,10 @@ export const tailoringContent = {
           'Reinforced anchoring on high-friction areas',
         ],
         tags: ['Lace Appliqué', 'Jodi Assembly', 'Scallop Edging', 'Border Attachment'],
-        image:
-          'https://images.unsplash.com/photo-1579541814924-49fef17c5be5?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-amber-950 to-chocolate-950',
         inquirySubject: 'Rida Lace and Panel Assembly',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
     ],
   },
@@ -280,11 +272,10 @@ export const tailoringContent = {
           'Reinforced double-stitched pocket corners',
         ],
         tags: ['ABN Boys', 'ABN Girls', 'Campus Standard', 'Reinforced Seams', 'Academic Wear'],
-        image:
-          'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-maroon-950 to-chocolate-900',
         inquirySubject: 'ABN School Uniform Tailoring',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
     ],
   },
@@ -312,11 +303,10 @@ export const tailoringContent = {
           'Genuine horn or mother-of-pearl buttons',
         ],
         tags: ['Executive Suits', 'Tuxedos', 'Three-Piece', 'Hand-Canvassed'],
-        image:
-          'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-950 to-maroon-950',
         inquirySubject: 'Bespoke Suit or Tuxedo',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'mens-blazers-jackets',
@@ -332,7 +322,7 @@ export const tailoringContent = {
           'Contrast interior piping and ticket pockets',
         ],
         tags: ['Tailored Blazers', 'Sport Jackets', 'Linen Blazers', 'Club Wear'],
-        image: '/images/tailoring/wardrobe.jpg',
+        image: null,
         gradient: 'from-chocolate-900 to-chocolate-950',
         inquirySubject: 'Tailored Blazer or Jacket',
         isRepresentativeImage: false,
@@ -351,7 +341,7 @@ export const tailoringContent = {
           'Personalized hand-embroidered monograms',
         ],
         tags: ['Giza Cotton Shirts', 'French Cuffs', 'Split Yoke', 'Monogrammed'],
-        image: '/images/tailoring/collar_shirt.jpg',
+        image: null,
         gradient: 'from-amber-950 to-chocolate-900',
         inquirySubject: 'Custom Sartorial Shirt',
         isRepresentativeImage: false,
@@ -370,7 +360,7 @@ export const tailoringContent = {
           'Clean break, half break, or no-break hem finishes',
         ],
         tags: ['Pleated Trousers', 'Side Adjusters', 'Wool Trousers', 'Clean Break'],
-        image: '/images/tailoring/folded_shirts.jpg',
+        image: null,
         gradient: 'from-chocolate-800 to-stone-900',
         inquirySubject: 'Tailored Trousers',
         isRepresentativeImage: false,
@@ -401,11 +391,10 @@ export const tailoringContent = {
           'Princess cut, katori cut, or traditional darting',
         ],
         tags: ['Saree Blouses', 'Princess Cut', 'Designer Backs', 'Padded Cups'],
-        image:
-          'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-maroon-900 to-amber-950',
         inquirySubject: 'Custom Saree Blouse',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'womens-salwar-kameez',
@@ -421,11 +410,10 @@ export const tailoringContent = {
           'Delicate hem lace finishes and border attachments',
         ],
         tags: ['Salwar Suits', 'Anarkali', 'Sharara Sets', 'Festive Wear'],
-        image:
-          'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-maroon-950 to-chocolate-900',
         inquirySubject: 'Salwar Suit or Anarkali',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'womens-festive-kurtis',
@@ -441,11 +429,10 @@ export const tailoringContent = {
           'Contrast fabric inner facings and side slit tapes',
         ],
         tags: ['Festive Kurtis', 'Daily Tunics', 'Concealed Pockets', 'Silk Kurtis'],
-        image:
-          'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-amber-950 to-maroon-900',
         inquirySubject: 'Festive Kurti or Tunic',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'womens-dresses-gowns',
@@ -461,11 +448,10 @@ export const tailoringContent = {
           'Custom sleeve and neckline modesty adjustments',
         ],
         tags: ['Modest Gowns', 'Tiered Dresses', 'Evening Wear', 'Full Lining'],
-        image:
-          'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-950 to-stone-900',
         inquirySubject: 'Modest Dress or Gown',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
     ],
   },
@@ -493,7 +479,7 @@ export const tailoringContent = {
           'Child-safe front button closures and soft elastics',
         ],
         tags: ['Junior Kurta-Saya', 'Boys Ethnic', 'Girls Festive', 'Growth Margin'],
-        image: '/images/tailoring/apparel_1.jpg',
+        image: null,
         gradient: 'from-amber-950 to-chocolate-900',
         inquirySubject: "Children's Traditional Attire",
         isRepresentativeImage: false,
@@ -512,11 +498,10 @@ export const tailoringContent = {
           'Easy-to-clean construction with reinforced knees',
         ],
         tags: ['Junior Suits', 'Occasion Wear', 'Soft Shoulder', 'Adjustable Waist'],
-        image:
-          'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-900 to-maroon-950',
         inquirySubject: 'Junior Suit or Blazer',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'alterations-suits',
@@ -532,11 +517,10 @@ export const tailoringContent = {
           'Full or partial jacket interior relining',
         ],
         tags: ['Shoulder Recut', 'Sleeve Shortening', 'Waist Tapering', 'Suit Relining'],
-        image:
-          'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-maroon-950 to-chocolate-900',
         inquirySubject: 'Suit or Blazer Alteration',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
       {
         id: 'alterations-trousers-heirlooms',
@@ -552,11 +536,10 @@ export const tailoringContent = {
           'Delicate antique embroidery and heirloom fabric reinforcement',
         ],
         tags: ['Trouser Hemming', 'Waist Let-out', 'Zipper Repair', 'Heirloom Restoration'],
-        image:
-          'https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=800&q=80',
+        image: null,
         gradient: 'from-chocolate-950 to-stone-900',
         inquirySubject: 'Trouser or Garment Alteration',
-        isRepresentativeImage: true,
+        isRepresentativeImage: false,
       },
     ],
   },
@@ -600,9 +583,11 @@ export const tailoringContent = {
     phone: BRAND_INFO.tailoringShop.phone,
     phoneDisplay: BRAND_INFO.tailoringShop.phoneDisplay,
     whatsapp: BRAND_INFO.tailoringShop.whatsapp,
-    whatsappUrl: `https://wa.me/${BRAND_INFO.tailoringShop.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-      'Hello Tailoring Home, I would like to inquire about bespoke tailoring services.'
-    )}`,
+    whatsappUrl: BRAND_INFO.tailoringShop.whatsapp
+      ? `https://wa.me/${BRAND_INFO.tailoringShop.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+          'Hello Tailoring Home, I would like to inquire about bespoke tailoring services.'
+        )}`
+      : null,
     location: BRAND_INFO.tailoringShop.location,
     hours: BRAND_INFO.workingHours,
     companionShop: {

@@ -87,11 +87,13 @@ export const HomePage = () => {
       >
         {/* Background Image with Dark Chocolate / Maroon Gradient Overlay */}
         <div className="absolute inset-0 z-0">
-          <img
-            src={hero.backgroundImage}
-            alt="Tailoring atelier and luxury fabrics backdrop"
-            className="w-full h-full object-cover object-center opacity-30 scale-105 transition-transform duration-1000 ease-out"
-          />
+          {hero.backgroundImage && (
+            <img
+              src={hero.backgroundImage}
+              alt="Tailoring atelier and luxury fabrics backdrop"
+              className="w-full h-full object-cover object-center opacity-30 scale-105 transition-transform duration-1000 ease-out"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-chocolate-950/90 via-chocolate-900/85 to-chocolate-950/95" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(94,31,39,0.25)_0,transparent_70%)]" />
         </div>
@@ -752,22 +754,29 @@ export const HomePage = () => {
               </div>
 
               <div className="pt-3 flex flex-wrap items-center gap-3">
-                <a
-                  href={`https://wa.me/${contact.tailoringContact.whatsapp.replace(/[^0-9]/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white transition-colors shadow-xs"
-                >
-                  <MessageCircle className="h-3.5 w-3.5" />
-                  <span>WhatsApp Inquire</span>
-                </a>
+                {contact.tailoringContact.whatsapp ? (
+                  <a
+                    href={`https://wa.me/${contact.tailoringContact.whatsapp.replace(/[^0-9]/g, '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white transition-colors shadow-xs"
+                  >
+                    <MessageCircle className="h-3.5 w-3.5" />
+                    <span>WhatsApp Inquire</span>
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium bg-white/5 border border-white/10 text-ivory/60">
+                    <MessageCircle className="h-3.5 w-3.5 text-gold-light/60" />
+                    <span>WhatsApp: Coming Soon</span>
+                  </span>
+                )}
                 <Button
-                  to="/contact#enquiry-form"
+                  to="/tailoring"
                   variant="gold"
                   size="sm"
                   className="text-chocolate-950"
                 >
-                  Book Session
+                  View Tailoring
                 </Button>
               </div>
             </div>
@@ -806,22 +815,29 @@ export const HomePage = () => {
               </div>
 
               <div className="pt-3 flex flex-wrap items-center gap-3">
-                <a
-                  href={`https://wa.me/${contact.fabricContact.whatsapp.replace(/[^0-9]/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white transition-colors shadow-xs"
-                >
-                  <MessageCircle className="h-3.5 w-3.5" />
-                  <span>WhatsApp Swatches</span>
-                </a>
+                {contact.fabricContact.whatsapp ? (
+                  <a
+                    href={`https://wa.me/${contact.fabricContact.whatsapp.replace(/[^0-9]/g, '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white transition-colors shadow-xs"
+                  >
+                    <MessageCircle className="h-3.5 w-3.5" />
+                    <span>WhatsApp Swatches</span>
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium bg-white/5 border border-white/10 text-ivory/60">
+                    <MessageCircle className="h-3.5 w-3.5 text-gold-light/60" />
+                    <span>WhatsApp: Coming Soon</span>
+                  </span>
+                )}
                 <Button
-                  to="/contact#enquiry-form"
+                  to="/fabric"
                   variant="outline"
                   size="sm"
                   className="text-ivory border-ivory/40 hover:bg-white/15"
                 >
-                  Inquire Yardage
+                  View Fabrics
                 </Button>
               </div>
             </div>

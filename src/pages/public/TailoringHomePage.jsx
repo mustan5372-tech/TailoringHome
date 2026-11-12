@@ -50,6 +50,7 @@ export const TailoringHomePage = () => {
 
   // Helper for generating targeted WhatsApp inquiry links
   const getWhatsAppInquiryUrl = (subject) => {
+    if (!contact.whatsapp) return null;
     const rawNumber = contact.whatsapp.replace(/[^0-9]/g, '');
     const message = `Hello Tailoring Home, I would like to inquire about bespoke tailoring for: ${subject}.`;
     return `https://wa.me/${rawNumber}?text=${encodeURIComponent(message)}`;
@@ -66,11 +67,13 @@ export const TailoringHomePage = () => {
       >
         {/* Background Image with Dark Chocolate / Maroon Gradient Overlay */}
         <div className="absolute inset-0 z-0">
-          <img
-            src={hero.backgroundImage}
-            alt="Tailoring Home atelier workshop"
-            className="w-full h-full object-cover object-center opacity-30 scale-105 transition-transform duration-1000 ease-out"
-          />
+          {hero.backgroundImage && (
+            <img
+              src={hero.backgroundImage}
+              alt="Tailoring Home atelier workshop"
+              className="w-full h-full object-cover object-center opacity-30 scale-105 transition-transform duration-1000 ease-out"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-chocolate-950/92 via-chocolate-900/88 to-chocolate-950/95" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(94,31,39,0.25)_0,transparent_70%)]" />
         </div>
@@ -98,14 +101,15 @@ export const TailoringHomePage = () => {
             {/* Dual CTAs */}
             <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Button
-                href={contact.whatsappUrl}
+                to={contact.whatsappUrl ? undefined : ROUTES.CONTACT}
+                href={contact.whatsappUrl || undefined}
                 variant="gold"
                 size="lg"
                 icon={MessageCircle}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={contact.whatsappUrl ? '_blank' : undefined}
+                rel={contact.whatsappUrl ? 'noopener noreferrer' : undefined}
               >
-                Inquire on WhatsApp
+                {contact.whatsappUrl ? 'Inquire on WhatsApp' : 'Contact Atelier'}
               </Button>
               <Button
                 to="#bohra-men"
@@ -955,12 +959,16 @@ export const TailoringHomePage = () => {
                   <Phone className="h-4 w-4 text-gold shrink-0 mt-0.5" />
                   <div>
                     <span className="text-cream/60 block text-[11px]">Primary Phone</span>
-                    <a
-                      href={`tel:${contact.phone}`}
-                      className="hover:text-gold transition-colors font-medium"
-                    >
-                      {contact.phoneDisplay}
-                    </a>
+                    {contact.phone ? (
+                      <a
+                        href={`tel:${contact.phone}`}
+                        className="hover:text-gold transition-colors font-medium"
+                      >
+                        {contact.phoneDisplay}
+                      </a>
+                    ) : (
+                      <span className="text-cream/80 text-sm">{contact.phoneDisplay}</span>
+                    )}
                   </div>
                 </div>
 
@@ -968,15 +976,19 @@ export const TailoringHomePage = () => {
                   <MessageCircle className="h-4 w-4 text-gold shrink-0 mt-0.5" />
                   <div>
                     <span className="text-cream/60 block text-[11px]">Direct WhatsApp</span>
-                    <a
-                      href={contact.whatsappUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-gold transition-colors font-medium inline-flex items-center gap-1"
-                    >
-                      <span>Inquire on WhatsApp</span>
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
+                    {contact.whatsappUrl ? (
+                      <a
+                        href={contact.whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-gold transition-colors font-medium inline-flex items-center gap-1"
+                      >
+                        <span>Inquire on WhatsApp</span>
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    ) : (
+                      <span className="text-cream/80 text-sm">To be announced</span>
+                    )}
                   </div>
                 </div>
 
@@ -1024,15 +1036,16 @@ export const TailoringHomePage = () => {
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
-                  href={contact.whatsappUrl}
+                  to={contact.whatsappUrl ? undefined : ROUTES.CONTACT}
+                  href={contact.whatsappUrl || undefined}
                   variant="primary"
                   size="md"
                   fullWidth
                   icon={MessageCircle}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={contact.whatsappUrl ? '_blank' : undefined}
+                  rel={contact.whatsappUrl ? 'noopener noreferrer' : undefined}
                 >
-                  WhatsApp Us
+                  {contact.whatsappUrl ? 'WhatsApp Us' : 'Contact Atelier'}
                 </Button>
                 <Button
                   to={ROUTES.CONTACT}

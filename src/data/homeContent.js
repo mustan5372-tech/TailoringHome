@@ -14,8 +14,7 @@ export const homeContent = {
     headline: 'Where Sartorial Craftsmanship Meets Exquisite Textiles',
     subheadline:
       'Welcome to the unified online catalogue of Tailoring Home and Fabric Home. Serving the Dawoodi Bohra community and discerning clients with bespoke artisanal tailoring, traditional attire, and curated fine fabrics.',
-    backgroundImage:
-      'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=2000&q=80',
+    backgroundImage: null,
     fallbackGradient: 'from-chocolate-950 via-chocolate-900 to-maroon-950',
     primaryCta: {
       label: 'Explore Tailoring Services',
@@ -46,8 +45,7 @@ export const homeContent = {
         'Bespoke gentlemen\'s suits, blazers, bandhgalas, custom shirts & trousers',
         'Traditional baste trial sessions and precision restoration alterations',
       ],
-      image:
-        'https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       ctaText: 'Browse Tailoring Catalogue',
       ctaTo: ROUTES.TAILORING,
       accentColor: 'maroon',
@@ -64,8 +62,7 @@ export const homeContent = {
         'Approved regulation MSB and ABN uniform fabrics in certified shades',
         'Pure Mulberry silks, Irish linens, Egyptian Giza cottons & Merino wools',
       ],
-      image:
-        'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1000&q=80',
+      image: null,
       ctaText: 'Explore Fabric Varieties',
       ctaTo: ROUTES.FABRIC,
       accentColor: 'chocolate',
@@ -95,10 +92,9 @@ export const homeContent = {
       description:
         'Master-tailored traditional Kurta, Saya, and Izaar crafted with precise proportions, neat hand-finishing, and classic pocket detailing suited for daily prayers and festive miqaats.',
       tags: ['Kurta & Saya', 'Izaar', 'Bohra Traditional', 'Miqaat Wear', 'Hand-Finished'],
-      image:
-        'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80',
+      image: '/images/tailoring/customary_attire.jpg',
       gradient: 'from-amber-950 to-chocolate-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
     },
     {
       id: 'bohra-womenswear',
@@ -111,8 +107,7 @@ export const homeContent = {
       description:
         'Artisanal stitching of traditional Ridas, including Pardi and Ghagra with elegant panel matching, lace attachment, intricate border appliqué, and custom color coordination.',
       tags: ['Rida Tailoring', 'Pardi & Ghagra', 'Lace Appliqué', 'Panel Matching', 'Bespoke Stitch'],
-      image:
-        'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-maroon-900 to-amber-950',
       isRepresentativeImage: true,
     },
@@ -130,10 +125,9 @@ export const homeContent = {
         'Tailored in accordance with Madrasa Saifiyah Burhaniyah (MSB) uniform dress codes for boys and girls across all grade divisions. Built with reinforced seams for active school life.',
       notice: 'Tailored as per respective school uniform dress codes and academic session requirements.',
       tags: ['MSB Uniform', 'Boys & Girls', 'Campus Standard', 'Grade 1–12', 'Reinforced Fit'],
-      image:
-        'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80',
+      image: '/images/tailoring/bohra_uniform.jpg',
       gradient: 'from-chocolate-900 to-maroon-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
     },
     {
       id: 'school-uniform-abn',
@@ -147,8 +141,7 @@ export const homeContent = {
         'Tailored to match Al Madrasa (ABN) approved school uniform patterns and dress codes. Cleanly finished collars, durable stitching, and comfortable daily campus proportions.',
       notice: 'Tailored as per respective school uniform dress codes and academic session requirements.',
       tags: ['ABN Uniform', 'Boys & Girls', 'Approved Standard', 'Durable Stitch', 'Daily Wear'],
-      image:
-        'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-maroon-950 to-chocolate-900',
       isRepresentativeImage: true,
     },
@@ -165,8 +158,7 @@ export const homeContent = {
       description:
         'Custom-tailored everyday and formal menswear, including classic bespoke shirts, pleated and flat-front trousers, waistcoats, and casual linen wear crafted for personal comfort.',
       tags: ['Bespoke Shirts', 'Pleated Trousers', 'Waistcoats', 'Linen Casuals'],
-      image:
-        'https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-chocolate-900 to-chocolate-950',
       isRepresentativeImage: true,
     },
@@ -181,8 +173,7 @@ export const homeContent = {
       description:
         'Bespoke tailoring for women including elegant salwar kameez, festive kurtis, ceremonial suits, modest designer wear, and custom silhouette drafting.',
       tags: ['Salwar Suits', 'Custom Kurtis', 'Festive Sets', 'Modest Wear'],
-      image:
-        'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-maroon-950 to-amber-950',
       isRepresentativeImage: true,
     },
@@ -197,8 +188,7 @@ export const homeContent = {
       description:
         'Tailored festive and traditional garments for boys and girls, including junior kurta-saya sets, ceremonial jackets, and occasion wear with growth-friendly seam allowances.',
       tags: ['Junior Kurta-Saya', 'Boys Ethnic', 'Girls Festive', 'Comfort Lining'],
-      image:
-        'https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-amber-950 to-chocolate-900',
       isRepresentativeImage: true,
     },
@@ -215,8 +205,7 @@ export const homeContent = {
       description:
         'Hand-canvassed formal suits, executive blazers, tuxedos, and master alterations including shoulder recutting, sleeve pitch adjustments, and garment restyling.',
       tags: ['Corporate Suits', 'Tailored Blazers', 'Tuxedos', 'Master Alterations'],
-      image:
-        'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-chocolate-900 to-maroon-950',
       isRepresentativeImage: true,
     },
@@ -231,8 +220,7 @@ export const homeContent = {
       description:
         'Handcrafted Sherwanis, classic Bandhgalas, Indo-Western silhouettes, and celebratory festive Kurta sets detailed with fine artisanal hand-finishes.',
       tags: ['Sherwani', 'Bandhgala', 'Indo-Western', 'Kurta Sets'],
-      image:
-        'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-maroon-900 to-amber-950',
       isRepresentativeImage: true,
     },
@@ -247,8 +235,7 @@ export const homeContent = {
       description:
         'Meticulous shoulder reduction, sleeve pitch adjustment, waist contouring, hem tapering, and restructuring high-value heirloom garments.',
       tags: ['Suit Resizing', 'Trouser Hemming', 'Relining', 'Jacket Recut'],
-      image:
-        'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-maroon-950 to-chocolate-900',
       isRepresentativeImage: true,
     },
@@ -280,8 +267,7 @@ export const homeContent = {
         'Curated floral prints, harmonious color combinations, soft cotton lawn jodis, self-embossed panels, and coordinating lace trims handpicked specifically for Rida creation.',
       idealFor: 'Pardi & Ghagra, Everyday & Miqaat Ridas, Coordinating Jodi Sets',
       tags: ['Floral Prints', 'Lace Trims', 'Soft Cotton Jodi', 'Embroidered Panels'],
-      image:
-        'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-maroon-900 to-amber-950',
       isRepresentativeImage: true,
     },
@@ -291,7 +277,7 @@ export const homeContent = {
       category: 'Bohra Speciality',
       group: 'bohra',
       isCommunitySpecial: true,
-      origin: 'Ahmadabad, Mumbai & Switzerland',
+      origin: 'Ahmadabad, Mumbai & Speciality Mills',
       weaveType: 'Crisp White Swiss Lawn, Egyptian Cotton & Fine Jacquard',
       badge: 'Community Speciality',
       badgeVariant: 'gold',
@@ -299,8 +285,7 @@ export const homeContent = {
         'Pristine white and ivory textiles engineered for Kurta and Saya draping. High-thread-count cambrics, soft lawns, and subtle self-textured jacquards offering cool breathability.',
       idealFor: 'Bohra Men\'s Kurta & Saya, Prayer Attire, Religious & Festive Miqaats',
       tags: ['Pristine White', 'Swiss Lawn', 'Egyptian Cambric', 'Self-Jacquard Weave'],
-      image:
-        'https://images.unsplash.com/photo-1528458876859-9944061a5b48?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-stone-900 to-chocolate-950',
       isRepresentativeImage: true,
     },
@@ -318,8 +303,7 @@ export const homeContent = {
         'Soft yet resilient unstitched cottons in pure whites, subtle self-stripes, and traditional woven borders tailored for comfortable daily and occasion Izaar wear.',
       idealFor: 'Traditional Izaars, Pajama Bottoms, Lightweight Daily Prayer Wear',
       tags: ['Pure White Cotton', 'Durable Cambric', 'Woven Border Accents'],
-      image:
-        'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-amber-950 to-chocolate-900',
       isRepresentativeImage: true,
     },
@@ -339,8 +323,7 @@ export const homeContent = {
         'Regulation uniform textiles matching Madrasa Saifiyah Burhaniyah (MSB) approved color shades and weave durability. Breathable, colorfast, and pill-resistant for students.',
       idealFor: 'MSB Boys\' & Girls\' School Uniforms, Shirts, Trousers & Pinafores',
       tags: ['MSB Regulation Shade', 'High Tensile Weave', 'Colorfast', 'Easy-Care'],
-      image:
-        'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-chocolate-900 to-maroon-950',
       isRepresentativeImage: true,
     },
@@ -358,8 +341,7 @@ export const homeContent = {
         'Approved regulation fabrics conforming to Al Madrasa (ABN) school specifications. Tested for tear strength, long-term wash resilience, and day-long classroom comfort.',
       idealFor: 'ABN Campus Uniforms, Student Shirting & Trousers',
       tags: ['ABN Standard Shade', 'High Tear Strength', 'Classroom Comfort'],
-      image:
-        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-maroon-950 to-chocolate-900',
       isRepresentativeImage: true,
     },
@@ -371,16 +353,15 @@ export const homeContent = {
       category: 'Natural Fibers',
       group: 'natural',
       isCommunitySpecial: false,
-      origin: 'India, Egypt & Western Europe',
-      weaveType: 'Certified 100% Natural Organic Weaves',
+      origin: 'India, Egypt & Speciality Centers',
+      weaveType: 'Certified Natural Weaves',
       badge: 'Natural Fibers',
       badgeVariant: 'chocolate',
       description:
         'A comprehensive library of certified pure natural fabrics: breathable long-staple cottons, artisanal mulberry handloom silks, and organic flax linens for versatile tailored creations.',
       idealFor: 'Kurtas, Casual Shirts, Traditional Ensembles, Summer Trousers',
-      tags: ['100% Organic', 'Breathable Linens', 'Mulberry Silks', 'Long-Staple Cotton'],
-      image:
-        'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80',
+      tags: ['Natural Weaves', 'Breathable Linens', 'Mulberry Silks', 'Long-Staple Cotton'],
+      image: null,
       gradient: 'from-amber-900 to-chocolate-900',
       isRepresentativeImage: true,
     },
@@ -390,16 +371,15 @@ export const homeContent = {
       category: 'Luxury Suiting',
       group: 'designer',
       isCommunitySpecial: false,
-      origin: 'Biella Italy, Yorkshire UK & Indian Luxury Mills',
+      origin: 'Luxury Mills & Textile Clusters',
       weaveType: 'Superfine Worsted Wool, Brocade & Jacquard',
       badge: 'Luxury Suiting',
       badgeVariant: 'chocolate',
       description:
         'Premium worsted suiting cloths, rich brocades, and designer textile blends chosen for drape memory, wrinkle resistance, and refined surface luster.',
       idealFor: 'Executive Two-Piece Suits, Tuxedos, Blazers & Royal Festive Jackets',
-      tags: ['Super 120s–160s', 'Worsted Wool', 'Royal Brocades', 'Crease Resistant'],
-      image:
-        'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80',
+      tags: ['Superfine Count', 'Worsted Wool', 'Royal Brocades', 'Crease Resistant'],
+      image: null,
       gradient: 'from-slate-900 to-chocolate-950',
       isRepresentativeImage: true,
     },
@@ -419,8 +399,7 @@ export const homeContent = {
         'Lustrous, dense fabric woven with antique golden and silver zari threads. Distinguished by regal drape, rich color depth, and heirloom quality.',
       idealFor: 'Sherwanis, Wedding Kurta Ensembles, Traditional Dupattas',
       tags: ['Handloom', 'Pure Zari', 'Varanasi Weave', 'Heirloom Quality'],
-      image:
-        'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80',
+      image: null,
       gradient: 'from-maroon-900 to-amber-900',
       isRepresentativeImage: true,
     },
@@ -430,54 +409,51 @@ export const homeContent = {
       category: 'Pure Flax',
       group: 'natural',
       isCommunitySpecial: false,
-      origin: 'Normandy & Ireland',
-      weaveType: '60s & 80s Count Plain Weave',
+      origin: 'Speciality Flax Centers',
+      weaveType: 'Plain Weave',
       badge: 'Organic Flax',
       badgeVariant: 'chocolate',
       description:
         'Natural organic flax delivering unparalleled breathability and distinctive cooling slub texture for refined summer bespoke suiting.',
       idealFor: 'Summer Suits, Unlined Blazers, Leisure Shirts',
-      tags: ['Pure Flax', 'Irish Weave', 'High Breathability', 'Summer Suiting'],
-      image:
-        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80',
+      tags: ['Pure Flax', 'High Breathability', 'Summer Suiting'],
+      image: null,
       gradient: 'from-amber-900 to-chocolate-900',
       isRepresentativeImage: true,
     },
     {
       id: 'cottons',
-      name: 'Egyptian Giza & Pima Cottons',
+      name: 'Fine Long-Staple Cottons',
       category: 'Fine Cottons',
       group: 'natural',
       isCommunitySpecial: false,
-      origin: 'Egypt & Supima USA',
-      weaveType: '100s–140s 2-Ply Poplin & Twill',
+      origin: 'Speciality Cotton Mills',
+      weaveType: 'Poplin & Twill Weave',
       badge: 'Long-Staple',
       badgeVariant: 'chocolate',
       description:
         'Silky smooth feel against the skin, crisp collar stability, brilliant dye retention, and superior tensile durability for luxury shirts.',
       idealFor: 'Executive Boardroom Shirts, Daily Luxury',
-      tags: ['Giza 2-Ply', '100s–140s Count', 'Silky Handfeel', 'Crisp Collars'],
-      image:
-        'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=800&q=80',
+      tags: ['Long-Staple', 'Silky Handfeel', 'Crisp Collars'],
+      image: null,
       gradient: 'from-chocolate-800 to-stone-900',
       isRepresentativeImage: true,
     },
     {
       id: 'wools',
-      name: 'Super 120s – 160s Merino Wool Blends',
+      name: 'Worsted Suiting Wool Blends',
       category: 'Worsted Wools',
       group: 'designer',
       isCommunitySpecial: false,
-      origin: 'Biella, Italy & Australia',
+      origin: 'Speciality Suiting Mills',
       weaveType: 'Worsted Twill, Sharkskin & Glen Check',
       badge: 'Four-Season',
       badgeVariant: 'chocolate',
       description:
         'Natural elasticity and four-season temperature control that drapes cleanly and resists creasing throughout active business travel.',
       idealFor: 'Two-Piece Suits, Overcoats, Tailored Trousers',
-      tags: ['Super 120s–160s', 'Biella Weave', 'Wrinkle Resistant', 'Executive Suit'],
-      image:
-        'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80',
+      tags: ['Worsted Wool', 'Wrinkle Resistant', 'Executive Suit'],
+      image: null,
       gradient: 'from-slate-900 to-chocolate-950',
       isRepresentativeImage: true,
     },
@@ -487,46 +463,42 @@ export const homeContent = {
   galleryPreview: [
     {
       id: 1,
-      title: 'Midnight Velvet Bandhgala',
+      title: "Bohra Men's Kurta & Saya Ensemble",
       shop: 'Tailoring Home',
       category: 'tailoring',
       tag: 'Bespoke Tailoring',
-      description: 'Hand-canvassed construction with antique brass coin buttons and silk lining.',
-      image:
-        'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80',
-      gradient: 'from-chocolate-950 to-maroon-950',
+      description: 'Master-tailored traditional Kurta and flowing Saya cut from pristine Swiss lawn.',
+      image: '/images/tailoring/customary_attire.jpg',
+      gradient: 'from-amber-950 to-chocolate-950',
     },
     {
       id: 2,
-      title: 'Heritage Banarasi Katan Silk',
-      shop: 'Fabric Home',
-      category: 'fabric',
-      tag: 'Textile Variety',
-      description: 'Handwoven floral jaal motif in antique gold zari on royal crimson base.',
-      image:
-        'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80',
-      gradient: 'from-maroon-900 to-amber-950',
+      title: 'MSB School Uniform Tailoring',
+      shop: 'Tailoring Home',
+      category: 'tailoring',
+      tag: 'School Uniform',
+      description: 'Official uniform tailoring for Madrasa Saifiyah Burhaniyah (MSB) students with reinforced seams.',
+      image: '/images/tailoring/bohra_uniform.jpg',
+      gradient: 'from-chocolate-900 to-maroon-950',
     },
     {
       id: 3,
-      title: 'Double-Breasted Irish Linen Suit',
-      shop: 'Tailoring Home',
-      category: 'tailoring',
-      tag: 'Bespoke Tailoring',
-      description: 'Unbleached natural linen tailored with wide peak lapels and horn buttons.',
-      image:
-        'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
-      gradient: 'from-amber-950 to-chocolate-900',
-    },
-    {
-      id: 4,
-      title: 'Italian Super 140s Navy Twill',
+      title: 'Fine Silk & Cotton Textile Swatches',
       shop: 'Fabric Home',
       category: 'fabric',
       tag: 'Textile Variety',
-      description: 'Fine worsted wool blend for sharp boardroom executive suiting.',
-      image:
-        'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80',
+      description: 'Curated selection of pure natural silks, linens, and soft cotton lawn swatches.',
+      image: null,
+      gradient: 'from-maroon-900 to-amber-950',
+    },
+    {
+      id: 4,
+      title: 'Worsted Suiting & Festive Brocades',
+      shop: 'Fabric Home',
+      category: 'fabric',
+      tag: 'Textile Variety',
+      description: 'Structured worsted wools and heritage brocades selected for custom suiting and regalia.',
+      image: null,
       gradient: 'from-slate-950 to-chocolate-950',
     },
   ],
@@ -582,9 +554,9 @@ export const homeContent = {
     badge: 'Visit & Inquire',
     title: 'Consult Our Master Artisans',
     subtitle:
-      'Visit our twin showrooms to inspect fabric swatches in person or book a dedicated measurement consultation with our master cutter.',
+      'Visit our twin showrooms to inspect fabric swatches in person or discuss tailoring requirements.',
     notice:
-      'Note: Contact numbers, WhatsApp links and boutique addresses below are temporary demonstration placeholders until verified business details are updated.',
+      'Visiting hours, boutique addresses and direct inquiry lines will be officially published upon store launch.',
     tailoringContact: {
       shop: 'Tailoring Home',
       specialty: 'Bespoke Stitching, Bohra Attire, Uniforms, Suits & Alterations',
