@@ -92,7 +92,7 @@ export const homeContent = {
       description:
         'Master-tailored traditional Kurta, Saya, and Izaar crafted with precise proportions, neat hand-finishing, and classic pocket detailing suited for daily prayers and festive miqaats.',
       tags: ['Kurta & Saya', 'Izaar', 'Bohra Traditional', 'Miqaat Wear', 'Hand-Finished'],
-      image: '/images/tailoring/customary_attire.jpg',
+      image: null,
       gradient: 'from-amber-950 to-chocolate-950',
       isRepresentativeImage: false,
     },
@@ -109,7 +109,7 @@ export const homeContent = {
       tags: ['Rida Tailoring', 'Pardi & Ghagra', 'Lace Appliqué', 'Panel Matching', 'Bespoke Stitch'],
       image: null,
       gradient: 'from-maroon-900 to-amber-950',
-      isRepresentativeImage: true,
+      isRepresentativeImage: false,
     },
 
     // --- Separate School Uniform Categories ---
@@ -125,7 +125,7 @@ export const homeContent = {
         'Tailored in accordance with Madrasa Saifiyah Burhaniyah (MSB) uniform dress codes for boys and girls across all grade divisions. Built with reinforced seams for active school life.',
       notice: 'Tailored as per respective school uniform dress codes and academic session requirements.',
       tags: ['MSB Uniform', 'Boys & Girls', 'Campus Standard', 'Grade 1–12', 'Reinforced Fit'],
-      image: '/images/tailoring/bohra_uniform.jpg',
+      image: null,
       gradient: 'from-chocolate-900 to-maroon-950',
       isRepresentativeImage: false,
     },
@@ -468,7 +468,7 @@ export const homeContent = {
       category: 'tailoring',
       tag: 'Bespoke Tailoring',
       description: 'Master-tailored traditional Kurta and flowing Saya cut from pristine Swiss lawn.',
-      image: '/images/tailoring/customary_attire.jpg',
+      image: null,
       gradient: 'from-amber-950 to-chocolate-950',
     },
     {
@@ -478,7 +478,7 @@ export const homeContent = {
       category: 'tailoring',
       tag: 'School Uniform',
       description: 'Official uniform tailoring for Madrasa Saifiyah Burhaniyah (MSB) students with reinforced seams.',
-      image: '/images/tailoring/bohra_uniform.jpg',
+      image: null,
       gradient: 'from-chocolate-900 to-maroon-950',
     },
     {

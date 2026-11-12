@@ -46,9 +46,9 @@ export const galleryContent = {
         'Hand-finished loop closures',
       ],
       tags: ['Kurta-Saya', 'Bohra Traditional', 'Swiss Lawn', 'Prayer Attire'],
-      image: '/images/tailoring/customary_attire.jpg',
+      image: null,
       gradient: 'from-amber-950 to-chocolate-950',
-      isRepresentativeImage: false, // User provided real boutique image
+      isRepresentativeImage: false,
       inquirySubject: "Bohra Men's Kurta & Saya Ensemble",
     },
     {
@@ -69,9 +69,9 @@ export const galleryContent = {
         'Wash-resilient stitching that holds shape',
       ],
       tags: ['MSB Uniform', 'Student Wear', 'Reinforced Fit', 'Campus Standard'],
-      image: '/images/tailoring/bohra_uniform.jpg',
+      image: null,
       gradient: 'from-chocolate-900 to-maroon-950',
-      isRepresentativeImage: false, // User provided real boutique image
+      isRepresentativeImage: false,
       inquirySubject: 'MSB School Uniform Tailoring',
     },
     {

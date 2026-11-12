@@ -77,9 +77,9 @@ export const aboutContent = {
         desc: 'Precision shoulder narrowing, sleeve pitch adjustment, and heirloom garment restoration.',
       },
     ],
-    image: '/images/tailoring/customary_attire.jpg',
+    image: null,
     imageAlt: 'Tailoring Home bespoke craftsmanship showcase',
-    isRepresentativeImage: false, // User provided real boutique image
+    isRepresentativeImage: false,
     ctaText: 'Explore Tailoring Services',
     ctaTo: ROUTES.TAILORING,
   },
