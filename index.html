@@ -2,14 +2,77 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Title & Meta -->
     <title>Tailoring Home & Fabric Home | Bespoke Tailoring & Premium Fabrics</title>
-    <meta name="description" content="Discover exquisite bespoke tailoring services and hand-selected luxury textiles at Tailoring Home & Fabric Home." />
+    <meta name="title" content="Tailoring Home & Fabric Home | Bespoke Tailoring & Premium Fabrics" />
+    <meta name="description" content="Discover bespoke custom tailoring and hand-selected luxury textiles at Tailoring Home & Fabric Home. Artisanal stitching, pure silks, European linens, suiting, and traditional Bohra attire." />
+    <meta name="theme-color" content="#0C251F" />
+    <link rel="canonical" href="https://tailoringhome.vercel.app/" />
+
+    <!-- Browser Favicons & Touch Icons (Official Emblem) -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph / Facebook / WhatsApp Preview Metadata -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tailoringhome.vercel.app/" />
+    <meta property="og:site_name" content="Tailoring Home & Fabric Home" />
+    <meta property="og:title" content="Tailoring Home & Fabric Home | Bespoke Tailoring & Premium Fabrics" />
+    <meta property="og:description" content="Discover bespoke custom tailoring and hand-selected luxury textiles at Tailoring Home & Fabric Home. Pure silks, fine European linens, corporate suiting, and traditional Bohra attire." />
+    <meta property="og:image" content="https://tailoringhome.vercel.app/images/og-preview.jpg" />
+    <meta property="og:image:secure_url" content="https://tailoringhome.vercel.app/images/og-preview.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tailoring Home & Fabric Home Official Emblem & Bespoke Atelier Showcase" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter / X Preview Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://tailoringhome.vercel.app/" />
+    <meta name="twitter:title" content="Tailoring Home & Fabric Home | Bespoke Tailoring & Premium Fabrics" />
+    <meta name="twitter:description" content="Discover bespoke custom tailoring and hand-selected luxury textiles at Tailoring Home & Fabric Home. Pure silks, fine European linens, corporate suiting, and traditional Bohra attire." />
+    <meta name="twitter:image" content="https://tailoringhome.vercel.app/images/og-preview.jpg" />
+    <meta name="twitter:image:alt" content="Tailoring Home & Fabric Home Official Emblem & Bespoke Atelier Showcase" />
+
     <!-- Google Fonts: Cormorant Garamond, Playfair Display & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) - Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WPDJ3V8XF6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Google Consent Mode v2 Default Configuration
+      (function() {
+        var stored = null;
+        try { stored = localStorage.getItem('th_analytics_consent'); } catch(e) {}
+        var dnt = navigator.doNotTrack === '1' || window.doNotTrack === '1';
+        var isGranted = stored === 'granted' || (stored === null && !dnt);
+
+        gtag('consent', 'default', {
+          'analytics_storage': isGranted ? 'granted' : 'denied',
+          'ad_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied',
+          'wait_for_update': 500
+        });
+
+        // Config GA4 with automatic pageviews disabled so React Router manages SPA routing without duplicate events
+        gtag('config', 'G-WPDJ3V8XF6', {
+          send_page_view: false,
+          anonymize_ip: true
+        });
+      })();
+    </script>
   </head>
   <body class="bg-ivory text-chocolate antialiased selection:bg-maroon-100 selection:text-maroon-900 min-h-screen">
     <div id="root"></div>

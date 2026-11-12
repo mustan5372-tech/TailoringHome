@@ -12,6 +12,7 @@ export const ROUTES = {
   ABOUT: '/about',
   CONTACT: '/contact',
   ADMIN: {
+    LOGIN: '/admin/login',
     DASHBOARD: '/admin',
     TAILORING: '/admin/tailoring',
     FABRIC: '/admin/fabric',

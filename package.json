@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "admin:manage": "node scripts/manage-admins.mjs",
+    "admin:bootstrap": "node scripts/manage-admins.mjs bootstrap",
+    "admin:cleanup": "node scripts/manage-admins.mjs cleanup",
+    "admin:backup": "node scripts/manage-admins.mjs backup"
   },
   "dependencies": {
     "firebase": "^13.2.0",
@@ -21,6 +25,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
+    "firebase-admin": "^14.5.1",
     "oxlint": "^1.90.0",
     "tailwindcss": "^4.3.5",
     "vite": "^8.3.6"

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, NavLink, Link, useLocation } from 'react-router-dom';
+import { Outlet, NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   Shield,
   LayoutDashboard,
@@ -19,14 +19,56 @@ import {
   HardDrive,
   User,
   Key,
+  LogOut,
 } from 'lucide-react';
 import { ROUTES } from '../constants/navigation';
 import { env } from '../config/env.config';
+import { useAuth } from '../context';
 
 export const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const {
+    user,
+    adminProfile,
+    role,
+    isSuperAdmin,
+    isTailoringAdmin,
+    isFabricAdmin,
+    logout,
+  } = useAuth();
+
+  const handleLogout = async () => {
+    setProfileDropdownOpen(false);
+    await logout();
+    navigate(ROUTES.ADMIN.LOGIN || '/admin/login', { replace: true });
+  };
+
+  const getRoleDisplayName = (r) => {
+    switch (r) {
+      case 'super_admin':
+        return 'Super Administrator';
+      case 'tailoring_admin':
+        return 'Tailoring Administrator';
+      case 'fabric_admin':
+        return 'Fabric Administrator';
+      default:
+        return 'Administrator';
+    }
+  };
+
+  const displayName = user?.displayName || adminProfile?.displayName || 'Administrator';
+  const email = user?.email || adminProfile?.email || 'admin@tailoringhome.com';
+  const roleDisplay = getRoleDisplayName(role);
+  const initials = displayName
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 
   // Page title mapping based on current active route
   const getPageInfo = (pathname) => {
@@ -90,61 +132,83 @@ export const AdminLayout = () => {
 
   const currentPage = getPageInfo(location.pathname);
 
-  // Core navigation items required by Day 9 specification
-  const adminNavItems = [
-    {
-      label: 'Dashboard',
-      path: ROUTES.ADMIN.DASHBOARD,
-      icon: LayoutDashboard,
-      badge: 'Overview',
-    },
-    {
-      label: 'Tailoring Home',
-      path: ROUTES.ADMIN.TAILORING,
-      icon: Scissors,
-      badge: '10 Cuts',
-    },
-    {
-      label: 'Fabric Home',
-      path: ROUTES.ADMIN.FABRIC,
-      icon: Layers,
-      badge: '11 Weaves',
-    },
-    {
-      label: 'Gallery',
-      path: ROUTES.ADMIN.GALLERY,
-      icon: ImageIcon,
-      badge: '16 Photos',
-    },
-    {
-      label: 'Image Studio',
-      path: ROUTES.ADMIN.IMAGE_STUDIO,
-      icon: Sparkles,
-      badge: 'Pipeline',
-    },
-    {
-      label: 'Admin Management',
-      path: ROUTES.ADMIN.ADMIN_MANAGEMENT,
-      icon: Users,
-      badge: '2 Admins',
-    },
-    {
-      label: 'Settings',
-      path: ROUTES.ADMIN.SETTINGS,
-      icon: Settings,
-      badge: 'Config',
-    },
-  ];
+  // Dynamic navigation items based on active role permissions
+  const getNavItems = () => {
+    const items = [
+      {
+        label: 'Dashboard',
+        path: ROUTES.ADMIN.DASHBOARD,
+        icon: LayoutDashboard,
+        badge: 'Overview',
+      },
+    ];
 
-  // Secondary tools (atomic cleanup utility)
-  const secondaryNavItems = [
-    {
-      label: 'Storage Cleanup',
-      path: ROUTES.ADMIN.CLEANUP,
-      icon: Trash2,
-      badge: 'Utility',
-    },
-  ];
+    if (isSuperAdmin || isTailoringAdmin) {
+      items.push({
+        label: 'Tailoring Home',
+        path: ROUTES.ADMIN.TAILORING,
+        icon: Scissors,
+        badge: '10 Cuts',
+      });
+    }
+
+    if (isSuperAdmin || isFabricAdmin) {
+      items.push({
+        label: 'Fabric Home',
+        path: ROUTES.ADMIN.FABRIC,
+        icon: Layers,
+        badge: '11 Weaves',
+      });
+    }
+
+    items.push(
+      {
+        label: 'Gallery',
+        path: ROUTES.ADMIN.GALLERY,
+        icon: ImageIcon,
+        badge: '16 Photos',
+      },
+      {
+        label: 'Image Studio',
+        path: ROUTES.ADMIN.IMAGE_STUDIO,
+        icon: Sparkles,
+        badge: 'Pipeline',
+      }
+    );
+
+    if (isSuperAdmin) {
+      items.push(
+        {
+          label: 'Admin Management',
+          path: ROUTES.ADMIN.ADMIN_MANAGEMENT,
+          icon: Users,
+          badge: 'Security',
+        },
+        {
+          label: 'Settings',
+          path: ROUTES.ADMIN.SETTINGS,
+          icon: Settings,
+          badge: 'Config',
+        }
+      );
+    }
+
+    return items;
+  };
+
+  const adminNavItems = getNavItems();
+
+  // Secondary tools (restricted to Super Admin)
+  const secondaryNavItems = isSuperAdmin
+    ? [
+        {
+          label: 'Storage Cleanup',
+          path: ROUTES.ADMIN.CLEANUP,
+          icon: Trash2,
+          badge: 'Utility',
+        },
+      ]
+    : [];
 
   return (
     <div className="min-h-screen bg-stone-100 flex flex-col md:flex-row text-chocolate-900 font-sans">
@@ -158,7 +222,7 @@ export const AdminLayout = () => {
             onClick={() => setSidebarOpen(!sidebarOpen)}
             aria-label={sidebarOpen ? 'Close navigation sidebar' : 'Open navigation sidebar'}
             aria-expanded={sidebarOpen}
-            className="p-2 -ml-1 text-ivory/80 hover:text-white rounded-sm hover:bg-chocolate-900 focus:outline-hidden focus:ring-1 focus:ring-gold transition-colors"
+            className="p-2 -ml-1 text-ivory/80 hover:text-white rounded-sm hover:bg-chocolate-900 focus:outline-hidden focus:ring-1 focus:ring-gold transition-colors cursor-pointer"
           >
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -168,7 +232,7 @@ export const AdminLayout = () => {
               {currentPage.title}
             </span>
             <span className="text-[10px] text-gold-light uppercase tracking-wider block font-sans">
-              Tailoring Home & Fabric Home [Demo]
+              Tailoring Home & Fabric Home
             </span>
           </div>
         </div>
@@ -178,11 +242,19 @@ export const AdminLayout = () => {
           type="button"
           onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
           aria-label="Toggle profile details"
-          className="flex items-center gap-1.5 p-1 rounded-sm bg-maroon-900 border border-gold/30 text-gold"
+          className="flex items-center gap-1.5 p-1 rounded-sm bg-maroon-900 border border-gold/30 text-gold cursor-pointer"
         >
-          <div className="h-7 w-7 rounded-full bg-maroon-800 text-gold flex items-center justify-center font-serif font-bold text-xs">
-            MC
-          </div>
+          {user?.photoURL ? (
+            <img
+              src={user.photoURL}
+              alt={displayName}
+              className="h-7 w-7 rounded-full object-cover border border-gold/40"
+            />
+          ) : (
+            <div className="h-7 w-7 rounded-full bg-maroon-800 text-gold flex items-center justify-center font-serif font-bold text-xs">
+              {initials}
+            </div>
+          )}
         </button>
       </div>
 
@@ -227,7 +299,7 @@ export const AdminLayout = () => {
               <button
                 type="button"
                 onClick={() => setSidebarOpen(false)}
-                className="md:hidden text-cream/60 hover:text-ivory p-1.5 rounded-sm hover:bg-chocolate-900"
+                className="md:hidden text-cream/60 hover:text-ivory p-1.5 rounded-sm hover:bg-chocolate-900 cursor-pointer"
                 aria-label="Close sidebar"
               >
                 <X className="h-5 w-5" />
@@ -241,7 +313,7 @@ export const AdminLayout = () => {
                   <Database className="h-3 w-3 text-gold" /> System State
                 </span>
                 <span className="uppercase font-semibold text-gold px-1.5 py-0.5 rounded bg-chocolate-950 text-[10px] border border-gold/30">
-                  {env.mode} [Demo]
+                  {env.mode}
                 </span>
               </div>
               <div className="text-[10px] text-cream/60 flex items-center gap-1 font-mono">
@@ -287,37 +359,41 @@ export const AdminLayout = () => {
             })}
 
             {/* Secondary Tools Header */}
-            <div className="pt-5 px-2 mb-2 text-[10px] uppercase font-semibold tracking-wider text-gold-light/70 font-sans">
-              System Utilities
-            </div>
+            {secondaryNavItems.length > 0 && (
+              <>
+                <div className="pt-5 px-2 mb-2 text-[10px] uppercase font-semibold tracking-wider text-gold-light/70 font-sans">
+                  System Utilities
+                </div>
 
-            {secondaryNavItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setSidebarOpen(false)}
-                  className={({ isActive }) =>
-                    `flex items-center justify-between px-3 py-2 text-xs font-medium rounded-sm transition-all duration-200 ${
-                      isActive
-                        ? 'bg-maroon-800 text-gold-light font-bold border-l-4 border-gold'
-                        : 'text-ivory/70 hover:bg-chocolate-900 hover:text-ivory border-l-4 border-transparent'
-                    }`
-                  }
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Icon className="h-4 w-4 shrink-0 text-gold/80" />
-                    <span>{item.label}</span>
-                  </div>
-                  {item.badge && (
-                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-maroon-900 text-maroon-200 border border-maroon-700">
-                      {item.badge}
-                    </span>
-                  )}
-                </NavLink>
-              );
-            })}
+                {secondaryNavItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <NavLink
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => setSidebarOpen(false)}
+                      className={({ isActive }) =>
+                        `flex items-center justify-between px-3 py-2 text-xs font-medium rounded-sm transition-all duration-200 ${
+                          isActive
+                            ? 'bg-maroon-800 text-gold-light font-bold border-l-4 border-gold'
+                            : 'text-ivory/70 hover:bg-chocolate-900 hover:text-ivory border-l-4 border-transparent'
+                        }`
+                      }
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Icon className="h-4 w-4 shrink-0 text-gold/80" />
+                        <span>{item.label}</span>
+                      </div>
+                      {item.badge && (
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-maroon-900 text-maroon-200 border border-maroon-700">
+                          {item.badge}
+                        </span>
+                      )}
+                    </NavLink>
+                  );
+                })}
+              </>
+            )}
           </nav>
         </div>
 
@@ -326,14 +402,14 @@ export const AdminLayout = () => {
           <div className="flex items-center justify-between px-2 text-[11px] text-cream/70 font-sans">
             <span className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Admin UI Live</span>
+              <span>RBAC Active</span>
             </span>
-            <span className="text-gold-light font-mono text-[10px]">Day 9 Layout</span>
+            <span className="text-gold-light font-mono text-[10px]">{roleDisplay}</span>
           </div>
 
           <Link
             to={ROUTES.HOME}
-            className="flex items-center justify-between px-3 py-2.5 text-xs font-semibold text-gold hover:text-gold-light hover:bg-chocolate-900 rounded-sm border border-gold/30 transition-colors"
+            className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-gold hover:text-gold-light hover:bg-chocolate-900 rounded-sm border border-gold/30 transition-colors"
           >
             <span className="flex items-center gap-2">
               <ExternalLink className="h-4 w-4" />
@@ -341,6 +417,18 @@ export const AdminLayout = () => {
             </span>
             <ChevronRight className="h-3.5 w-3.5" />
           </Link>
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-red-300 hover:text-white hover:bg-red-950/60 rounded-sm border border-red-900/50 transition-colors cursor-pointer"
+          >
+            <span className="flex items-center gap-2">
+              <LogOut className="h-4 w-4 text-red-400" />
+              <span>Sign Out</span>
+            </span>
+            <ChevronRight className="h-3.5 w-3.5" />
+          </button>
         </div>
       </aside>
 
@@ -368,10 +456,10 @@ export const AdminLayout = () => {
 
           {/* Right Header Controls */}
           <div className="flex items-center gap-3 relative">
-            {/* Demo Status Badge */}
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-medium bg-amber-50 text-gold-dark border border-gold/40">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-              <span>Demo Mode UI</span>
+            {/* Live Security Badge */}
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-medium bg-emerald-50 text-emerald-800 border border-emerald-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <span>Firebase RBAC Secured</span>
             </span>
 
             {/* Quick Public Website Link */}
@@ -383,27 +471,35 @@ export const AdminLayout = () => {
               <ExternalLink className="h-3 w-3" />
             </Link>
 
-            {/* Admin Profile Placeholder Button */}
+            {/* Admin Profile Dropdown Button */}
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                className="flex items-center gap-2 pl-3 border-l border-cream-border text-left hover:opacity-90 focus:outline-hidden"
+                className="flex items-center gap-2 pl-3 border-l border-cream-border text-left hover:opacity-90 focus:outline-hidden cursor-pointer"
                 aria-expanded={profileDropdownOpen}
                 aria-label="Toggle administrator profile dropdown"
               >
-                <div className="h-8 w-8 rounded-full bg-maroon-800 text-gold flex items-center justify-center border border-gold/30 text-xs font-serif font-bold shrink-0 shadow-2xs">
-                  MC
-                </div>
+                {user?.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    alt={displayName}
+                    className="h-8 w-8 rounded-full object-cover border border-gold/40 shadow-2xs"
+                  />
+                ) : (
+                  <div className="h-8 w-8 rounded-full bg-maroon-800 text-gold flex items-center justify-center border border-gold/30 text-xs font-serif font-bold shrink-0 shadow-2xs">
+                    {initials}
+                  </div>
+                )}
                 <div className="hidden sm:block">
                   <div className="flex items-center gap-1">
                     <span className="font-semibold text-xs text-chocolate-900 block leading-tight">
-                      Master Cutter
+                      {displayName}
                     </span>
                     <ChevronDown className="h-3 w-3 text-chocolate-400" />
                   </div>
-                  <span className="text-[10px] text-chocolate-500 block leading-tight">
-                    Super Admin [Demo]
+                  <span className="text-[10px] text-chocolate-500 block leading-tight font-medium">
+                    {roleDisplay}
                   </span>
                 </div>
               </button>
@@ -415,17 +511,25 @@ export const AdminLayout = () => {
                     className="fixed inset-0 z-30"
                     onClick={() => setProfileDropdownOpen(false)}
                   />
-                  <div className="absolute right-0 mt-3 w-72 bg-white rounded-sm border border-cream-border shadow-xl p-4 z-40 space-y-3 font-sans">
+                  <div className="absolute right-0 mt-3 w-76 bg-white rounded-sm border border-cream-border shadow-xl p-4 z-40 space-y-3 font-sans">
                     <div className="flex items-center gap-3 pb-3 border-b border-cream-border">
-                      <div className="h-10 w-10 rounded-full bg-maroon-800 text-gold flex items-center justify-center font-serif font-bold text-sm border border-gold/30 shrink-0">
-                        MC
-                      </div>
-                      <div>
-                        <div className="font-serif font-bold text-sm text-chocolate-900">
-                          Master Cutter & Manager
+                      {user?.photoURL ? (
+                        <img
+                          src={user.photoURL}
+                          alt={displayName}
+                          className="h-10 w-10 rounded-full object-cover border border-gold/40 shrink-0"
+                        />
+                      ) : (
+                        <div className="h-10 w-10 rounded-full bg-maroon-800 text-gold flex items-center justify-center font-serif font-bold text-sm border border-gold/30 shrink-0">
+                          {initials}
                         </div>
-                        <div className="text-[11px] text-chocolate-500 font-mono">
-                          admin@tailoringhome.com [Demo]
+                      )}
+                      <div className="overflow-hidden">
+                        <div className="font-serif font-bold text-sm text-chocolate-900 truncate">
+                          {displayName}
+                        </div>
+                        <div className="text-[11px] text-chocolate-500 font-mono truncate">
+                          {email}
                         </div>
                       </div>
                     </div>
@@ -434,7 +538,13 @@ export const AdminLayout = () => {
                       <div className="flex justify-between items-center py-1">
                         <span className="text-chocolate-500">Security Role:</span>
                         <span className="font-semibold text-maroon-800 flex items-center gap-1">
-                          <Key className="h-3 w-3" /> Super Admin [Demo]
+                          <Key className="h-3 w-3" /> {roleDisplay}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center py-1">
+                        <span className="text-chocolate-500">Firebase UID:</span>
+                        <span className="font-mono text-[10px] text-chocolate-600 truncate max-w-[140px]" title={user?.uid}>
+                          {user?.uid ? `${user.uid.slice(0, 12)}...` : 'N/A'}
                         </span>
                       </div>
                       <div className="flex justify-between items-center py-1">
@@ -445,22 +555,24 @@ export const AdminLayout = () => {
                       </div>
                       <div className="flex justify-between items-center py-1">
                         <span className="text-chocolate-500">Auth Status:</span>
-                        <span className="text-emerald-700 font-medium">Staged UI Mock</span>
+                        <span className="text-emerald-700 font-medium">Verified Active</span>
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-cream-border space-y-2">
-                      <Link
-                        to={ROUTES.ADMIN.ADMIN_MANAGEMENT}
-                        onClick={() => setProfileDropdownOpen(false)}
-                        className="w-full flex items-center justify-between text-xs font-semibold px-2.5 py-1.5 rounded-sm text-chocolate-700 hover:bg-cream transition-colors"
-                      >
-                        <span className="flex items-center gap-1.5">
-                          <User className="h-3.5 w-3.5" />
-                          <span>Manage Admin Accounts</span>
-                        </span>
-                        <ChevronRight className="h-3 w-3" />
-                      </Link>
+                    <div className="pt-2 border-t border-cream-border space-y-1.5">
+                      {isSuperAdmin && (
+                        <Link
+                          to={ROUTES.ADMIN.ADMIN_MANAGEMENT}
+                          onClick={() => setProfileDropdownOpen(false)}
+                          className="w-full flex items-center justify-between text-xs font-semibold px-2.5 py-1.5 rounded-sm text-chocolate-700 hover:bg-cream transition-colors"
+                        >
+                          <span className="flex items-center gap-1.5">
+                            <User className="h-3.5 w-3.5" />
+                            <span>Manage Admin Accounts</span>
+                          </span>
+                          <ChevronRight className="h-3 w-3" />
+                        </Link>
+                      )}
 
                       <Link
                         to={ROUTES.HOME}
@@ -473,6 +585,18 @@ export const AdminLayout = () => {
                         </span>
                         <ChevronRight className="h-3 w-3" />
                       </Link>
+
+                      <button
+                        type="button"
+                        onClick={handleLogout}
+                        className="w-full flex items-center justify-between text-xs font-semibold px-2.5 py-1.5 rounded-sm text-red-700 hover:bg-red-50 transition-colors cursor-pointer"
+                      >
+                        <span className="flex items-center gap-1.5">
+                          <LogOut className="h-3.5 w-3.5" />
+                          <span>Sign Out</span>
+                        </span>
+                        <ChevronRight className="h-3 w-3" />
+                      </button>
                     </div>
                   </div>
                 </>

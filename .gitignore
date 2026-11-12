@@ -29,6 +29,10 @@ dist-ssr
 *.cert
 serviceAccountKey*.json
 
+# Scratch and temporary scripts
+scratch/
+backups/
+
 
 # Editor directories and files
 .vscode/*

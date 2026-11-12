@@ -4,17 +4,24 @@
  * Official Firebase JavaScript SDK initialization.
  * Reads web configuration values from Vite environment variables (import.meta.env).
  *
+ * DAY 13: Activated Firebase Authentication (Google Auth Provider) & Firestore for Admin Access.
  * SECURITY:
  * Service account credentials and private keys are never exposed in frontend code.
- * Authentication, Firestore queries, and Storage uploads are staged for subsequent days.
  */
 
 import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 import { getAnalytics, isSupported } from 'firebase/analytics';
 import { env } from './env.config';
 
 let app = null;
+let auth = null;
+let db = null;
+let storage = null;
 let analytics = null;
+let googleProvider = null;
 
 // Read Firebase Web configuration from Vite environment variables
 export const firebaseConfig = {
@@ -31,8 +38,7 @@ export const firebaseConfig = {
 export const isConfigured = env.isFirebaseConfigured();
 
 /**
- * Initializes and returns the central Firebase App instance.
- * Gracefully handles missing credentials during initial setup without crashing the UI.
+ * Initializes and returns the central Firebase App instance with its services.
  */
 export const initializeFirebase = (customConfig = null) => {
   const config = customConfig || firebaseConfig;
@@ -60,12 +66,20 @@ export const initializeFirebase = (customConfig = null) => {
       `[Firebase] Initialized successfully for project [${config.projectId}].`
     );
 
+    // Initialize Auth & Google Provider
+    auth = getAuth(initializedApp);
+    googleProvider = new GoogleAuthProvider();
+    googleProvider.setCustomParameters({ prompt: 'select_account' });
+
+    // Initialize Firestore & Storage
+    db = getFirestore(initializedApp);
+    storage = getStorage(initializedApp);
+
     // Initialize Analytics if supported in current browser environment
     if (typeof window !== 'undefined' && config.measurementId) {
       isSupported().then((supported) => {
         if (supported) {
           analytics = getAnalytics(initializedApp);
-          console.info(`[Firebase] Analytics initialized with measurement ID: ${config.measurementId}`);
         }
       }).catch((err) => {
         console.warn('[Firebase] Analytics not supported in this environment:', err);
@@ -84,11 +98,5 @@ if (isConfigured) {
   app = initializeFirebase();
 }
 
-// Staged handles for future services (Firestore, Storage, Auth)
-// Staged without executing operations per Day 10 restrictions
-export const db = null;
-export const storage = null;
-export const auth = null;
-
-export { app, analytics };
-export default { app, analytics, firebaseConfig, isConfigured, initializeFirebase };
+export { app, auth, db, storage, analytics, googleProvider };
+export default { app, auth, db, storage, analytics, googleProvider, firebaseConfig, isConfigured, initializeFirebase };

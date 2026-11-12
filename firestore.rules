@@ -17,7 +17,8 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/admins/$(request.auth.uid)).data;
     }
 
-    // Check if user exists in the admin collection and is marked active
+    // Check if user exists in the admin collection and is marked active.
+    // Immediate Revocation: setting active: false immediately cuts all access.
     function isActiveAdmin() {
       return isAuthenticated() &&
         exists(/databases/$(database)/documents/admins/$(request.auth.uid)) &&
@@ -25,41 +26,58 @@ service cloud.firestore {
     }
 
     // Super Administrator: Highest privilege level
+    // Authoritative source: /admins/{uid}.role in Firestore.
+    // Consistency check: If a custom claim exists, it must not contradict the database record.
     function isSuperAdmin() {
-      return isActiveAdmin() && (
-        getAdminDoc().role == 'super_admin' ||
-        request.auth.token.role == 'super_admin'
-      );
+      return isActiveAdmin() &&
+        getAdminDoc().role == 'super_admin' &&
+        (!('role' in request.auth.token) || request.auth.token.role == 'super_admin');
     }
 
-    // Tailoring Administrator: Authority over tailoring & school uniforms
+    // Tailoring Administrator: Authority over tailoring services, uniforms, and tailoring gallery
     function isTailoringAdmin() {
-      return isActiveAdmin() && (
-        getAdminDoc().role == 'tailoring_admin' ||
-        request.auth.token.role == 'tailoring_admin' ||
-        isSuperAdmin()
+      return isSuperAdmin() || (
+        isActiveAdmin() &&
+        getAdminDoc().role == 'tailoring_admin' &&
+        (!('role' in request.auth.token) || request.auth.token.role == 'tailoring_admin')
       );
     }
 
-    // Fabric Administrator: Authority over fabric catalogue and swatches
+    // Fabric Administrator: Authority over fabric catalogue, swatches, and fabric gallery
     function isFabricAdmin() {
-      return isActiveAdmin() && (
-        getAdminDoc().role == 'fabric_admin' ||
-        request.auth.token.role == 'fabric_admin' ||
-        isSuperAdmin()
+      return isSuperAdmin() || (
+        isActiveAdmin() &&
+        getAdminDoc().role == 'fabric_admin' &&
+        (!('role' in request.auth.token) || request.auth.token.role == 'fabric_admin')
       );
+    }
+
+    // Published Record Guard: Hides drafts and staging records from the public
+    function isPublishedRecord() {
+      return (!('published' in resource.data) || resource.data.published == true)
+          && (!('isDraft' in resource.data) || resource.data.isDraft != true);
     }
 
     // Customer Enquiry Schema and Anti-Abuse Validator
     function isValidEnquiry() {
       let data = request.resource.data;
-      return data.keys().hasOnly(['name', 'phone', 'email', 'service', 'message', 'createdAt', 'status'])
+      return data.keys().hasOnly(['name', 'phone', 'email', 'service', 'message', 'createdAt', 'status', 'website'])
+        // Name: 2-80 characters
         && data.name is string && data.name.size() >= 2 && data.name.size() <= 80
+        // Phone: 7-20 characters, digits and standard formatting (+, -, (), spaces)
         && data.phone is string && data.phone.size() >= 7 && data.phone.size() <= 20
-        && (!('email' in data) || (data.email is string && data.email.size() <= 100))
-        && (!('service' in data) || (data.service is string && data.service.size() <= 80))
+        && data.phone.matches('^[0-9+() -]{7,20}$')
+        // Email: optional, but if present must be valid email format <= 100 chars
+        && (!('email' in data) || (data.email is string && data.email.size() <= 100 && data.email.matches('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,}$')))
+        // Service: optional string <= 80 chars. Using bracket notation data['service'] because 'service' is a reserved keyword in Firestore Rules.
+        && (!('service' in data) || (data['service'] is string && data['service'].size() <= 80))
+        // Message: 5-2000 chars
         && data.message is string && data.message.size() >= 5 && data.message.size() <= 2000
+        // Honeypot field: bots filling 'website' are immediately rejected
+        && (!('website' in data) || data.website == '')
+        // State integrity: public submissions must always start as 'pending'
         && data.status == 'pending'
+        // Server-synced timestamp validation
         && data.createdAt == request.time;
     }
 
@@ -67,87 +85,152 @@ service cloud.firestore {
     // 1. TAILORING SERVICES (Bohra Wear, School Uniforms, Suiting)
     // =========================================================================
     match /tailoring_services/{itemId} {
-      allow read: if true;
+      allow read: if isTailoringAdmin() || isPublishedRecord();
       allow write: if isTailoringAdmin();
-    }
-    match /dev_tailoring_services/{itemId} {
-      allow read: if true;
-      allow write: if isTailoringAdmin();
+
+      match /{subcollection=**} {
+        allow read: if isTailoringAdmin() || isPublishedRecord();
+        allow write: if isTailoringAdmin();
+      }
     }
 
     // =========================================================================
     // 2. FABRICS CATALOGUE (Silks, Cottons, Linens, Suiting Wools)
     // =========================================================================
     match /fabrics_catalogue/{fabricId} {
-      allow read: if true;
+      allow read: if isFabricAdmin() || isPublishedRecord();
       allow write: if isFabricAdmin();
-    }
-    match /dev_fabrics_catalogue/{fabricId} {
-      allow read: if true;
-      allow write: if isFabricAdmin();
+
+      match /{subcollection=**} {
+        allow read: if isFabricAdmin() || isPublishedRecord();
+        allow write: if isFabricAdmin();
+      }
     }
 
     // =========================================================================
-    // 3. GALLERY SHOWCASE
+    // 3. GALLERY SHOWCASE (Departmental Isolation on writes)
     // =========================================================================
     match /gallery_showcase/{photoId} {
-      allow read: if true;
-      allow write: if isTailoringAdmin() || isFabricAdmin();
-    }
-    match /dev_gallery_showcase/{photoId} {
-      allow read: if true;
-      allow write: if isTailoringAdmin() || isFabricAdmin();
+      allow read: if isTailoringAdmin() || isFabricAdmin() || isPublishedRecord();
+      allow create: if isSuperAdmin() ||
+        (isTailoringAdmin() && request.resource.data.get('category', '') == 'tailoring') ||
+        (isFabricAdmin() && request.resource.data.get('category', '') == 'fabric');
+      allow update: if isSuperAdmin() ||
+        (isTailoringAdmin() && resource.data.get('category', '') == 'tailoring' && request.resource.data.get('category', '') == 'tailoring') ||
+        (isFabricAdmin() && resource.data.get('category', '') == 'fabric' && request.resource.data.get('category', '') == 'fabric');
+      allow delete: if isSuperAdmin() ||
+        (isTailoringAdmin() && resource.data.get('category', '') == 'tailoring') ||
+        (isFabricAdmin() && resource.data.get('category', '') == 'fabric');
+
+      match /{subcollection=**} {
+        allow read: if isTailoringAdmin() || isFabricAdmin() || isPublishedRecord();
+        allow write: if isTailoringAdmin() || isFabricAdmin();
+      }
     }
 
     // =========================================================================
-    // 4. SITE SETTINGS & BRAND METADATA
+    // 4. SITE SETTINGS & BRAND METADATA (Super Admin exclusive)
     // =========================================================================
     match /site_settings/{settingId} {
       allow read: if true;
       allow write: if isSuperAdmin();
-    }
-    match /dev_site_settings/{settingId} {
-      allow read: if true;
-      allow write: if isSuperAdmin();
+
+      match /{subcollection=**} {
+        allow read: if true;
+        allow write: if isSuperAdmin();
+      }
     }
 
     // =========================================================================
-    // 5. CUSTOMER ENQUIRIES (Public submission, Admin review)
+    // 5. CUSTOMER ENQUIRIES (Public submission, Admin review, Super Admin delete)
     // =========================================================================
     match /customer_enquiries/{enquiryId} {
       allow create: if isValidEnquiry();
-      allow read, update, delete: if isTailoringAdmin() || isFabricAdmin();
-    }
-    match /dev_customer_enquiries/{enquiryId} {
-      allow create: if isValidEnquiry();
-      allow read, update, delete: if isTailoringAdmin() || isFabricAdmin();
+      allow read: if isTailoringAdmin() || isFabricAdmin();
+      // Admins can update status and notes, but cannot alter the customer's original submission
+      allow update: if (isTailoringAdmin() || isFabricAdmin())
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['name', 'phone', 'email', 'service', 'message', 'createdAt']);
+      // Deletion is reserved exclusively for Super Admin to protect the audit trail
+      allow delete: if isSuperAdmin();
+
+      match /{subcollection=**} {
+        allow read, write: if isSuperAdmin();
+      }
     }
 
     // =========================================================================
     // 6. ADMIN USER MANAGEMENT (/admins)
-    // Prevents privilege escalation: only Super Admin can create or assign roles
     // =========================================================================
     match /admins/{adminId} {
       // Admins can read their own profile to verify their role; Super Admin reads all
       allow read: if isSuperAdmin() || (isAuthenticated() && request.auth.uid == adminId);
       // Only Super Admin can invite, modify, or deactivate administrators
       allow write: if isSuperAdmin();
+
+      match /{subcollection=**} {
+        allow read, write: if isSuperAdmin();
+      }
     }
 
     // =========================================================================
-    // 7. USER PROFILES (/users)
+    // 7. USER PROFILES & SUBCOLLECTIONS (/users)
+    // Strict schema on create, privilege escalation protection on update
     // =========================================================================
     match /users/{userId} {
       allow read: if isSuperAdmin() || (isAuthenticated() && request.auth.uid == userId);
-      allow create: if isAuthenticated() && request.auth.uid == userId;
-      // Users cannot elevate their own role or modify administrative flags
+      
+      // On create: Only approved user fields permitted; privilege fields are strictly blocked
+      allow create: if isAuthenticated() && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['displayName', 'email', 'phone', 'photoURL', 'createdAt', 'updatedAt'])
+        && !request.resource.data.keys().hasAny(['role', 'isSuperAdmin', 'isAdmin', 'permissions', 'active']);
+
+      // On update: Users cannot escalate role or tamper with immutable creation data
       allow update: if isAuthenticated() && request.auth.uid == userId
-                    && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'isSuperAdmin', 'permissions']);
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'isSuperAdmin', 'isAdmin', 'permissions', 'active', 'createdAt', 'email'])
+        && request.resource.data.keys().hasOnly(['displayName', 'email', 'phone', 'photoURL', 'createdAt', 'updatedAt', 'addresses']);
+
       allow delete: if isSuperAdmin();
+
+      // Secure nested subcollections (e.g. measurements, order drafts)
+      match /{subcollection=**} {
+        allow read, write: if isAuthenticated() && (request.auth.uid == userId || isSuperAdmin());
+      }
     }
 
     // =========================================================================
-    // 8. DEFAULT DENY
+    // 8. DEVELOPMENT COLLECTIONS (Environment Isolation)
+    // ZERO public access: strictly restricted to authenticated admins
+    // =========================================================================
+    match /dev_tailoring_services/{itemId} {
+      allow read, write: if isTailoringAdmin();
+      match /{subcollection=**} { allow read, write: if isTailoringAdmin(); }
+    }
+
+    match /dev_fabrics_catalogue/{fabricId} {
+      allow read, write: if isFabricAdmin();
+      match /{subcollection=**} { allow read, write: if isFabricAdmin(); }
+    }
+
+    match /dev_gallery_showcase/{photoId} {
+      allow read: if isTailoringAdmin() || isFabricAdmin();
+      allow write: if isSuperAdmin() ||
+        (isTailoringAdmin() && request.resource.data.get('category', '') == 'tailoring') ||
+        (isFabricAdmin() && request.resource.data.get('category', '') == 'fabric');
+      match /{subcollection=**} { allow read, write: if isTailoringAdmin() || isFabricAdmin(); }
+    }
+
+    match /dev_site_settings/{settingId} {
+      allow read, write: if isSuperAdmin();
+      match /{subcollection=**} { allow read, write: if isSuperAdmin(); }
+    }
+
+    match /dev_customer_enquiries/{enquiryId} {
+      allow read, write: if isTailoringAdmin() || isFabricAdmin();
+      match /{subcollection=**} { allow read, write: if isTailoringAdmin() || isFabricAdmin(); }
+    }
+
+    // =========================================================================
+    // 9. DEFAULT DENY
     // Block all unmapped collections and wildcard paths
     // =========================================================================
     match /{document=**} {

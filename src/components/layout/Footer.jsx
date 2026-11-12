@@ -154,11 +154,27 @@ export const Footer = () => {
           <p>
             © {CURRENT_YEAR} Tailoring Home & Fabric Home. All rights reserved.
           </p>
-          <p className="flex items-center gap-1">
-            <span>Crafted with</span>
-            <Heart className="h-3 w-3 text-maroon-400 fill-maroon-400" />
-            <span>for bespoke craftsmanship</span>
-          </p>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={() => {
+                try {
+                  localStorage.removeItem('th_analytics_consent');
+                  window.location.reload();
+                } catch {
+                  // Ignore
+                }
+              }}
+              className="text-gold-light/60 hover:text-gold transition-colors text-[11px] underline cursor-pointer"
+            >
+              Privacy & Cookie Preferences
+            </button>
+            <p className="flex items-center gap-1">
+              <span>Crafted with</span>
+              <Heart className="h-3 w-3 text-maroon-400 fill-maroon-400" />
+              <span>for bespoke craftsmanship</span>
+            </p>
+          </div>
         </div>
 
         {/* About the Developer Section */}

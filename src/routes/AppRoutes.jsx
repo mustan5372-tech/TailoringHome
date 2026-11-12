@@ -14,6 +14,10 @@ import AboutPage from '../pages/public/AboutPage';
 import ContactPage from '../pages/public/ContactPage';
 import NotFoundPage from '../pages/public/NotFoundPage';
 
+// Admin Authentication & Protection
+import AdminLoginPage from '../pages/admin/AdminLoginPage';
+import AdminProtectedRoute from './AdminProtectedRoute';
+
 // Admin Pages
 import AdminDashboardPage from '../pages/admin/AdminDashboardPage';
 import AdminTailoringPage from '../pages/admin/AdminTailoringPage';
@@ -38,16 +42,35 @@ export const AppRoutes = () => {
         <Route path="*" element={<NotFoundPage />} />
       </Route>
 
-      {/* Admin Operations Console Routes */}
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<AdminDashboardPage />} />
-        <Route path="tailoring" element={<AdminTailoringPage />} />
-        <Route path="fabric" element={<AdminFabricPage />} />
-        <Route path="gallery" element={<AdminGalleryManagementPage />} />
-        <Route path="image-studio" element={<AdminImageStudioPage />} />
-        <Route path="admins" element={<AdminUsersPage />} />
-        <Route path="settings" element={<AdminSettingsPage />} />
-        <Route path="cleanup" element={<AdminCleanupPage />} />
+      {/* Admin Authentication Entrypoint */}
+      <Route path="/admin/login" element={<AdminLoginPage />} />
+
+      {/* Protected Admin Operations Console Routes (Requires Active Entry in /admins/{uid}) */}
+      <Route element={<AdminProtectedRoute />}>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboardPage />} />
+
+          {/* Departmental Access: Tailoring Admin or Super Admin */}
+          <Route element={<AdminProtectedRoute requiredRole="tailoring_admin" />}>
+            <Route path="tailoring" element={<AdminTailoringPage />} />
+          </Route>
+
+          {/* Departmental Access: Fabric Admin or Super Admin */}
+          <Route element={<AdminProtectedRoute requiredRole="fabric_admin" />}>
+            <Route path="fabric" element={<AdminFabricPage />} />
+          </Route>
+
+          {/* Shared Admin Modules */}
+          <Route path="gallery" element={<AdminGalleryManagementPage />} />
+          <Route path="image-studio" element={<AdminImageStudioPage />} />
+
+          {/* Super Admin Exclusive Governance Modules */}
+          <Route element={<AdminProtectedRoute requiredRole="super_admin" />}>
+            <Route path="admins" element={<AdminUsersPage />} />
+            <Route path="settings" element={<AdminSettingsPage />} />
+            <Route path="cleanup" element={<AdminCleanupPage />} />
+          </Route>
+        </Route>
       </Route>
     </Routes>
   );
