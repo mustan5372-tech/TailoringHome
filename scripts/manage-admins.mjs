@@ -23,6 +23,52 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
+// Central administrative roles
+export const VALID_ROLES = [
+  'super_admin',
+  'operations_admin',
+  'tailoring_admin',
+  'fabric_admin',
+];
+
+export function getClaimsForRole(role) {
+  switch (role) {
+    case 'super_admin':
+      return {
+        role: 'super_admin',
+        admin: true,
+        tailoring: true,
+        fabric: true,
+        super: true,
+      };
+    case 'operations_admin':
+      return {
+        role: 'operations_admin',
+        admin: true,
+        tailoring: true,
+        fabric: true,
+      };
+    case 'tailoring_admin':
+      return {
+        role: 'tailoring_admin',
+        admin: true,
+        tailoring: true,
+        fabric: false,
+      };
+    case 'fabric_admin':
+      return {
+        role: 'fabric_admin',
+        admin: true,
+        tailoring: false,
+        fabric: true,
+      };
+    default:
+      throw new Error(
+        `Invalid role: "${role}". Valid roles are: ${VALID_ROLES.join(', ')}`
+      );
+  }
+}
+
 // Locate service account key if available
 const serviceAccountPaths = [
   path.join(rootDir, 'serviceAccountKey.json'),
@@ -242,16 +288,165 @@ async function bootstrapSuperAdmin(targetUid = null) {
 
   // 2. Synchronize Custom User Claims in Firebase Auth
   try {
-    await auth.setCustomUserClaims(uid, {
-      role: 'super_admin',
-      admin: true,
-    });
-    console.log(`✓ Firebase Auth custom user claims set: { role: 'super_admin', admin: true }`);
+    const claims = getClaimsForRole('super_admin');
+    await auth.setCustomUserClaims(uid, claims);
+    console.log(`✓ Firebase Auth custom user claims set:`, JSON.stringify(claims));
   } catch (err) {
     console.warn(`[Warning] Could not set custom claims via Auth: ${err.message}`);
   }
 
   console.log(`\nSuper Admin setup complete for ${superAdminEmail} (UID: ${uid})!\n`);
+}
+
+/**
+ * Sets the role of an administrator in both Firestore and Firebase Auth custom claims.
+ */
+async function setRoleAdmin({ uid = null, email = null, role }) {
+  if (!role || !VALID_ROLES.includes(role)) {
+    throw new Error(`Invalid role "${role}". Valid roles: ${VALID_ROLES.join(', ')}`);
+  }
+
+  const app = initFirebaseAdmin();
+  const db = app.firestore();
+  const auth = app.auth();
+
+  let targetUid = uid;
+  let targetEmail = email;
+
+  if (!targetUid && targetEmail) {
+    const userRecord = await auth.getUserByEmail(targetEmail);
+    targetUid = userRecord.uid;
+  } else if (targetUid && !targetEmail) {
+    try {
+      const userRecord = await auth.getUser(targetUid);
+      targetEmail = userRecord.email;
+    } catch {
+      // User might only be in Firestore
+    }
+  }
+
+  if (!targetUid) {
+    throw new Error('Either --uid or --email must be provided.');
+  }
+
+  const adminDocRef = db.collection('admins').doc(targetUid);
+  const snap = await adminDocRef.get();
+  if (!snap.exists) {
+    throw new Error(`Admin document /admins/${targetUid} does not exist.`);
+  }
+
+  const updatePayload = {
+    role,
+    updatedAt: new Date().toISOString(),
+  };
+
+  await adminDocRef.update(updatePayload);
+  console.log(`✓ Updated Firestore /admins/${targetUid} to role "${role}"`);
+
+  // Synchronize custom user claims in Auth
+  try {
+    const claims = getClaimsForRole(role);
+    await auth.setCustomUserClaims(targetUid, claims);
+    console.log(`✓ Synchronized Firebase Auth custom claims:`, JSON.stringify(claims));
+  } catch (err) {
+    console.warn(`[Warning] Could not set custom claims via Auth: ${err.message}`);
+  }
+
+  console.log(`Role update complete for ${targetEmail || targetUid} -> ${role}\n`);
+}
+
+/**
+ * Synchronizes custom claims for all active administrator accounts in Firestore.
+ */
+async function syncAllAdminClaims() {
+  const app = initFirebaseAdmin();
+  const db = app.firestore();
+  const auth = app.auth();
+
+  console.log('\n=== Synchronizing Firebase Auth Custom Claims for All Admins ===\n');
+  const snapshot = await db.collection('admins').get();
+
+  if (snapshot.empty) {
+    console.log('No admin records found in /admins.\n');
+    return;
+  }
+
+  let synced = 0;
+  for (const doc of snapshot.docs) {
+    const data = doc.data();
+    const uid = doc.id;
+    const role = data.role;
+
+    if (!VALID_ROLES.includes(role)) {
+      console.warn(`[Skip] Admin ${uid} has unknown role: ${role}`);
+      continue;
+    }
+
+    try {
+      const claims = getClaimsForRole(role);
+      await auth.setCustomUserClaims(uid, claims);
+      console.log(`✓ [Synced] UID ${uid} (${data.email || 'N/A'}) -> Role: ${role}`);
+      synced++;
+    } catch (err) {
+      console.warn(`✗ [Error] Could not sync claims for UID ${uid}: ${err.message}`);
+    }
+  }
+
+  console.log(`\nSynchronization complete: ${synced} administrator accounts updated.\n`);
+}
+
+/**
+ * Registers a new administrator with Firestore document and custom claims.
+ */
+async function addAdmin({ uid, email, displayName, role = 'operations_admin', active = true }) {
+  if (!uid || !email) {
+    throw new Error('Both --uid and --email are required to register an administrator.');
+  }
+
+  if (!VALID_ROLES.includes(role)) {
+    throw new Error(`Invalid role "${role}". Valid roles: ${VALID_ROLES.join(', ')}`);
+  }
+
+  const app = initFirebaseAdmin();
+  const db = app.firestore();
+  const auth = app.auth();
+
+  const adminDocRef = db.collection('admins').doc(uid);
+  const existingDoc = await adminDocRef.get();
+
+  const adminPayload = {
+    displayName: displayName || email.split('@')[0],
+    email: email.toLowerCase(),
+    role,
+    active: Boolean(active),
+    updatedAt: new Date().toISOString(),
+  };
+
+  if (!existingDoc.exists) {
+    adminPayload.createdAt = new Date().toISOString();
+    adminPayload.createdBy = 'cli_admin_tool';
+  }
+
+  await adminDocRef.set(adminPayload, { merge: true });
+  console.log(`✓ Firestore document /admins/${uid} written:\n`, JSON.stringify(adminPayload, null, 2));
+
+  try {
+    const claims = getClaimsForRole(role);
+    await auth.setCustomUserClaims(uid, claims);
+    console.log(`✓ Firebase Auth custom claims synchronized:`, JSON.stringify(claims));
+  } catch (err) {
+    console.warn(`[Warning] Could not set custom claims via Auth: ${err.message}`);
+  }
+
+  console.log(`\nAdministrator ${email} registered successfully as "${role}"!\n`);
+}
+
+/**
+ * Helper to parse CLI argument flags (--flag value).
+ */
+function getArg(args, flag) {
+  const index = args.indexOf(flag);
+  return index !== -1 && args[index + 1] ? args[index + 1] : null;
 }
 
 /**
@@ -275,18 +470,46 @@ async function main() {
         await cleanupTestAdmins();
         break;
       case 'bootstrap': {
-        const uidIndex = args.indexOf('--uid');
-        const uid = uidIndex !== -1 && args[uidIndex + 1] ? args[uidIndex + 1] : null;
+        const uid = getArg(args, '--uid');
         await bootstrapSuperAdmin(uid);
+        break;
+      }
+      case 'set-role': {
+        const uid = getArg(args, '--uid');
+        const email = getArg(args, '--email');
+        const role = getArg(args, '--role');
+        await setRoleAdmin({ uid, email, role });
+        break;
+      }
+      case 'sync-claims':
+        await syncAllAdminClaims();
+        break;
+      case 'add': {
+        const uid = getArg(args, '--uid');
+        const email = getArg(args, '--email');
+        const name = getArg(args, '--name');
+        const role = getArg(args, '--role') || 'operations_admin';
+        await addAdmin({ uid, email, displayName: name, role });
         break;
       }
       default:
         console.log(`Unknown command: ${command}`);
-        console.log('Available commands: list, backup, cleanup, bootstrap [--uid <uid>]');
+        console.log(
+          'Available commands:\n' +
+          '  list                                     - List all registered administrators\n' +
+          '  backup                                   - Backup admins collection to JSON\n' +
+          '  cleanup                                  - Safe removal of test/fake accounts\n' +
+          '  bootstrap [--uid <uid>]                  - Bootstrap mustan5372@gmail.com as Super Admin\n' +
+          '  set-role (--uid <uid> | --email <email>) --role <role>\n' +
+          '                                           - Set role in Firestore and sync Auth claims\n' +
+          '  sync-claims                              - Sync custom claims for all admins in Firestore\n' +
+          '  add --uid <uid> --email <email> [--name <name>] [--role <role>]\n' +
+          '                                           - Register new administrator\n'
+        );
         break;
     }
   } catch (error) {
-    console.error('[Error]', error);
+    console.error('[Error]', error.message || error);
     process.exit(1);
   }
 }

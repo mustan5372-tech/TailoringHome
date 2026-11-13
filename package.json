@@ -11,7 +11,9 @@
     "admin:manage": "node scripts/manage-admins.mjs",
     "admin:bootstrap": "node scripts/manage-admins.mjs bootstrap",
     "admin:cleanup": "node scripts/manage-admins.mjs cleanup",
-    "admin:backup": "node scripts/manage-admins.mjs backup"
+    "admin:backup": "node scripts/manage-admins.mjs backup",
+    "admin:sync-claims": "node scripts/manage-admins.mjs sync-claims",
+    "test:rbac": "node scratch/test_admin_auth_scenarios.mjs"
   },
   "dependencies": {
     "firebase": "^13.2.0",

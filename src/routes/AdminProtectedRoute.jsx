@@ -3,6 +3,7 @@ import { Navigate, useLocation, Outlet } from 'react-router-dom';
 import { Shield, Sparkles, Lock } from 'lucide-react';
 import { useAuth } from '../context';
 import { ROUTES } from '../constants/navigation';
+import { hasRoleAccess } from '../constants/roles';
 
 /**
  * AdminProtectedRoute
@@ -13,7 +14,7 @@ import { ROUTES } from '../constants/navigation';
  * 3. Enforces departmental role restrictions (Super Admin, Tailoring Admin, Fabric Admin).
  */
 export const AdminProtectedRoute = ({ requiredRole }) => {
-  const { isAuthenticated, loading, role, isSuperAdmin } = useAuth();
+  const { isAuthenticated, loading, role } = useAuth();
   const location = useLocation();
 
   // 1. Loading State
@@ -52,15 +53,7 @@ export const AdminProtectedRoute = ({ requiredRole }) => {
 
   // 3. Departmental Role Access Control
   if (requiredRole) {
-    let hasAccess = isSuperAdmin;
-
-    if (requiredRole === 'tailoring_admin') {
-      hasAccess = isSuperAdmin || role === 'tailoring_admin';
-    } else if (requiredRole === 'fabric_admin') {
-      hasAccess = isSuperAdmin || role === 'fabric_admin';
-    } else if (requiredRole === 'super_admin') {
-      hasAccess = isSuperAdmin;
-    }
+    const hasAccess = hasRoleAccess(role, requiredRole);
 
     if (!hasAccess) {
       return (

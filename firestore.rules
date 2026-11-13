@@ -34,9 +34,20 @@ service cloud.firestore {
         (!('role' in request.auth.token) || request.auth.token.role == 'super_admin');
     }
 
+    // Operations Administrator: Dual-business authority over Tailoring Home & Fabric Home
+    // Authoritative source: /admins/{uid}.role in Firestore.
+    // Consistency check: If a custom claim exists, it must not contradict the database record.
+    // Strictly restricted from Admin Management, user privilege modifications, and site settings.
+    function isOperationsAdmin() {
+      return isActiveAdmin() &&
+        getAdminDoc().role == 'operations_admin' &&
+        (!('role' in request.auth.token) || request.auth.token.role == 'operations_admin');
+    }
+
     // Tailoring Administrator: Authority over tailoring services, uniforms, and tailoring gallery
+    // Also satisfied by Super Admin and Operations Admin (dual-business authority)
     function isTailoringAdmin() {
-      return isSuperAdmin() || (
+      return isSuperAdmin() || isOperationsAdmin() || (
         isActiveAdmin() &&
         getAdminDoc().role == 'tailoring_admin' &&
         (!('role' in request.auth.token) || request.auth.token.role == 'tailoring_admin')
@@ -44,8 +55,9 @@ service cloud.firestore {
     }
 
     // Fabric Administrator: Authority over fabric catalogue, swatches, and fabric gallery
+    // Also satisfied by Super Admin and Operations Admin (dual-business authority)
     function isFabricAdmin() {
-      return isSuperAdmin() || (
+      return isSuperAdmin() || isOperationsAdmin() || (
         isActiveAdmin() &&
         getAdminDoc().role == 'fabric_admin' &&
         (!('role' in request.auth.token) || request.auth.token.role == 'fabric_admin')
@@ -164,11 +176,79 @@ service cloud.firestore {
     match /admins/{adminId} {
       // Admins can read their own profile to verify their role; Super Admin reads all
       allow read: if isSuperAdmin() || (isAuthenticated() && request.auth.uid == adminId);
-      // Only Super Admin can invite, modify, or deactivate administrators
-      allow write: if isSuperAdmin();
+
+      // Super Admin can create any admin.
+      // An authenticated user claiming their verified Google invitation can create their own doc:
+      allow create: if isSuperAdmin() || (
+        isAuthenticated() &&
+        request.auth.uid == adminId &&
+        request.auth.token.email_verified == true &&
+        request.resource.data.email == request.auth.token.email.lower() &&
+        request.resource.data.active == true &&
+        request.resource.data.role in ['tailoring_admin', 'fabric_admin', 'operations_admin'] &&
+        exists(/databases/$(database)/documents/admin_invitations/$(request.auth.token.email.lower())) &&
+        get(/databases/$(database)/documents/admin_invitations/$(request.auth.token.email.lower())).data.status == 'pending' &&
+        get(/databases/$(database)/documents/admin_invitations/$(request.auth.token.email.lower())).data.role == request.resource.data.role
+      );
+
+      // Only Super Admin can modify or deactivate administrators
+      allow update, delete: if isSuperAdmin();
 
       match /{subcollection=**} {
         allow read, write: if isSuperAdmin();
+      }
+    }
+
+    // =========================================================================
+    // 7. ADMIN INVITATIONS & ONBOARDING (/admin_invitations)
+    // =========================================================================
+    match /admin_invitations/{invitationId} {
+      // Super Admin reads all invitations.
+      // Authenticated user can read their own pending invitation by email.
+      allow read: if isSuperAdmin() || (
+        isAuthenticated() &&
+        request.auth.token.email != null &&
+        resource.data.email == request.auth.token.email.lower()
+      );
+
+      // Super Admin creates and deletes invitations
+      allow create, delete: if isSuperAdmin();
+
+      // Super Admin updates, or authenticated user claims their own invitation
+      allow update: if isSuperAdmin() || (
+        isAuthenticated() &&
+        request.auth.token.email != null &&
+        resource.data.email == request.auth.token.email.lower() &&
+        resource.data.status == 'pending' &&
+        request.resource.data.status == 'claimed' &&
+        request.resource.data.claimedByUid == request.auth.uid &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'claimedByUid', 'claimedAt', 'updatedAt'])
+      );
+
+      match /{subcollection=**} {
+        allow read, write: if isSuperAdmin();
+      }
+    }
+
+    // =========================================================================
+    // 8. SECURITY AUDIT LOGS (/admin_audit_logs)
+    // =========================================================================
+    match /admin_audit_logs/{logId} {
+      // Super Admin can inspect security audit records
+      allow read: if isSuperAdmin();
+
+      // Append-only audit logging: Super Admin or verified admin claiming account can log an event
+      allow create: if isSuperAdmin() || (
+        isAuthenticated() &&
+        request.resource.data.keys().hasOnly(['timestamp', 'action', 'actorUid', 'actorEmail', 'targetUid', 'targetEmail', 'details', 'createdAt'])
+      );
+
+      // Strict audit immutability: records cannot be updated or deleted
+      allow update, delete: if false;
+
+      match /{subcollection=**} {
+        allow read: if isSuperAdmin();
+        allow write: if false;
       }
     }
 
@@ -227,6 +307,31 @@ service cloud.firestore {
     match /dev_customer_enquiries/{enquiryId} {
       allow read, write: if isTailoringAdmin() || isFabricAdmin();
       match /{subcollection=**} { allow read, write: if isTailoringAdmin() || isFabricAdmin(); }
+    }
+
+    match /dev_admin_invitations/{invitationId} {
+      allow read: if isSuperAdmin() || (
+        isAuthenticated() &&
+        request.auth.token.email != null &&
+        resource.data.email == request.auth.token.email.lower()
+      );
+      allow create, delete: if isSuperAdmin();
+      allow update: if isSuperAdmin() || (
+        isAuthenticated() &&
+        request.auth.token.email != null &&
+        resource.data.email == request.auth.token.email.lower() &&
+        resource.data.status == 'pending' &&
+        request.resource.data.status == 'claimed' &&
+        request.resource.data.claimedByUid == request.auth.uid
+      );
+      match /{subcollection=**} { allow read, write: if isSuperAdmin(); }
+    }
+
+    match /dev_admin_audit_logs/{logId} {
+      allow read: if isSuperAdmin();
+      allow create: if isSuperAdmin() || isAuthenticated();
+      allow update, delete: if false;
+      match /{subcollection=**} { allow read: if isSuperAdmin(); allow write: if false; }
     }
 
     // =========================================================================

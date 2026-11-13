@@ -16,6 +16,7 @@ import {
 } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db, googleProvider } from '../../config/firebase.config';
+import { checkAndClaimInvitation } from './adminManagement.service';
 
 /**
  * Initiates Google Sign-In and verifies administrator authorization.
@@ -32,7 +33,15 @@ export const signInWithGoogleAdmin = async () => {
 
     // Immediately verify authorization in Firestore /admins/{uid}
     const adminDocRef = doc(db, 'admins', user.uid);
-    const adminSnap = await getDoc(adminDocRef);
+    let adminSnap = await getDoc(adminDocRef);
+
+    // If user record doesn't exist yet, check for pending invitation
+    if (!adminSnap.exists()) {
+      const claimResult = await checkAndClaimInvitation({ user });
+      if (claimResult.success) {
+        adminSnap = await getDoc(adminDocRef);
+      }
+    }
 
     if (!adminSnap.exists()) {
       // Unregistered Google account
@@ -160,7 +169,15 @@ export const subscribeToAdminAuth = (onChange) => {
 
     try {
       const adminDocRef = doc(db, 'admins', firebaseUser.uid);
-      const adminSnap = await getDoc(adminDocRef);
+      let adminSnap = await getDoc(adminDocRef);
+
+      // If user record doesn't exist yet, check for pending invitation
+      if (!adminSnap.exists()) {
+        const claimResult = await checkAndClaimInvitation({ user: firebaseUser });
+        if (claimResult.success) {
+          adminSnap = await getDoc(adminDocRef);
+        }
+      }
 
       if (adminSnap.exists() && adminSnap.data().active === true) {
         const adminData = adminSnap.data();

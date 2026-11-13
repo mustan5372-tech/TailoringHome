@@ -5,6 +5,12 @@ import {
   logoutAdmin,
   subscribeToAdminAuth,
 } from '../services/firebase/auth.service';
+import {
+  ROLES,
+  hasPermission,
+  hasRoleAccess,
+  getRoleDisplayName,
+} from '../constants/roles';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -97,14 +103,37 @@ export const AuthProvider = ({ children }) => {
     setError(null);
   };
 
+  const isSuperAdmin = role === ROLES.SUPER_ADMIN;
+  const isOperationsAdmin = role === ROLES.OPERATIONS_ADMIN;
+  const isTailoringAdmin =
+    role === ROLES.TAILORING_ADMIN || isOperationsAdmin || isSuperAdmin;
+  const isFabricAdmin =
+    role === ROLES.FABRIC_ADMIN || isOperationsAdmin || isSuperAdmin;
+
   const value = {
     user,
     adminProfile,
     role,
     isAuthenticated: Boolean(user && adminProfile && adminProfile.active),
-    isSuperAdmin: role === 'super_admin',
-    isTailoringAdmin: role === 'tailoring_admin' || role === 'super_admin',
-    isFabricAdmin: role === 'fabric_admin' || role === 'super_admin',
+    isSuperAdmin,
+    isOperationsAdmin,
+    isTailoringAdmin,
+    isFabricAdmin,
+    // Explicit capability flags
+    canManageTailoring: isTailoringAdmin,
+    canManageFabric: isFabricAdmin,
+    canManageBothBusinesses: isSuperAdmin || isOperationsAdmin,
+    canManageGalleries: Boolean(role),
+    canManageBothGalleries: isSuperAdmin || isOperationsAdmin,
+    canAccessImageStudio: Boolean(role),
+    canManageEnquiries: Boolean(role),
+    canDeleteEnquiries: isSuperAdmin,
+    canManageAdmins: isSuperAdmin,
+    canManageSettings: isSuperAdmin,
+    canManageCleanup: isSuperAdmin,
+    hasPermission: (permission) => hasPermission(role, permission),
+    hasRoleAccess: (requiredRole) => hasRoleAccess(role, requiredRole),
+    roleDisplayName: getRoleDisplayName(role),
     loading,
     error,
     unauthorizedUser,

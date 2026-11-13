@@ -24,6 +24,7 @@ import {
 import { ROUTES } from '../constants/navigation';
 import { env } from '../config/env.config';
 import { useAuth } from '../context';
+import { getRoleDisplayName } from '../constants/roles';
 
 export const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -36,6 +37,7 @@ export const AdminLayout = () => {
     adminProfile,
     role,
     isSuperAdmin,
+    isOperationsAdmin,
     isTailoringAdmin,
     isFabricAdmin,
     logout,
@@ -45,19 +47,6 @@ export const AdminLayout = () => {
     setProfileDropdownOpen(false);
     await logout();
     navigate(ROUTES.ADMIN.LOGIN || '/admin/login', { replace: true });
-  };
-
-  const getRoleDisplayName = (r) => {
-    switch (r) {
-      case 'super_admin':
-        return 'Super Administrator';
-      case 'tailoring_admin':
-        return 'Tailoring Administrator';
-      case 'fabric_admin':
-        return 'Fabric Administrator';
-      default:
-        return 'Administrator';
-    }
   };
 
   const displayName = user?.displayName || adminProfile?.displayName || 'Administrator';
@@ -143,7 +132,7 @@ export const AdminLayout = () => {
       },
     ];
 
-    if (isSuperAdmin || isTailoringAdmin) {
+    if (isSuperAdmin || isOperationsAdmin || isTailoringAdmin) {
       items.push({
         label: 'Tailoring Home',
         path: ROUTES.ADMIN.TAILORING,
@@ -152,7 +141,7 @@ export const AdminLayout = () => {
       });
     }
 
-    if (isSuperAdmin || isFabricAdmin) {
+    if (isSuperAdmin || isOperationsAdmin || isFabricAdmin) {
       items.push({
         label: 'Fabric Home',
         path: ROUTES.ADMIN.FABRIC,
