@@ -22,6 +22,7 @@ import {
   SectionHeading,
   Badge,
   ImageContainer,
+  ScrollReveal,
 } from '../../components/common';
 
 import { tailoringContent } from '../../data/tailoringContent';
@@ -71,7 +72,7 @@ export const TailoringHomePage = () => {
             <img
               src={hero.backgroundImage}
               alt="Tailoring Home atelier workshop"
-              className="w-full h-full object-cover object-center opacity-30 scale-105 transition-transform duration-1000 ease-out"
+              className="animate-hero-bg w-full h-full object-cover object-center opacity-30 scale-105"
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-b from-chocolate-950/92 via-chocolate-900/88 to-chocolate-950/95" />
@@ -81,7 +82,7 @@ export const TailoringHomePage = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-32">
           <div className="max-w-3xl">
             {/* Boutique Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 mb-6">
+            <div className="animate-hero-badge inline-flex items-center gap-2 mb-6">
               <span className="h-px w-8 bg-gold-light" />
               <Badge variant="gold" size="sm" icon={Sparkles}>
                 {hero.badge}
@@ -89,17 +90,17 @@ export const TailoringHomePage = () => {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-ivory tracking-tight leading-[1.15]">
+            <h1 className="animate-hero-headline text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-ivory tracking-tight leading-[1.15]">
               {hero.headline}
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-6 text-base sm:text-lg text-cream/90 leading-relaxed font-sans max-w-2xl">
+            <p className="animate-hero-subtitle mt-6 text-base sm:text-lg text-cream/90 leading-relaxed font-sans max-w-2xl">
               {hero.subheadline}
             </p>
 
             {/* Dual CTAs */}
-            <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <div className="animate-hero-cta mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Button
                 to={contact.whatsappUrl ? undefined : ROUTES.CONTACT}
                 href={contact.whatsappUrl || undefined}
@@ -123,7 +124,7 @@ export const TailoringHomePage = () => {
             </div>
 
             {/* Atelier Key Highlights */}
-            <div className="mt-12 pt-8 border-t border-gold/20 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-sans text-cream/80">
+            <div className="animate-hero-highlights mt-12 pt-8 border-t border-gold/20 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-sans text-cream/80">
               {hero.highlights.map((highlight, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-gold-light shrink-0 mt-0.5" />
@@ -138,11 +139,11 @@ export const TailoringHomePage = () => {
       {/* ====================================================================== */}
       {/* QUICK JUMP NAVIGATION BAR                                              */}
       {/* ====================================================================== */}
-      <nav
-        aria-label="Catalogue navigation"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-14 relative z-20"
-      >
-        <div className="bg-white/95 backdrop-blur-md rounded-sm p-3 sm:p-4 border border-cream-border shadow-md">
+      <ScrollReveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-14 relative z-20">
+        <nav
+          aria-label="Catalogue navigation"
+          className="bg-white/95 backdrop-blur-md rounded-sm p-3 sm:p-4 border border-cream-border shadow-md"
+        >
           <div className="flex items-center justify-between gap-3 mb-2 px-2 border-b border-cream-border pb-2">
             <span className="text-xs uppercase tracking-wider font-semibold text-chocolate-700 font-sans flex items-center gap-1.5">
               <Scissors className="h-3.5 w-3.5 text-maroon-800" />
@@ -170,8 +171,8 @@ export const TailoringHomePage = () => {
               </a>
             ))}
           </div>
-        </div>
-      </nav>
+        </nav>
+      </ScrollReveal>
 
       {/* ====================================================================== */}
       {/* 2. BOHRA MEN'S WEAR: KURTA, SAYA & IZAAR                                */}
@@ -180,53 +181,55 @@ export const TailoringHomePage = () => {
         id={bohraMenswear.id}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-cream-border">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Badge variant="gold" size="xs" icon={Sparkles}>
-                {bohraMenswear.communityBadge}
-              </Badge>
-              <Badge variant="maroon" size="xs">
-                Prominent Visibility
-              </Badge>
+        <ScrollReveal>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-cream-border">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Badge variant="gold" size="xs" icon={Sparkles}>
+                  {bohraMenswear.communityBadge}
+                </Badge>
+                <Badge variant="maroon" size="xs">
+                  Prominent Visibility
+                </Badge>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-chocolate-900 tracking-tight">
+                {bohraMenswear.title}
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-chocolate-600 max-w-2xl font-sans leading-relaxed">
+                {bohraMenswear.subtitle}
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-chocolate-900 tracking-tight">
-              {bohraMenswear.title}
-            </h2>
-            <p className="mt-3 text-sm sm:text-base text-chocolate-600 max-w-2xl font-sans leading-relaxed">
-              {bohraMenswear.subtitle}
-            </p>
+
+            <div className="shrink-0">
+              <Button
+                href={getWhatsAppInquiryUrl("Bohra Men's Wear (Kurta, Saya, Izaar)")}
+                variant="gold"
+                size="sm"
+                icon={MessageCircle}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Inquire Bohra Men's Wear
+              </Button>
+            </div>
           </div>
 
-          <div className="shrink-0">
-            <Button
-              href={getWhatsAppInquiryUrl("Bohra Men's Wear (Kurta, Saya, Izaar)")}
-              variant="gold"
-              size="sm"
-              icon={MessageCircle}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Inquire Bohra Men's Wear
-            </Button>
+          {/* Temporary Notice Pill */}
+          <div className="bg-amber-50/60 border border-gold/30 rounded-sm p-3 mb-8 text-xs text-chocolate-700 font-sans flex items-start gap-2">
+            <Sparkle className="h-4 w-4 text-gold-dark shrink-0 mt-0.5" />
+            <span>{bohraMenswear.notice}</span>
           </div>
-        </div>
-
-        {/* Temporary Notice Pill */}
-        <div className="bg-amber-50/60 border border-gold/30 rounded-sm p-3 mb-8 text-xs text-chocolate-700 font-sans flex items-start gap-2">
-          <Sparkle className="h-4 w-4 text-gold-dark shrink-0 mt-0.5" />
-          <span>{bohraMenswear.notice}</span>
-        </div>
+        </ScrollReveal>
 
         {/* Category Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {bohraMenswear.items.map((item) => (
-            <Card
-              key={item.id}
-              variant="default"
-              padding="none"
-              className="overflow-hidden flex flex-col justify-between border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20 transition-all duration-300"
-            >
+          {bohraMenswear.items.map((item, idx) => (
+            <ScrollReveal key={item.id} delay={((idx % 4) + 1) * 70} className="h-full">
+              <Card
+                variant="default"
+                padding="none"
+                className="overflow-hidden flex flex-col justify-between border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20 transition-all duration-300 h-full"
+              >
               <div>
                 <ImageContainer
                   src={item.image}
@@ -267,9 +270,9 @@ export const TailoringHomePage = () => {
                   </div>
 
                   <div className="flex flex-wrap gap-1.5 pt-4 mt-3 border-t border-cream-border">
-                    {item.tags.map((tag, tIdx) => (
+                    {item.tags.map((tag, tagIndex) => (
                       <span
-                        key={tIdx}
+                        key={tagIndex}
                         className="text-[10px] font-medium px-2 py-0.5 rounded bg-cream text-chocolate-700 border border-cream-border"
                       >
                         {tag}
@@ -294,6 +297,7 @@ export const TailoringHomePage = () => {
                 </Button>
               </div>
             </Card>
+          </ScrollReveal>
           ))}
         </div>
       </section>
@@ -306,53 +310,55 @@ export const TailoringHomePage = () => {
         className="bg-cream py-16 md:py-24 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-cream-border">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <Badge variant="gold" size="xs" icon={Sparkles}>
-                  {bohraWomenswear.communityBadge}
-                </Badge>
-                <Badge variant="maroon" size="xs">
-                  Artisanal Craftsmanship
-                </Badge>
+          <ScrollReveal>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-cream-border">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Badge variant="gold" size="xs" icon={Sparkles}>
+                    {bohraWomenswear.communityBadge}
+                  </Badge>
+                  <Badge variant="maroon" size="xs">
+                    Artisanal Craftsmanship
+                  </Badge>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-chocolate-900 tracking-tight">
+                  {bohraWomenswear.title}
+                </h2>
+                <p className="mt-3 text-sm sm:text-base text-chocolate-600 max-w-2xl font-sans leading-relaxed">
+                  {bohraWomenswear.subtitle}
+                </p>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-chocolate-900 tracking-tight">
-                {bohraWomenswear.title}
-              </h2>
-              <p className="mt-3 text-sm sm:text-base text-chocolate-600 max-w-2xl font-sans leading-relaxed">
-                {bohraWomenswear.subtitle}
-              </p>
+
+              <div className="shrink-0">
+                <Button
+                  href={getWhatsAppInquiryUrl("Bohra Women's Wear (Rida, Pardi, Ghagra)")}
+                  variant="gold"
+                  size="sm"
+                  icon={MessageCircle}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Inquire Rida Stitching
+                </Button>
+              </div>
             </div>
 
-            <div className="shrink-0">
-              <Button
-                href={getWhatsAppInquiryUrl("Bohra Women's Wear (Rida, Pardi, Ghagra)")}
-                variant="gold"
-                size="sm"
-                icon={MessageCircle}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Inquire Rida Stitching
-              </Button>
+            {/* Temporary Notice Pill */}
+            <div className="bg-amber-50/70 border border-gold/30 rounded-sm p-3 mb-8 text-xs text-chocolate-700 font-sans flex items-start gap-2">
+              <Sparkle className="h-4 w-4 text-gold-dark shrink-0 mt-0.5" />
+              <span>{bohraWomenswear.notice}</span>
             </div>
-          </div>
-
-          {/* Temporary Notice Pill */}
-          <div className="bg-amber-50/70 border border-gold/30 rounded-sm p-3 mb-8 text-xs text-chocolate-700 font-sans flex items-start gap-2">
-            <Sparkle className="h-4 w-4 text-gold-dark shrink-0 mt-0.5" />
-            <span>{bohraWomenswear.notice}</span>
-          </div>
+          </ScrollReveal>
 
           {/* Category Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {bohraWomenswear.items.map((item) => (
-              <Card
-                key={item.id}
-                variant="default"
-                padding="none"
-                className="overflow-hidden flex flex-col justify-between border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20 transition-all duration-300"
-              >
+            {bohraWomenswear.items.map((item, idx) => (
+              <ScrollReveal key={item.id} delay={((idx % 4) + 1) * 70} className="h-full">
+                <Card
+                  variant="default"
+                  padding="none"
+                  className="overflow-hidden flex flex-col justify-between border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20 transition-all duration-300 h-full"
+                >
                 <div>
                   <ImageContainer
                     src={item.image}
@@ -420,6 +426,7 @@ export const TailoringHomePage = () => {
                   </Button>
                 </div>
               </Card>
+            </ScrollReveal>
             ))}
           </div>
         </div>
@@ -432,32 +439,34 @@ export const TailoringHomePage = () => {
         id={schoolUniforms.id}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <SectionHeading
-          eyebrow={schoolUniforms.eyebrow}
-          title={schoolUniforms.title}
-          subtitle={schoolUniforms.subtitle}
-        />
+        <ScrollReveal>
+          <SectionHeading
+            eyebrow={schoolUniforms.eyebrow}
+            title={schoolUniforms.title}
+            subtitle={schoolUniforms.subtitle}
+          />
 
-        {/* Important Uniform Notice / Disclaimer */}
-        <div className="mt-6 mb-10 bg-cream/90 border border-maroon-200 rounded-sm p-4 text-xs text-chocolate-700 font-sans leading-relaxed flex items-start gap-3">
-          <GraduationCap className="h-5 w-5 text-maroon-800 shrink-0 mt-0.5" />
-          <div>
-            <strong className="text-maroon-900 block mb-1">
-              Official Dress Code Compliance:
-            </strong>
-            {schoolUniforms.notice}
+          {/* Important Uniform Notice / Disclaimer */}
+          <div className="mt-6 mb-10 bg-cream/90 border border-maroon-200 rounded-sm p-4 text-xs text-chocolate-700 font-sans leading-relaxed flex items-start gap-3">
+            <GraduationCap className="h-5 w-5 text-maroon-800 shrink-0 mt-0.5" />
+            <div>
+              <strong className="text-maroon-900 block mb-1">
+                Official Dress Code Compliance:
+              </strong>
+              {schoolUniforms.notice}
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Distinct Dual School Uniform Cards: MSB and ABN Separated */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {schoolUniforms.institutions.map((school) => (
-            <Card
-              key={school.id}
-              variant="default"
-              padding="none"
-              className="overflow-hidden flex flex-col justify-between border-2 border-maroon-200 hover:border-maroon-300 shadow-xs transition-all duration-300"
-            >
+          {schoolUniforms.institutions.map((school, idx) => (
+            <ScrollReveal key={school.id} delay={(idx + 1) * 100} className="h-full">
+              <Card
+                variant="default"
+                padding="none"
+                className="overflow-hidden flex flex-col justify-between border-2 border-maroon-200 hover:border-maroon-300 shadow-xs transition-all duration-300 h-full"
+              >
               <div>
                 <ImageContainer
                   src={school.image}
@@ -527,6 +536,7 @@ export const TailoringHomePage = () => {
                 </Button>
               </div>
             </Card>
+          </ScrollReveal>
           ))}
         </div>
       </section>
@@ -538,156 +548,43 @@ export const TailoringHomePage = () => {
         id={mensWear.id}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-cream-border">
-          <div>
-            <Badge variant="chocolate" size="xs" className="mb-2">
-              Gentlemen's Atelier
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-chocolate-900 tracking-tight">
-              {mensWear.title}
-            </h2>
-            <p className="mt-3 text-sm sm:text-base text-chocolate-600 max-w-2xl font-sans leading-relaxed">
-              {mensWear.subtitle}
-            </p>
-          </div>
-
-          <div className="shrink-0">
-            <Button
-              href={getWhatsAppInquiryUrl("Gentlemen's Suiting & Menswear")}
-              variant="outline"
-              size="sm"
-              icon={MessageCircle}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Inquire Men's Formals
-            </Button>
-          </div>
-        </div>
-
-        {/* Category Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {mensWear.items.map((item) => (
-            <Card
-              key={item.id}
-              variant="default"
-              padding="none"
-              className="overflow-hidden flex flex-col justify-between border border-cream-border hover:border-chocolate-300 hover:shadow-xs transition-all duration-300"
-            >
-              <div>
-                <ImageContainer
-                  src={item.image}
-                  alt={item.title}
-                  aspectRatio="landscape"
-                  category="tailoring"
-                  gradient={item.gradient}
-                  badge={item.badge}
-                  title={item.title}
-                />
-
-                <div className="p-5">
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <Badge variant={item.badgeVariant} size="xs">
-                      {item.badge}
-                    </Badge>
-                    {item.isRepresentativeImage && (
-                      <span className="text-[10px] text-chocolate-400 font-sans tracking-wide">
-                        Sample Preview
-                      </span>
-                    )}
-                  </div>
-
-                  <h3 className="font-serif font-bold text-lg text-chocolate-900 mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-chocolate-600 leading-relaxed font-sans mb-4 line-clamp-3">
-                    {item.description}
-                  </p>
-
-                  <div className="space-y-1.5 pt-3 border-t border-cream-border text-[11px] text-chocolate-700 font-sans">
-                    {item.details.map((detail, dIdx) => (
-                      <div key={dIdx} className="flex items-start gap-2">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-chocolate-700 shrink-0 mt-0.5" />
-                        <span>{detail}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap gap-1.5 pt-4 mt-3 border-t border-cream-border">
-                    {item.tags.map((tag, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="text-[10px] font-medium px-2 py-0.5 rounded bg-cream text-chocolate-700 border border-cream-border"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-5 pt-0">
-                <Button
-                  href={getWhatsAppInquiryUrl(item.inquirySubject)}
-                  variant="outline"
-                  size="sm"
-                  fullWidth
-                  icon={MessageCircle}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs"
-                >
-                  Inquire on WhatsApp
-                </Button>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* ====================================================================== */}
-      {/* 6. WOMEN'S WEAR: BLOUSES, DRESSES & OTHER STITCHING                    */}
-      {/* ====================================================================== */}
-      <section
-        id={womensWear.id}
-        className="bg-cream py-16 md:py-24 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-cream-border">
             <div>
-              <Badge variant="maroon" size="xs" className="mb-2">
-                Ladies' Couture
+              <Badge variant="chocolate" size="xs" className="mb-2">
+                Gentlemen's Atelier
               </Badge>
               <h2 className="text-3xl sm:text-4xl font-serif font-bold text-chocolate-900 tracking-tight">
-                {womensWear.title}
+                {mensWear.title}
               </h2>
               <p className="mt-3 text-sm sm:text-base text-chocolate-600 max-w-2xl font-sans leading-relaxed">
-                {womensWear.subtitle}
+                {mensWear.subtitle}
               </p>
             </div>
 
             <div className="shrink-0">
               <Button
-                href={getWhatsAppInquiryUrl("Women's Tailoring & Blouse Fitting")}
-                variant="maroonOutline"
+                href={getWhatsAppInquiryUrl("Gentlemen's Suiting & Menswear")}
+                variant="outline"
                 size="sm"
                 icon={MessageCircle}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Inquire Women's Wear
+                Inquire Men's Formals
               </Button>
             </div>
           </div>
+        </ScrollReveal>
 
-          {/* Category Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {womensWear.items.map((item) => (
+        {/* Category Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {mensWear.items.map((item, idx) => (
+            <ScrollReveal key={item.id} delay={idx * 80}>
               <Card
-                key={item.id}
                 variant="default"
                 padding="none"
-                className="overflow-hidden flex flex-col justify-between border border-cream-border hover:border-maroon-300 hover:shadow-xs transition-all duration-300"
+                className="overflow-hidden flex flex-col justify-between border border-cream-border hover:border-chocolate-300 hover:shadow-boutique-md transition-all duration-300 h-full"
               >
                 <div>
                   <ImageContainer
@@ -722,7 +619,7 @@ export const TailoringHomePage = () => {
                     <div className="space-y-1.5 pt-3 border-t border-cream-border text-[11px] text-chocolate-700 font-sans">
                       {item.details.map((detail, dIdx) => (
                         <div key={dIdx} className="flex items-start gap-2">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-maroon-700 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="h-3.5 w-3.5 text-chocolate-700 shrink-0 mt-0.5" />
                           <span>{detail}</span>
                         </div>
                       ))}
@@ -744,7 +641,7 @@ export const TailoringHomePage = () => {
                 <div className="p-5 pt-0">
                   <Button
                     href={getWhatsAppInquiryUrl(item.inquirySubject)}
-                    variant="maroonOutline"
+                    variant="outline"
                     size="sm"
                     fullWidth
                     icon={MessageCircle}
@@ -756,6 +653,125 @@ export const TailoringHomePage = () => {
                   </Button>
                 </div>
               </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ====================================================================== */}
+      {/* 6. WOMEN'S WEAR: BLOUSES, DRESSES & OTHER STITCHING                    */}
+      {/* ====================================================================== */}
+      <section
+        id={womensWear.id}
+        className="bg-cream py-16 md:py-24 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-cream-border">
+              <div>
+                <Badge variant="maroon" size="xs" className="mb-2">
+                  Ladies' Couture
+                </Badge>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-chocolate-900 tracking-tight">
+                  {womensWear.title}
+                </h2>
+                <p className="mt-3 text-sm sm:text-base text-chocolate-600 max-w-2xl font-sans leading-relaxed">
+                  {womensWear.subtitle}
+                </p>
+              </div>
+
+              <div className="shrink-0">
+                <Button
+                  href={getWhatsAppInquiryUrl("Women's Tailoring & Blouse Fitting")}
+                  variant="maroonOutline"
+                  size="sm"
+                  icon={MessageCircle}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Inquire Women's Wear
+                </Button>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Category Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {womensWear.items.map((item, idx) => (
+              <ScrollReveal key={item.id} delay={idx * 80}>
+                <Card
+                  variant="default"
+                  padding="none"
+                  className="overflow-hidden flex flex-col justify-between border border-cream-border hover:border-maroon-300 hover:shadow-boutique-md transition-all duration-300 h-full"
+                >
+                  <div>
+                    <ImageContainer
+                      src={item.image}
+                      alt={item.title}
+                      aspectRatio="landscape"
+                      category="tailoring"
+                      gradient={item.gradient}
+                      badge={item.badge}
+                      title={item.title}
+                    />
+
+                    <div className="p-5">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <Badge variant={item.badgeVariant} size="xs">
+                          {item.badge}
+                        </Badge>
+                        {item.isRepresentativeImage && (
+                          <span className="text-[10px] text-chocolate-400 font-sans tracking-wide">
+                            Sample Preview
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="font-serif font-bold text-lg text-chocolate-900 mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs text-chocolate-600 leading-relaxed font-sans mb-4 line-clamp-3">
+                        {item.description}
+                      </p>
+
+                      <div className="space-y-1.5 pt-3 border-t border-cream-border text-[11px] text-chocolate-700 font-sans">
+                        {item.details.map((detail, dIdx) => (
+                          <div key={dIdx} className="flex items-start gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-maroon-700 shrink-0 mt-0.5" />
+                            <span>{detail}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-wrap gap-1.5 pt-4 mt-3 border-t border-cream-border">
+                        {item.tags.map((tag, tIdx) => (
+                          <span
+                            key={tIdx}
+                            className="text-[10px] font-medium px-2 py-0.5 rounded bg-cream text-chocolate-700 border border-cream-border"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-5 pt-0">
+                    <Button
+                      href={getWhatsAppInquiryUrl(item.inquirySubject)}
+                      variant="maroonOutline"
+                      size="sm"
+                      fullWidth
+                      icon={MessageCircle}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs"
+                    >
+                      Inquire on WhatsApp
+                    </Button>
+                  </div>
+                </Card>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -768,109 +784,112 @@ export const TailoringHomePage = () => {
         id={childrenAndAlterations.id}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-cream-border">
-          <div>
-            <Badge variant="chocolate" size="xs" className="mb-2">
-              Youth Tailoring & Restyling
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-chocolate-900 tracking-tight">
-              {childrenAndAlterations.title}
-            </h2>
-            <p className="mt-3 text-sm sm:text-base text-chocolate-600 max-w-2xl font-sans leading-relaxed">
-              {childrenAndAlterations.subtitle}
-            </p>
-          </div>
+        <ScrollReveal>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-cream-border">
+            <div>
+              <Badge variant="chocolate" size="xs" className="mb-2">
+                Youth Tailoring & Restyling
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-chocolate-900 tracking-tight">
+                {childrenAndAlterations.title}
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-chocolate-600 max-w-2xl font-sans leading-relaxed">
+                {childrenAndAlterations.subtitle}
+              </p>
+            </div>
 
-          <div className="shrink-0">
-            <Button
-              href={getWhatsAppInquiryUrl("Children's Tailoring or Alterations")}
-              variant="outline"
-              size="sm"
-              icon={MessageCircle}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Inquire Alterations
-            </Button>
+            <div className="shrink-0">
+              <Button
+                href={getWhatsAppInquiryUrl("Children's Tailoring or Alterations")}
+                variant="outline"
+                size="sm"
+                icon={MessageCircle}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Inquire Alterations
+              </Button>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Category Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {childrenAndAlterations.items.map((item) => (
-            <Card
-              key={item.id}
-              variant="default"
-              padding="none"
-              className="overflow-hidden flex flex-col justify-between border border-cream-border hover:border-chocolate-300 hover:shadow-xs transition-all duration-300"
-            >
-              <div>
-                <ImageContainer
-                  src={item.image}
-                  alt={item.title}
-                  aspectRatio="landscape"
-                  category="tailoring"
-                  gradient={item.gradient}
-                  badge={item.badge}
-                  title={item.title}
-                />
+          {childrenAndAlterations.items.map((item, idx) => (
+            <ScrollReveal key={item.id} delay={idx * 80}>
+              <Card
+                variant="default"
+                padding="none"
+                className="overflow-hidden flex flex-col justify-between border border-cream-border hover:border-chocolate-300 hover:shadow-boutique-md transition-all duration-300 h-full"
+              >
+                <div>
+                  <ImageContainer
+                    src={item.image}
+                    alt={item.title}
+                    aspectRatio="landscape"
+                    category="tailoring"
+                    gradient={item.gradient}
+                    badge={item.badge}
+                    title={item.title}
+                  />
 
-                <div className="p-5">
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <Badge variant={item.badgeVariant} size="xs">
-                      {item.badge}
-                    </Badge>
-                    {item.isRepresentativeImage && (
-                      <span className="text-[10px] text-chocolate-400 font-sans tracking-wide">
-                        Sample Preview
-                      </span>
-                    )}
-                  </div>
+                  <div className="p-5">
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <Badge variant={item.badgeVariant} size="xs">
+                        {item.badge}
+                      </Badge>
+                      {item.isRepresentativeImage && (
+                        <span className="text-[10px] text-chocolate-400 font-sans tracking-wide">
+                          Sample Preview
+                        </span>
+                      )}
+                    </div>
 
-                  <h3 className="font-serif font-bold text-lg text-chocolate-900 mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-chocolate-600 leading-relaxed font-sans mb-4 line-clamp-3">
-                    {item.description}
-                  </p>
+                    <h3 className="font-serif font-bold text-lg text-chocolate-900 mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-chocolate-600 leading-relaxed font-sans mb-4 line-clamp-3">
+                      {item.description}
+                    </p>
 
-                  <div className="space-y-1.5 pt-3 border-t border-cream-border text-[11px] text-chocolate-700 font-sans">
-                    {item.details.map((detail, dIdx) => (
-                      <div key={dIdx} className="flex items-start gap-2">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-chocolate-700 shrink-0 mt-0.5" />
-                        <span>{detail}</span>
-                      </div>
-                    ))}
-                  </div>
+                    <div className="space-y-1.5 pt-3 border-t border-cream-border text-[11px] text-chocolate-700 font-sans">
+                      {item.details.map((detail, dIdx) => (
+                        <div key={dIdx} className="flex items-start gap-2">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-chocolate-700 shrink-0 mt-0.5" />
+                          <span>{detail}</span>
+                        </div>
+                      ))}
+                    </div>
 
-                  <div className="flex flex-wrap gap-1.5 pt-4 mt-3 border-t border-cream-border">
-                    {item.tags.map((tag, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="text-[10px] font-medium px-2 py-0.5 rounded bg-cream text-chocolate-700 border border-cream-border"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    <div className="flex flex-wrap gap-1.5 pt-4 mt-3 border-t border-cream-border">
+                      {item.tags.map((tag, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="text-[10px] font-medium px-2 py-0.5 rounded bg-cream text-chocolate-700 border border-cream-border"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="p-5 pt-0">
-                <Button
-                  href={getWhatsAppInquiryUrl(item.inquirySubject)}
-                  variant="outline"
-                  size="sm"
-                  fullWidth
-                  icon={MessageCircle}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs"
-                >
-                  Inquire on WhatsApp
-                </Button>
-              </div>
-            </Card>
+                <div className="p-5 pt-0">
+                  <Button
+                    href={getWhatsAppInquiryUrl(item.inquirySubject)}
+                    variant="outline"
+                    size="sm"
+                    fullWidth
+                    icon={MessageCircle}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs"
+                  >
+                    Inquire on WhatsApp
+                  </Button>
+                </div>
+              </Card>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -883,42 +902,45 @@ export const TailoringHomePage = () => {
         className="bg-cream py-16 md:py-24 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Atelier Standards"
-            title="The Bespoke Crafting Journey"
-            subtitle="Every bespoke piece passes through four meticulous stages to ensure poise, comfort, and an enduring hand-tailored fit."
-          />
+          <ScrollReveal>
+            <SectionHeading
+              eyebrow="Atelier Standards"
+              title="The Bespoke Crafting Journey"
+              subtitle="Every bespoke piece passes through four meticulous stages to ensure poise, comfort, and an enduring hand-tailored fit."
+            />
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
             {process.map((item, idx) => {
               const IconComponent = processIconMap[item.icon] || Scissors;
               return (
-                <div
-                  key={idx}
-                  className="bg-white p-6 sm:p-7 rounded-sm border border-cream-border shadow-2xs flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="font-serif text-3xl font-bold text-gold-dark">
-                        {item.step}
-                      </span>
-                      <div className="h-10 w-10 rounded-sm bg-cream text-maroon-800 flex items-center justify-center border border-cream-border">
-                        <IconComponent className="h-5 w-5" />
+                <ScrollReveal key={idx} delay={idx * 80}>
+                  <div
+                    className="bg-white p-6 sm:p-7 rounded-sm border border-cream-border shadow-2xs flex flex-col justify-between h-full hover:shadow-boutique-md transition-shadow duration-300"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="font-serif text-3xl font-bold text-gold-dark">
+                          {item.step}
+                        </span>
+                        <div className="h-10 w-10 rounded-sm bg-cream text-maroon-800 flex items-center justify-center border border-cream-border">
+                          <IconComponent className="h-5 w-5" />
+                        </div>
                       </div>
+
+                      <h3 className="font-serif font-bold text-lg text-chocolate-900 mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs text-chocolate-600 leading-relaxed font-sans">
+                        {item.desc}
+                      </p>
                     </div>
 
-                    <h3 className="font-serif font-bold text-lg text-chocolate-900 mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-chocolate-600 leading-relaxed font-sans">
-                      {item.desc}
-                    </p>
+                    <div className="pt-4 mt-4 border-t border-cream-border text-[11px] text-chocolate-500 font-sans">
+                      Stage {item.step} of 04
+                    </div>
                   </div>
-
-                  <div className="pt-4 mt-4 border-t border-cream-border text-[11px] text-chocolate-500 font-sans">
-                    Stage {item.step} of 04
-                  </div>
-                </div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -932,134 +954,136 @@ export const TailoringHomePage = () => {
         id="consultation"
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <div className="bg-chocolate-950 text-ivory rounded-sm p-8 sm:p-12 border border-gold/30 shadow-md">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Content */}
-            <div className="lg:col-span-7 space-y-4">
-              <Badge variant="gold" size="sm" icon={Sparkles}>
-                {contact.badge}
-              </Badge>
+        <ScrollReveal>
+          <div className="bg-chocolate-950 text-ivory rounded-sm p-8 sm:p-12 border border-gold/30 shadow-md">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left Content */}
+              <div className="lg:col-span-7 space-y-4">
+                <Badge variant="gold" size="sm" icon={Sparkles}>
+                  {contact.badge}
+                </Badge>
 
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-ivory">
-                {contact.title}
-              </h2>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-ivory">
+                  {contact.title}
+                </h2>
 
-              <p className="text-sm sm:text-base text-cream/80 leading-relaxed font-sans">
-                {contact.subtitle}
-              </p>
-
-              {/* Temporary Notice */}
-              <p className="text-xs text-gold-light/90 italic font-sans pt-1">
-                {contact.notice}
-              </p>
-
-              {/* Contact Meta Details */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-xs font-sans text-cream/90">
-                <div className="flex items-start gap-2.5">
-                  <Phone className="h-4 w-4 text-gold shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-cream/60 block text-[11px]">Primary Phone</span>
-                    {contact.phone ? (
-                      <a
-                        href={`tel:${contact.phone}`}
-                        className="hover:text-gold transition-colors font-medium"
-                      >
-                        {contact.phoneDisplay}
-                      </a>
-                    ) : (
-                      <span className="text-cream/80 text-sm">{contact.phoneDisplay}</span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <MessageCircle className="h-4 w-4 text-gold shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-cream/60 block text-[11px]">Direct WhatsApp</span>
-                    {contact.whatsappUrl ? (
-                      <a
-                        href={contact.whatsappUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-gold transition-colors font-medium inline-flex items-center gap-1"
-                      >
-                        <span>Inquire on WhatsApp</span>
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-                    ) : (
-                      <span className="text-cream/80 text-sm">To be announced</span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <MapPin className="h-4 w-4 text-gold shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-cream/60 block text-[11px]">Atelier Address</span>
-                    <span>{contact.location}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <Clock className="h-4 w-4 text-gold shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-cream/60 block text-[11px]">Visiting Hours</span>
-                    <span>{contact.hours}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Action & Companion Shop Card */}
-            <div className="lg:col-span-5 flex flex-col gap-4">
-              <div className="bg-chocolate-900/90 border border-gold/30 p-6 rounded-sm space-y-4">
-                <div className="flex items-center gap-2 text-gold">
-                  <Layers className="h-5 w-5" />
-                  <h4 className="font-serif font-bold text-lg text-ivory">
-                    {contact.companionShop.title}
-                  </h4>
-                </div>
-                <p className="text-xs text-cream/80 leading-relaxed font-sans">
-                  {contact.companionShop.desc}
+                <p className="text-sm sm:text-base text-cream/80 leading-relaxed font-sans">
+                  {contact.subtitle}
                 </p>
-                <Button
-                  to={contact.companionShop.ctaTo}
-                  variant="gold"
-                  size="md"
-                  fullWidth
-                  icon={ArrowRight}
-                  iconPosition="right"
-                >
-                  {contact.companionShop.ctaText}
-                </Button>
+
+                {/* Temporary Notice */}
+                <p className="text-xs text-gold-light/90 italic font-sans pt-1">
+                  {contact.notice}
+                </p>
+
+                {/* Contact Meta Details */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-xs font-sans text-cream/90">
+                  <div className="flex items-start gap-2.5">
+                    <Phone className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-cream/60 block text-[11px]">Primary Phone</span>
+                      {contact.phone ? (
+                        <a
+                          href={`tel:${contact.phone}`}
+                          className="hover:text-gold transition-colors font-medium"
+                        >
+                          {contact.phoneDisplay}
+                        </a>
+                      ) : (
+                        <span className="text-cream/80 text-sm">{contact.phoneDisplay}</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5">
+                    <MessageCircle className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-cream/60 block text-[11px]">Direct WhatsApp</span>
+                      {contact.whatsappUrl ? (
+                        <a
+                          href={contact.whatsappUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-gold transition-colors font-medium inline-flex items-center gap-1"
+                        >
+                          <span>Inquire on WhatsApp</span>
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      ) : (
+                        <span className="text-cream/80 text-sm">To be announced</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5">
+                    <MapPin className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-cream/60 block text-[11px]">Atelier Address</span>
+                      <span>{contact.location}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5">
+                    <Clock className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-cream/60 block text-[11px]">Visiting Hours</span>
+                      <span>{contact.hours}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button
-                  to={contact.whatsappUrl ? undefined : ROUTES.CONTACT}
-                  href={contact.whatsappUrl || undefined}
-                  variant="primary"
-                  size="md"
-                  fullWidth
-                  icon={MessageCircle}
-                  target={contact.whatsappUrl ? '_blank' : undefined}
-                  rel={contact.whatsappUrl ? 'noopener noreferrer' : undefined}
-                >
-                  {contact.whatsappUrl ? 'WhatsApp Us' : 'Contact Atelier'}
-                </Button>
-                <Button
-                  to={ROUTES.CONTACT}
-                  variant="outline"
-                  size="md"
-                  fullWidth
-                  className="text-ivory border-gold/40 hover:bg-gold/10"
-                >
-                  Contact Page
-                </Button>
+              {/* Right Action & Companion Shop Card */}
+              <div className="lg:col-span-5 flex flex-col gap-4">
+                <div className="bg-chocolate-900/90 border border-gold/30 p-6 rounded-sm space-y-4">
+                  <div className="flex items-center gap-2 text-gold">
+                    <Layers className="h-5 w-5" />
+                    <h4 className="font-serif font-bold text-lg text-ivory">
+                      {contact.companionShop.title}
+                    </h4>
+                  </div>
+                  <p className="text-xs text-cream/80 leading-relaxed font-sans">
+                    {contact.companionShop.desc}
+                  </p>
+                  <Button
+                    to={contact.companionShop.ctaTo}
+                    variant="gold"
+                    size="md"
+                    fullWidth
+                    icon={ArrowRight}
+                    iconPosition="right"
+                  >
+                    {contact.companionShop.ctaText}
+                  </Button>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button
+                    to={contact.whatsappUrl ? undefined : ROUTES.CONTACT}
+                    href={contact.whatsappUrl || undefined}
+                    variant="primary"
+                    size="md"
+                    fullWidth
+                    icon={MessageCircle}
+                    target={contact.whatsappUrl ? '_blank' : undefined}
+                    rel={contact.whatsappUrl ? 'noopener noreferrer' : undefined}
+                  >
+                    {contact.whatsappUrl ? 'WhatsApp Us' : 'Contact Atelier'}
+                  </Button>
+                  <Button
+                    to={ROUTES.CONTACT}
+                    variant="outline"
+                    size="md"
+                    fullWidth
+                    className="text-ivory border-gold/40 hover:bg-gold/10"
+                  >
+                    Contact Page
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
     </div>
   );

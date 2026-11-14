@@ -10,4 +10,5 @@ export * from './ImageContainer';
 export * from './BrandLogo';
 export * from './EnvironmentBanner';
 export * from './ScrollToTop';
+export * from './ScrollReveal';
 

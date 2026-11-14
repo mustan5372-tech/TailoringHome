@@ -56,14 +56,18 @@ export const ImageContainer = ({
               setHasError(true);
               setIsLoading(false);
             }}
-            className={`h-full w-full object-cover ${
-              zoomOnHover ? 'transition-transform duration-500 ease-out group-hover:scale-105' : ''
-            } ${isLoading ? 'opacity-0' : 'opacity-100'} ${imageClassName}`}
+            className={`h-full w-full object-cover will-change-transform ${
+              zoomOnHover ? 'transition-transform duration-700 ease-out group-hover:scale-105' : ''
+            } ${
+              isLoading
+                ? 'opacity-0 scale-[0.98]'
+                : 'opacity-100 scale-100 transition-all duration-700 ease-out'
+            } ${imageClassName}`}
           />
 
           {/* Skeleton Pulse during initial loading */}
           {isLoading && (
-            <div className="absolute inset-0 bg-stone-200 animate-pulse" />
+            <div className="absolute inset-0 bg-stone-200 animate-pulse transition-opacity duration-500" />
           )}
 
           {/* Accessible Gradient Overlay for text contrast */}
@@ -74,8 +78,8 @@ export const ImageContainer = ({
       ) : (
         /* 2. Boutique Placeholder Frame (keeps raw images out of source code) */
         <div
-          className={`h-full w-full bg-gradient-to-br ${gradient} p-6 flex flex-col justify-between relative overflow-hidden text-ivory ${
-            zoomOnHover ? 'transition-transform duration-500 ease-out group-hover:scale-[1.02]' : ''
+          className={`h-full w-full bg-gradient-to-br ${gradient} p-6 flex flex-col justify-between relative overflow-hidden text-ivory will-change-transform ${
+            zoomOnHover ? 'transition-transform duration-700 ease-out group-hover:scale-[1.02]' : ''
           }`}
         >
           {/* Subtle Geometric Weave Overlay */}

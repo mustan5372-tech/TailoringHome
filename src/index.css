@@ -103,3 +103,168 @@
     color: var(--color-maroon-900);
   }
 }
+
+/* ========================================================================= */
+/* BOUTIQUE ANIMATION SYSTEM & KEYFRAMES (DAY 16)                            */
+/* ========================================================================= */
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroBgZoom {
+  from {
+    opacity: 0.15;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Section Subtle Staggered Entrance */
+.animate-hero-bg {
+  animation: heroBgZoom 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-hero-badge {
+  animation: heroFadeIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.animate-hero-headline {
+  animation: heroFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+
+.animate-hero-subtitle {
+  animation: heroFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+.animate-hero-cta {
+  animation: heroFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.46s both;
+}
+
+.animate-hero-highlights {
+  animation: heroFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+/* Mobile Navigation Drawer Entrance */
+.animate-drawer-in {
+  animation: slideDownFade 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Scroll Reveal Elements Base Styles */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progressive Stagger Classes */
+.scroll-reveal.stagger-1 { transition-delay: 80ms; }
+.scroll-reveal.stagger-2 { transition-delay: 160ms; }
+.scroll-reveal.stagger-3 { transition-delay: 240ms; }
+.scroll-reveal.stagger-4 { transition-delay: 320ms; }
+.scroll-reveal.stagger-5 { transition-delay: 400ms; }
+.scroll-reveal.stagger-6 { transition-delay: 480ms; }
+
+/* Desktop Navigation Link Underline Effect */
+.nav-link-boutique {
+  position: relative;
+}
+
+.nav-link-boutique::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-gold);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.nav-link-boutique:hover::after {
+  width: 70%;
+  left: 15%;
+}
+
+.nav-link-boutique.is-active::after {
+  width: 80%;
+  left: 10%;
+  background-color: var(--color-maroon-800);
+}
+
+/* Smooth Card Hover Elevation & Subtle Glow */
+.card-hover-boutique {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
+  will-change: transform, box-shadow;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-hover-boutique:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-boutique-md);
+  }
+}
+
+/* Accessibility: Strictly Respect Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .animate-hero-bg,
+  .animate-hero-badge,
+  .animate-hero-headline,
+  .animate-hero-subtitle,
+  .animate-hero-cta,
+  .animate-hero-highlights,
+  .animate-drawer-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .card-hover-boutique:hover {
+    transform: none !important;
+  }
+}

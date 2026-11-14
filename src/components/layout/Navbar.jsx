@@ -21,9 +21,9 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-200 border-b ${
+      className={`sticky top-0 z-40 transition-all duration-300 ease-out border-b ${
         isScrolled
-          ? 'bg-ivory/98 shadow-md border-cream-border/90'
+          ? 'bg-ivory/98 shadow-boutique-md border-cream-border/90'
           : 'bg-ivory/95 border-cream-border'
       } backdrop-blur-md`}
     >
@@ -46,9 +46,9 @@ export const Navbar = () => {
                   to={link.path}
                   end={link.path === ROUTES.HOME}
                   className={({ isActive }) =>
-                    `relative px-3.5 py-2 text-sm font-medium transition-colors tracking-wide rounded-sm flex items-center gap-1.5 ${
+                    `nav-link-boutique relative px-3.5 py-2 text-sm font-medium transition-all duration-200 tracking-wide rounded-sm flex items-center gap-1.5 ${
                       isActive
-                        ? 'text-maroon-800 font-semibold bg-maroon-50/70 border-b-2 border-maroon-800'
+                        ? 'text-maroon-800 font-semibold bg-maroon-50/70 is-active'
                         : 'text-chocolate-800 hover:text-maroon-700 hover:bg-cream-soft'
                     }`
                   }
@@ -106,7 +106,7 @@ export const Navbar = () => {
 
       {/* Mobile Drawer Navigation with Safe Height & Scrolling */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-cream-border bg-ivory shadow-xl px-4 pt-3 pb-6 space-y-1.5 max-h-[calc(100vh-5.5rem)] overflow-y-auto animate-fadeIn">
+        <div className="lg:hidden border-t border-cream-border bg-ivory shadow-xl px-4 pt-3 pb-6 space-y-1.5 max-h-[calc(100vh-5.5rem)] overflow-y-auto animate-drawer-in">
           {/* Quick Dual-Shop Highlight Pills */}
           <div className="grid grid-cols-2 gap-2 pb-3 mb-2 border-b border-cream-border">
             <Link

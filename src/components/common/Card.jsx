@@ -42,7 +42,7 @@ export const Card = ({
   }[padding] || 'p-6 sm:p-7';
 
   const hoverClasses = hoverEffect
-    ? 'transition-all duration-300 ease-out hover:shadow-md hover:-translate-y-0.5'
+    ? 'transition-all duration-300 ease-out hover:shadow-boutique-md hover:-translate-y-1 hover:border-gold/40 will-change-transform'
     : 'transition-colors duration-200';
 
   const interactiveClasses = onClick

@@ -20,6 +20,7 @@ import {
   Card,
   Badge,
   ImageContainer,
+  ScrollReveal,
 } from '../../components/common';
 
 import { galleryContent } from '../../data/galleryContent';
@@ -130,7 +131,7 @@ export const GalleryPage = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center">
           <div className="max-w-3xl mx-auto">
             {/* Boutique Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 mb-4">
+            <div className="inline-flex items-center gap-2 mb-4 animate-hero-badge">
               <span className="h-px w-8 bg-gold-light" />
               <Badge variant="gold" size="sm" icon={Sparkles}>
                 {header.badge}
@@ -139,17 +140,17 @@ export const GalleryPage = () => {
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-ivory tracking-tight leading-[1.15]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-ivory tracking-tight leading-[1.15] animate-hero-headline">
               {header.headline}
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-5 text-base sm:text-lg text-cream/90 leading-relaxed font-sans">
+            <p className="mt-5 text-base sm:text-lg text-cream/90 leading-relaxed font-sans animate-hero-subtitle">
               {header.subheadline}
             </p>
 
             {/* Placeholder Transparency Notice */}
-            <p className="mt-4 text-xs text-gold-light/90 italic font-sans max-w-xl mx-auto">
+            <p className="mt-4 text-xs text-gold-light/90 italic font-sans max-w-xl mx-auto animate-hero-highlights">
               {header.notice}
             </p>
           </div>
@@ -164,89 +165,91 @@ export const GalleryPage = () => {
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
         {/* Primary Filter Tabs: All, Tailoring Home, Fabric Home */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-          {filterTabs.map((tab) => {
-            const isActive = activeFilter === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => {
-                  setActiveFilter(tab.id);
-                  setSelectedItemIndex(null);
-                }}
-                type="button"
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-sm text-xs sm:text-sm font-sans transition-all duration-200 cursor-pointer ${
-                  isActive
-                    ? 'bg-maroon-800 text-ivory font-semibold shadow-xs ring-2 ring-maroon-800/30'
-                    : 'bg-white/90 hover:bg-cream text-chocolate-700 hover:text-chocolate-900 border border-cream-border font-medium'
-                }`}
-              >
-                {tab.id === 'tailoring' && (
-                  <Scissors className="h-3.5 w-3.5 text-maroon-700" />
-                )}
-                {tab.id === 'fabric' && (
-                  <Layers className="h-3.5 w-3.5 text-chocolate-700" />
-                )}
-                {tab.id === 'all' && (
-                  <Filter className="h-3.5 w-3.5 text-gold-dark" />
-                )}
-                <span>{tab.label}</span>
-                <span
-                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-sans ${
+        <ScrollReveal>
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+            {filterTabs.map((tab) => {
+              const isActive = activeFilter === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveFilter(tab.id);
+                    setSelectedItemIndex(null);
+                  }}
+                  type="button"
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-sm text-xs sm:text-sm font-sans transition-all duration-200 cursor-pointer ${
                     isActive
-                      ? 'bg-maroon-950 text-ivory'
-                      : 'bg-cream-border/70 text-chocolate-600'
+                      ? 'bg-maroon-800 text-ivory font-semibold shadow-xs ring-2 ring-maroon-800/30'
+                      : 'bg-white/90 hover:bg-cream text-chocolate-700 hover:text-chocolate-900 border border-cream-border font-medium'
                   }`}
                 >
-                  {getTabCount(tab.id)}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+                  {tab.id === 'tailoring' && (
+                    <Scissors className="h-3.5 w-3.5 text-maroon-700" />
+                  )}
+                  {tab.id === 'fabric' && (
+                    <Layers className="h-3.5 w-3.5 text-chocolate-700" />
+                  )}
+                  {tab.id === 'all' && (
+                    <Filter className="h-3.5 w-3.5 text-gold-dark" />
+                  )}
+                  <span>{tab.label}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full font-sans ${
+                      isActive
+                        ? 'bg-maroon-950 text-ivory'
+                        : 'bg-cream-border/70 text-chocolate-600'
+                    }`}
+                  >
+                    {getTabCount(tab.id)}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </ScrollReveal>
 
         {/* Gallery Image Grid with Consistent Spacing & Aspect Ratios */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredItems.map((item, idx) => (
-            <Card
-              key={item.id}
-              variant="default"
-              padding="none"
-              className={`overflow-hidden flex flex-col justify-between transition-all duration-300 group ${
-                item.isCommunitySpecial
-                  ? 'border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20'
-                  : 'border border-cream-border hover:border-chocolate-300 hover:shadow-xs'
-              }`}
-            >
-              <div>
-                {/* Clickable Image Container with Hover Inspect Overlay */}
-                <div
-                  onClick={() => handleOpenModal(idx)}
-                  className="relative cursor-pointer overflow-hidden block"
-                  title="Click to view full photograph"
-                >
-                  <ImageContainer
-                    src={item.image}
-                    alt={item.title}
-                    aspectRatio="landscape"
-                    category={item.category}
-                    gradient={item.gradient}
-                    badge={item.shop}
-                    title={item.title}
-                  />
+            <ScrollReveal key={item.id} delay={(idx % 3) * 80}>
+              <Card
+                variant="default"
+                padding="none"
+                className={`overflow-hidden flex flex-col justify-between transition-all duration-300 group h-full ${
+                  item.isCommunitySpecial
+                    ? 'border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-boutique-md ring-1 ring-gold/20'
+                    : 'border border-cream-border hover:border-chocolate-300 hover:shadow-boutique-md'
+                }`}
+              >
+                <div>
+                  {/* Clickable Image Container with Hover Inspect Overlay */}
+                  <div
+                    onClick={() => handleOpenModal(idx)}
+                    className="relative cursor-pointer overflow-hidden block"
+                    title="Click to view full photograph"
+                  >
+                    <ImageContainer
+                      src={item.image}
+                      alt={item.title}
+                      aspectRatio="landscape"
+                      category={item.category}
+                      gradient={item.gradient}
+                      badge={item.shop}
+                      title={item.title}
+                    />
 
-                  {/* Subtle Hover Overlay with Magnifying Eye Icon */}
-                  <div className="absolute inset-0 bg-chocolate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2 text-ivory p-4 text-center z-10">
-                    <div className="h-11 w-11 rounded-full bg-gold/90 text-chocolate-950 flex items-center justify-center shadow-md transform scale-90 group-hover:scale-100 transition-transform duration-300">
-                      <Eye className="h-5 w-5" />
+                    {/* Subtle Hover Overlay with Magnifying Eye Icon */}
+                    <div className="absolute inset-0 bg-chocolate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2 text-ivory p-4 text-center z-10">
+                      <div className="h-11 w-11 rounded-full bg-gold/90 text-chocolate-950 flex items-center justify-center shadow-md transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                        <Eye className="h-5 w-5" />
+                      </div>
+                      <span className="text-xs font-semibold tracking-wider uppercase font-sans text-gold-light">
+                        Click to Inspect Image
+                      </span>
                     </div>
-                    <span className="text-xs font-semibold tracking-wider uppercase font-sans text-gold-light">
-                      Click to Inspect Image
-                    </span>
                   </div>
-                </div>
 
-                {/* Card Content */}
+                  {/* Card Content */}
                 <div className="p-5 sm:p-6">
                   {/* Shop Entity and Badge Indicators */}
                   <div className="flex items-center justify-between gap-2 mb-2">
@@ -333,6 +336,7 @@ export const GalleryPage = () => {
                 )}
               </div>
             </Card>
+          </ScrollReveal>
           ))}
         </div>
       </section>
@@ -529,37 +533,39 @@ export const GalleryPage = () => {
         id="gallery-enquiry"
         className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <div className="bg-chocolate-950 text-ivory rounded-sm p-8 sm:p-10 border border-gold/30 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="font-serif text-2xl font-bold">
-              {consultationBanner.title}
-            </h3>
-            <p className="text-xs sm:text-sm text-cream/80 max-w-xl">
-              {consultationBanner.desc}
-            </p>
+        <ScrollReveal>
+          <div className="bg-chocolate-950 text-ivory rounded-sm p-8 sm:p-10 border border-gold/30 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-2 text-center md:text-left">
+              <h3 className="font-serif text-2xl font-bold">
+                {consultationBanner.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-cream/80 max-w-xl">
+                {consultationBanner.desc}
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+              <Button
+                to={consultationBanner.whatsappUrl ? undefined : ROUTES.CONTACT}
+                href={consultationBanner.whatsappUrl || undefined}
+                variant="gold"
+                size="md"
+                icon={MessageCircle}
+                target={consultationBanner.whatsappUrl ? '_blank' : undefined}
+                rel={consultationBanner.whatsappUrl ? 'noopener noreferrer' : undefined}
+              >
+                {consultationBanner.whatsappUrl ? 'WhatsApp Us' : 'Contact Us'}
+              </Button>
+              <Button
+                to={ROUTES.CONTACT}
+                variant="outline"
+                size="md"
+                className="text-ivory border-gold/40 hover:bg-gold/10"
+              >
+                Contact & Visit
+              </Button>
+            </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-            <Button
-              to={consultationBanner.whatsappUrl ? undefined : ROUTES.CONTACT}
-              href={consultationBanner.whatsappUrl || undefined}
-              variant="gold"
-              size="md"
-              icon={MessageCircle}
-              target={consultationBanner.whatsappUrl ? '_blank' : undefined}
-              rel={consultationBanner.whatsappUrl ? 'noopener noreferrer' : undefined}
-            >
-              {consultationBanner.whatsappUrl ? 'WhatsApp Us' : 'Contact Us'}
-            </Button>
-            <Button
-              to={ROUTES.CONTACT}
-              variant="outline"
-              size="md"
-              className="text-ivory border-gold/40 hover:bg-gold/10"
-            >
-              Contact & Visit
-            </Button>
-          </div>
-        </div>
+        </ScrollReveal>
       </section>
     </div>
   );

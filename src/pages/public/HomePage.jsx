@@ -22,6 +22,7 @@ import {
   SectionHeading,
   Badge,
   ImageContainer,
+  ScrollReveal,
 } from '../../components/common';
 
 import { homeContent } from '../../data/homeContent';
@@ -91,7 +92,7 @@ export const HomePage = () => {
             <img
               src={hero.backgroundImage}
               alt="Tailoring atelier and luxury fabrics backdrop"
-              className="w-full h-full object-cover object-center opacity-30 scale-105 transition-transform duration-1000 ease-out"
+              className="animate-hero-bg w-full h-full object-cover object-center opacity-30 scale-105"
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-b from-chocolate-950/90 via-chocolate-900/85 to-chocolate-950/95" />
@@ -100,7 +101,7 @@ export const HomePage = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-36 text-center">
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-maroon-900/80 border border-gold/40 text-gold-light mb-8 shadow-xs">
+          <div className="animate-hero-badge inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-maroon-900/80 border border-gold/40 text-gold-light mb-8 shadow-xs">
             <Sparkles className="h-3.5 w-3.5 text-gold" />
             <span className="text-xs font-semibold tracking-widest uppercase font-sans">
               {hero.badge}
@@ -108,17 +109,17 @@ export const HomePage = () => {
           </div>
 
           {/* Premium Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-tight max-w-4xl mx-auto text-ivory">
+          <h1 className="animate-hero-headline text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-tight max-w-4xl mx-auto text-ivory">
             {hero.headline}
           </h1>
 
           {/* Introduction */}
-          <p className="mt-6 text-base sm:text-lg text-ivory/85 max-w-2xl mx-auto leading-relaxed font-sans">
+          <p className="animate-hero-subtitle mt-6 text-base sm:text-lg text-ivory/85 max-w-2xl mx-auto leading-relaxed font-sans">
             {hero.subheadline}
           </p>
 
           {/* Dual Navigation Buttons */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div className="animate-hero-cta mt-10 flex flex-wrap items-center justify-center gap-4">
             <Button
               to={hero.primaryCta.to}
               variant="primary"
@@ -140,7 +141,7 @@ export const HomePage = () => {
           </div>
 
           {/* Highlights Ribbon */}
-          <div className="mt-14 pt-8 border-t border-ivory/15 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto text-xs sm:text-sm text-ivory/80 font-sans">
+          <div className="animate-hero-highlights mt-14 pt-8 border-t border-ivory/15 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto text-xs sm:text-sm text-ivory/80 font-sans">
             {hero.highlights.map((item, index) => (
               <div key={index} className="flex items-center justify-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-gold"></span>
@@ -158,19 +159,22 @@ export const HomePage = () => {
         id="boutiques"
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <SectionHeading
-          eyebrow="Two Distinct Entities"
-          title="Curated Under One Prestigious Roof"
-          subtitle="Explore the separate disciplines of our master bespoke tailoring studio and our premier repository of certified fine textiles."
-        />
+        <ScrollReveal>
+          <SectionHeading
+            eyebrow="Two Distinct Entities"
+            title="Curated Under One Prestigious Roof"
+            subtitle="Explore the separate disciplines of our master bespoke tailoring studio and our premier repository of certified fine textiles."
+          />
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-12">
           {/* Card 1: Tailoring Home */}
-          <Card
-            variant="default"
-            padding="none"
-            className="group overflow-hidden border-2 border-maroon-100 hover:border-maroon-300 transition-all duration-300 flex flex-col justify-between"
-          >
+          <ScrollReveal delay={100} className="h-full">
+            <Card
+              variant="default"
+              padding="none"
+              className="group overflow-hidden border-2 border-maroon-100 hover:border-maroon-300 transition-all duration-300 flex flex-col justify-between h-full"
+            >
             <div>
               {/* Image Showcase */}
               <ImageContainer
@@ -231,13 +235,15 @@ export const HomePage = () => {
               </Button>
             </div>
           </Card>
+        </ScrollReveal>
 
           {/* Card 2: Fabric Home */}
-          <Card
-            variant="default"
-            padding="none"
-            className="group overflow-hidden border-2 border-chocolate-200 hover:border-chocolate-400 transition-all duration-300 flex flex-col justify-between"
-          >
+          <ScrollReveal delay={200} className="h-full">
+            <Card
+              variant="default"
+              padding="none"
+              className="group overflow-hidden border-2 border-chocolate-200 hover:border-chocolate-400 transition-all duration-300 flex flex-col justify-between h-full"
+            >
             <div>
               {/* Image Showcase */}
               <ImageContainer
@@ -298,6 +304,7 @@ export const HomePage = () => {
               </Button>
             </div>
           </Card>
+        </ScrollReveal>
         </div>
       </section>
 
@@ -309,15 +316,18 @@ export const HomePage = () => {
         className="bg-cream py-18 md:py-24 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Sartorial Offerings"
-            title="Tailoring Home Specialities"
-            subtitle="Bespoke craftsmanship for Dawoodi Bohra traditional attire, official school uniforms, gentlemen's suits and fine alterations."
-          />
+          <ScrollReveal>
+            <SectionHeading
+              eyebrow="Sartorial Offerings"
+              title="Tailoring Home Specialities"
+              subtitle="Bespoke craftsmanship for Dawoodi Bohra traditional attire, official school uniforms, gentlemen's suits and fine alterations."
+            />
+          </ScrollReveal>
 
           {/* Category Filter Tabs */}
           {tailoringFilterTabs.length > 0 && (
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-8 mb-10">
+            <ScrollReveal delay={100}>
+              <div className="flex flex-wrap items-center justify-center gap-2 mt-8 mb-10">
               {tailoringFilterTabs.map((tab) => {
                 const isActive = activeTailoringFilter === tab.id;
                 return (
@@ -348,21 +358,22 @@ export const HomePage = () => {
                 );
               })}
             </div>
+            </ScrollReveal>
           )}
 
           {/* Tailoring Category Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredTailoring.map((item) => (
-              <Card
-                key={item.id}
-                variant="default"
-                padding="none"
-                className={`overflow-hidden flex flex-col justify-between transition-all duration-300 ${
-                  item.isCommunitySpecial
-                    ? 'border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20'
-                    : 'border border-cream-border hover:border-chocolate-300 hover:shadow-xs'
-                }`}
-              >
+            {filteredTailoring.map((item, idx) => (
+              <ScrollReveal key={item.id} delay={((idx % 4) + 1) * 70} className="h-full">
+                <Card
+                  variant="default"
+                  padding="none"
+                  className={`overflow-hidden flex flex-col justify-between transition-all duration-300 h-full ${
+                    item.isCommunitySpecial
+                      ? 'border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20'
+                      : 'border border-cream-border hover:border-chocolate-300 hover:shadow-xs'
+                  }`}
+                >
                 <div>
                   <ImageContainer
                     src={item.image}
@@ -426,10 +437,11 @@ export const HomePage = () => {
                   </Link>
                 </div>
               </Card>
+            </ScrollReveal>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <ScrollReveal delay={150} className="mt-12 text-center">
             <Button
               to={ROUTES.TAILORING}
               variant="primary"
@@ -438,7 +450,7 @@ export const HomePage = () => {
             >
               Explore Complete Tailoring Catalogue
             </Button>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -449,60 +461,64 @@ export const HomePage = () => {
         id="fabric-highlights"
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <SectionHeading
-          eyebrow="Textile Repository"
-          title="Curated Fabric Varieties"
-          subtitle="Specialized Rida materials, Kurta-Saya Swiss lawns and cambrics, approved MSB & ABN uniform textiles alongside pure silks, Irish linens and luxury wools."
-        />
+        <ScrollReveal>
+          <SectionHeading
+            eyebrow="Textile Repository"
+            title="Curated Fabric Varieties"
+            subtitle="Specialized Rida materials, Kurta-Saya Swiss lawns and cambrics, approved MSB & ABN uniform textiles alongside pure silks, Irish linens and luxury wools."
+          />
+        </ScrollReveal>
 
         {/* Category Filter Tabs */}
         {fabricFilterTabs.length > 0 && (
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-8 mb-10">
-            {fabricFilterTabs.map((tab) => {
-              const isActive = activeFabricFilter === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveFabricFilter(tab.id)}
-                  type="button"
-                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-sm text-xs sm:text-sm font-sans transition-all duration-200 cursor-pointer ${
-                    isActive
-                      ? 'bg-chocolate-800 text-ivory font-semibold shadow-xs ring-2 ring-chocolate-800/30'
-                      : tab.isFeatured
-                      ? 'bg-amber-50/80 text-gold-dark hover:bg-amber-100/80 border border-gold/40 font-medium'
-                      : 'bg-white/80 hover:bg-cream text-chocolate-700 hover:text-chocolate-900 border border-cream-border font-medium'
-                  }`}
-                >
-                  {tab.isFeatured && <Sparkles className="h-3.5 w-3.5 text-gold-dark" />}
-                  <span>{tab.label}</span>
-                  <span
-                    className={`text-[10px] px-1.5 py-0.5 rounded-full font-sans ${
+          <ScrollReveal delay={100}>
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-8 mb-10">
+              {fabricFilterTabs.map((tab) => {
+                const isActive = activeFabricFilter === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveFabricFilter(tab.id)}
+                    type="button"
+                    className={`inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-sm text-xs sm:text-sm font-sans transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? 'bg-chocolate-950 text-ivory'
-                        : 'bg-cream-border/70 text-chocolate-600'
+                        ? 'bg-chocolate-800 text-ivory font-semibold shadow-xs ring-2 ring-chocolate-800/30'
+                        : tab.isFeatured
+                        ? 'bg-amber-50/80 text-gold-dark hover:bg-amber-100/80 border border-gold/40 font-medium'
+                        : 'bg-white/80 hover:bg-cream text-chocolate-700 hover:text-chocolate-900 border border-cream-border font-medium'
                     }`}
                   >
-                    {getFabricCount(tab.id)}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+                    {tab.isFeatured && <Sparkles className="h-3.5 w-3.5 text-gold-dark" />}
+                    <span>{tab.label}</span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-sans ${
+                        isActive
+                          ? 'bg-chocolate-950 text-ivory'
+                          : 'bg-cream-border/70 text-chocolate-600'
+                      }`}
+                    >
+                      {getFabricCount(tab.id)}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </ScrollReveal>
         )}
 
         {/* Fabric Category Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredFabric.map((fabric) => (
-            <Card
-              key={fabric.id}
-              variant="default"
-              padding="none"
-              className={`overflow-hidden flex flex-col justify-between transition-all duration-300 ${
-                fabric.isCommunitySpecial
-                  ? 'border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20'
-                  : 'border border-cream-border hover:border-chocolate-300 hover:shadow-xs'
-              }`}
-            >
+          {filteredFabric.map((fabric, idx) => (
+            <ScrollReveal key={fabric.id} delay={((idx % 4) + 1) * 70} className="h-full">
+              <Card
+                variant="default"
+                padding="none"
+                className={`overflow-hidden flex flex-col justify-between transition-all duration-300 h-full ${
+                  fabric.isCommunitySpecial
+                    ? 'border-2 border-gold/50 shadow-xs hover:border-gold hover:shadow-md ring-1 ring-gold/20'
+                    : 'border border-cream-border hover:border-chocolate-300 hover:shadow-xs'
+                }`}
+              >
               <div>
                 <ImageContainer
                   src={fabric.image}
@@ -568,10 +584,11 @@ export const HomePage = () => {
                 </Link>
               </div>
             </Card>
+          </ScrollReveal>
           ))}
         </div>
 
-        <div className="mt-12 text-center">
+        <ScrollReveal delay={150} className="mt-12 text-center">
           <Button
             to={ROUTES.FABRIC}
             variant="secondary"
@@ -580,7 +597,7 @@ export const HomePage = () => {
           >
             Explore Complete Fabric Archive
           </Button>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* ====================================================================== */}
@@ -591,20 +608,22 @@ export const HomePage = () => {
         className="bg-cream py-18 md:py-24 border-y border-cream-border scroll-mt-24 md:scroll-mt-28"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Visual Retrospective"
-            title="Craftsmanship & Textile Gallery"
-            subtitle="A curated glimpse of completed bespoke creations from Tailoring Home alongside distinct fabric weaves from Fabric Home."
-          />
+          <ScrollReveal>
+            <SectionHeading
+              eyebrow="Visual Retrospective"
+              title="Craftsmanship & Textile Gallery"
+              subtitle="A curated glimpse of completed bespoke creations from Tailoring Home alongside distinct fabric weaves from Fabric Home."
+            />
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            {galleryPreview.map((item) => (
-              <Card
-                key={item.id}
-                variant="default"
-                padding="none"
-                className="overflow-hidden flex flex-col justify-between"
-              >
+            {galleryPreview.map((item, idx) => (
+              <ScrollReveal key={item.id} delay={((idx % 4) + 1) * 70} className="h-full">
+                <Card
+                  variant="default"
+                  padding="none"
+                  className="overflow-hidden flex flex-col justify-between h-full"
+                >
                 <ImageContainer
                   src={item.image}
                   alt={item.title}
@@ -627,10 +646,11 @@ export const HomePage = () => {
                   </p>
                 </div>
               </Card>
+            </ScrollReveal>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <ScrollReveal delay={150} className="mt-12 text-center">
             <Button
               to={ROUTES.GALLERY}
               variant="outline"
@@ -640,7 +660,7 @@ export const HomePage = () => {
             >
               View Full Creation Gallery
             </Button>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -651,22 +671,24 @@ export const HomePage = () => {
         id="standards"
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <SectionHeading
-          eyebrow="Craftsmanship Values"
-          title="Why Choose Tailoring Home & Fabric Home"
-          subtitle="Our principles are anchored in generational pattern mastery, verified natural fiber sourcing, and pressure-free customer consultations."
-        />
+        <ScrollReveal>
+          <SectionHeading
+            eyebrow="Craftsmanship Values"
+            title="Why Choose Tailoring Home & Fabric Home"
+            subtitle="Our principles are anchored in generational pattern mastery, verified natural fiber sourcing, and pressure-free customer consultations."
+          />
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          {whyChooseUs.map((pillar) => {
+          {whyChooseUs.map((pillar, idx) => {
             const Icon = iconMap[pillar.icon] || Scissors;
 
             return (
-              <Card
-                key={pillar.id}
-                variant="default"
-                className="flex flex-col justify-between"
-              >
+              <ScrollReveal key={pillar.id} delay={((idx % 3) + 1) * 90} className="h-full">
+                <Card
+                  variant="default"
+                  className="flex flex-col justify-between h-full"
+                >
                 <div>
                   <div className="h-12 w-12 rounded-sm bg-maroon-50 text-maroon-800 flex items-center justify-center mb-5 border border-maroon-200/60 shadow-2xs">
                     <Icon className="h-6 w-6" />
@@ -681,6 +703,7 @@ export const HomePage = () => {
                   </p>
                 </div>
               </Card>
+            </ScrollReveal>
             );
           })}
         </div>
@@ -693,7 +716,8 @@ export const HomePage = () => {
         id="consultation"
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 md:scroll-mt-28"
       >
-        <div className="bg-gradient-to-br from-chocolate-950 via-chocolate-900 to-maroon-950 text-ivory rounded-sm p-8 sm:p-12 lg:p-14 border border-gold/40 shadow-xl relative overflow-hidden">
+        <ScrollReveal>
+          <div className="bg-gradient-to-br from-chocolate-950 via-chocolate-900 to-maroon-950 text-ivory rounded-sm p-8 sm:p-12 lg:p-14 border border-gold/40 shadow-xl relative overflow-hidden">
           {/* Subtle Background Ornament */}
           <div className="absolute -right-12 -bottom-12 opacity-5 pointer-events-none">
             <Scissors className="h-96 w-96 text-gold" />
@@ -843,6 +867,7 @@ export const HomePage = () => {
             </div>
           </div>
         </div>
+        </ScrollReveal>
       </section>
     </div>
   );
