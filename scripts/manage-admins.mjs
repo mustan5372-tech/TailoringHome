@@ -15,6 +15,8 @@
  */
 
 import admin from 'firebase-admin';
+import { getFirestore } from 'firebase-admin/firestore';
+import { getAuth } from 'firebase-admin/auth';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -80,7 +82,8 @@ const serviceAccountPaths = [
 let serviceAccountPath = serviceAccountPaths.find(p => fs.existsSync(p));
 
 function initFirebaseAdmin() {
-  if (admin.apps.length > 0) return admin.app();
+  const apps = admin.getApps ? admin.getApps() : admin.apps;
+  if (apps && apps.length > 0) return apps[0] || admin.app();
 
   if (serviceAccountPath && fs.existsSync(serviceAccountPath)) {
     console.log(`[Admin Utility] Using service account key from: ${serviceAccountPath}`);
@@ -141,8 +144,8 @@ async function backupAdmins(db) {
  */
 async function listAdmins() {
   const app = initFirebaseAdmin();
-  const db = app.firestore();
-  const auth = app.auth();
+  const db = getFirestore(app);
+  const auth = getAuth(app);
 
   console.log('\n=== Tailoring Home & Fabric Home - Registered Administrators ===\n');
   const snapshot = await db.collection('admins').get();
@@ -178,7 +181,7 @@ async function listAdmins() {
  */
 async function cleanupTestAdmins() {
   const app = initFirebaseAdmin();
-  const db = app.firestore();
+  const db = getFirestore(app);
 
   console.log('\n=== Cleaning Fake & Test Administrator Accounts ===\n');
 
@@ -239,8 +242,8 @@ async function cleanupTestAdmins() {
  */
 async function bootstrapSuperAdmin(targetUid = null) {
   const app = initFirebaseAdmin();
-  const db = app.firestore();
-  const auth = app.auth();
+  const db = getFirestore(app);
+  const auth = getAuth(app);
 
   const superAdminEmail = 'mustan5372@gmail.com';
   console.log(`\n=== Configuring Super Admin Access for: ${superAdminEmail} ===\n`);
@@ -307,8 +310,8 @@ async function setRoleAdmin({ uid = null, email = null, role }) {
   }
 
   const app = initFirebaseAdmin();
-  const db = app.firestore();
-  const auth = app.auth();
+  const db = getFirestore(app);
+  const auth = getAuth(app);
 
   let targetUid = uid;
   let targetEmail = email;
@@ -360,8 +363,8 @@ async function setRoleAdmin({ uid = null, email = null, role }) {
  */
 async function syncAllAdminClaims() {
   const app = initFirebaseAdmin();
-  const db = app.firestore();
-  const auth = app.auth();
+  const db = getFirestore(app);
+  const auth = getAuth(app);
 
   console.log('\n=== Synchronizing Firebase Auth Custom Claims for All Admins ===\n');
   const snapshot = await db.collection('admins').get();
@@ -408,8 +411,8 @@ async function addAdmin({ uid, email, displayName, role = 'operations_admin', ac
   }
 
   const app = initFirebaseAdmin();
-  const db = app.firestore();
-  const auth = app.auth();
+  const db = getFirestore(app);
+  const auth = getAuth(app);
 
   const adminDocRef = db.collection('admins').doc(uid);
   const existingDoc = await adminDocRef.get();
@@ -463,7 +466,7 @@ async function main() {
         break;
       case 'backup': {
         const app = initFirebaseAdmin();
-        await backupAdmins(app.firestore());
+        await backupAdmins(getFirestore(app));
         break;
       }
       case 'cleanup':

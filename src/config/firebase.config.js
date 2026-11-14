@@ -14,7 +14,7 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { getAnalytics, isSupported } from 'firebase/analytics';
-import { env } from './env.config';
+import { env } from './env.config.js';
 
 let app = null;
 let auth = null;

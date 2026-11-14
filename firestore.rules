@@ -234,8 +234,8 @@ service cloud.firestore {
     // 8. SECURITY AUDIT LOGS (/admin_audit_logs)
     // =========================================================================
     match /admin_audit_logs/{logId} {
-      // Super Admin can inspect security audit records
-      allow read: if isSuperAdmin();
+      // Active administrators can inspect security audit records (scoped by role in dashboard)
+      allow read: if isActiveAdmin();
 
       // Append-only audit logging: Super Admin or verified admin claiming account can log an event
       allow create: if isSuperAdmin() || (
@@ -247,7 +247,7 @@ service cloud.firestore {
       allow update, delete: if false;
 
       match /{subcollection=**} {
-        allow read: if isSuperAdmin();
+        allow read: if isActiveAdmin();
         allow write: if false;
       }
     }
@@ -328,10 +328,10 @@ service cloud.firestore {
     }
 
     match /dev_admin_audit_logs/{logId} {
-      allow read: if isSuperAdmin();
+      allow read: if isActiveAdmin();
       allow create: if isSuperAdmin() || isAuthenticated();
       allow update, delete: if false;
-      match /{subcollection=**} { allow read: if isSuperAdmin(); allow write: if false; }
+      match /{subcollection=**} { allow read: if isActiveAdmin(); allow write: if false; }
     }
 
     // =========================================================================

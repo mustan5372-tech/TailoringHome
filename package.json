@@ -13,7 +13,9 @@
     "admin:cleanup": "node scripts/manage-admins.mjs cleanup",
     "admin:backup": "node scripts/manage-admins.mjs backup",
     "admin:sync-claims": "node scripts/manage-admins.mjs sync-claims",
-    "test:rbac": "node scratch/test_admin_auth_scenarios.mjs"
+    "test:rbac": "node scratch/test_admin_auth_scenarios.mjs",
+    "test:dashboard": "node scratch/test_day15_dashboard.mjs",
+    "test": "node scratch/test_admin_auth_scenarios.mjs && node scratch/test_day15_dashboard.mjs"
   },
   "dependencies": {
     "firebase": "^13.2.0",

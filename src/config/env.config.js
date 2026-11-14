@@ -5,17 +5,33 @@
  */
 
 const getEnvVar = (key, fallback = '') => {
-  return import.meta.env[key] !== undefined ? import.meta.env[key] : fallback;
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env[key] !== undefined) {
+    return import.meta.env[key];
+  }
+  if (typeof process !== 'undefined' && process.env && process.env[key] !== undefined) {
+    return process.env[key];
+  }
+  return fallback;
+};
+
+const getMode = () => {
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.MODE) {
+    return import.meta.env.MODE;
+  }
+  if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV) {
+    return process.env.NODE_ENV;
+  }
+  return 'development';
 };
 
 export const env = {
   // Application Mode
-  mode: getEnvVar('VITE_APP_ENV', import.meta.env.MODE || 'development'),
+  mode: getEnvVar('VITE_APP_ENV', getMode()),
   appName: getEnvVar('VITE_APP_NAME', 'Tailoring Home & Fabric Home'),
   appUrl: getEnvVar('VITE_APP_URL', 'http://localhost:5173'),
 
-  isDev: (getEnvVar('VITE_APP_ENV') || import.meta.env.MODE) === 'development',
-  isProd: (getEnvVar('VITE_APP_ENV') || import.meta.env.MODE) === 'production',
+  isDev: (getEnvVar('VITE_APP_ENV') || getMode()) === 'development',
+  isProd: (getEnvVar('VITE_APP_ENV') || getMode()) === 'production',
 
   // Firebase Web SDK Configuration (Read from Vite environment variables)
   firebase: {

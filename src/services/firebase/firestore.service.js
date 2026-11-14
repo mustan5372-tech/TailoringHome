@@ -13,8 +13,8 @@ import {
   deleteDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { db, isConfigured } from '../../config/firebase.config';
-import { env } from '../../config/env.config';
+import { db, isConfigured } from '../../config/firebase.config.js';
+import { env } from '../../config/env.config.js';
 
 /**
  * Returns the environment-partitioned collection name.
@@ -33,6 +33,9 @@ export const COLLECTIONS = {
   GALLERY: getPartitionedCollectionName('gallery_showcase'),
   ENQUIRIES: getPartitionedCollectionName('customer_enquiries'),
   SETTINGS: getPartitionedCollectionName('site_settings'),
+  AUDIT_LOGS: getPartitionedCollectionName('admin_audit_logs'),
+  ADMINS: 'admins',
+  INVITATIONS: getPartitionedCollectionName('admin_invitations'),
 };
 
 /**

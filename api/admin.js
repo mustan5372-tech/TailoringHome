@@ -10,12 +10,15 @@
  */
 
 import admin from 'firebase-admin';
+import { getFirestore } from 'firebase-admin/firestore';
+import { getAuth } from 'firebase-admin/auth';
 import fs from 'fs';
 import path from 'path';
 
 // Locate service account key if available
 function initAdminSDK() {
-  if (admin.apps.length > 0) return admin.app();
+  const apps = admin.getApps ? admin.getApps() : admin.apps;
+  if (apps && apps.length > 0) return apps[0] || admin.app();
 
   const serviceAccountPaths = [
     path.join(process.cwd(), 'serviceAccountKey.json'),
@@ -92,8 +95,8 @@ export default async function handler(req, res) {
 
   try {
     const app = initAdminSDK();
-    const db = app.firestore();
-    const auth = app.auth();
+    const db = getFirestore(app);
+    const auth = getAuth(app);
 
     const action = req.query?.action || body.action || '';
 
